@@ -1,10 +1,10 @@
 package hotel;
 
-public abstract class Quarto {
+public class Quarto {
 	private String id;
-	private double diaria;
+	private Quartos diaria;
 
-	public Quarto(String id, double diaria){
+	public Quarto(String id, Quartos diaria){
 		this.id = id;
 		this.diaria = diaria;
 	}
@@ -18,11 +18,11 @@ public abstract class Quarto {
 	}
 
 	public double getDiaria() {
-		return diaria;
+		return diaria.getPreco();
 	}
 
 	public void setDiaria(double diaria) {
-		this.diaria = diaria;
+		this.diaria.setPreco(diaria);
 	}
 	
 	

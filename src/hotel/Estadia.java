@@ -5,10 +5,10 @@ public class Estadia {
 	private int qtdeDias;
 	private double gastos;
 	
-	public Estadia (Quarto quarto, int qtdeDias){
-		this.quarto = quarto;
+	public Estadia (String id,Quartos diaria, int qtdeDias){
+		this.quarto = new Quarto(id, diaria);
 		this.qtdeDias = qtdeDias;
-		this.gastos = 0.0;
+		this.gastos = diaria.getPreco()*this.qtdeDias;
 	}
 
 	public Quarto getQuarto() {
