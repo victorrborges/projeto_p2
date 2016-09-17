@@ -5,24 +5,38 @@ import exceptions.HospedeInvalidoException;
 public class Hospede {
 	private String nome;
 	private String email;
-	private String datadenascimento;
+	private String dataDeNascimento;
 	
-	public Hospede(String nome, String email,String datadenascimento) throws HospedeInvalidoException{
+	public Hospede(String nome, String email, String dataDeNascimento) throws HospedeInvalidoException{
 		if(nome == null || nome.trim().isEmpty()){
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
-		}if(!nome.trim().matches("[ a-zA-Z] * ")){
+		}
+		if(!nome.trim().matches("[ a-zA-Z]*")){
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
 		}
+		if(email == null || email.trim().isEmpty()){
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
+		}
+		if(!email.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")){
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
+		}
+		if(dataDeNascimento == null || dataDeNascimento.trim().isEmpty()){
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
+		}
+		if(!dataDeNascimento.matches("\\d{2}/\\d{2}/\\d{4}")){
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Formato de data invalido.");
+		}
+		
 		this.nome = nome;
 		this.email = email;
-		this.datadenascimento = datadenascimento;
+		this.dataDeNascimento = dataDeNascimento;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((datadenascimento == null) ? 0 : datadenascimento.hashCode());
+		result = prime * result + ((dataDeNascimento == null) ? 0 : dataDeNascimento.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -36,10 +50,10 @@ public class Hospede {
 		if (getClass() != obj.getClass())
 			return false;
 		Hospede other = (Hospede) obj;
-		if (datadenascimento == null) {
-			if (other.datadenascimento != null)
+		if (dataDeNascimento == null) {
+			if (other.dataDeNascimento != null)
 				return false;
-		} else if (!datadenascimento.equals(other.datadenascimento))
+		} else if (!dataDeNascimento.equals(other.dataDeNascimento))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -66,11 +80,11 @@ public class Hospede {
 	}
 
 	public String getAno() {
-		return datadenascimento;
+		return dataDeNascimento;
 	}
 
 	public void setAno(String dataDeNascimento) {
-		this.datadenascimento = dataDeNascimento;
+		this.dataDeNascimento = dataDeNascimento;
 	}
 	
 }
