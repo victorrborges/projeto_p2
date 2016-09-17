@@ -11,28 +11,40 @@ public class Hospede {
 		if (nome == null || nome.trim().isEmpty()) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
 		}
-		if (!nome.trim().matches("[ a-zA-Z]+")) {
+		if (!validaNome(nome)) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
 		}
 		if (email == null || email.trim().isEmpty()) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
 		}
-		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-			if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-				throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
-			}
+		if(!validaEmail(email)){
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
 		}
 		if (dataDeNascimento == null || dataDeNascimento.trim().isEmpty()) {
 			throw new HospedeInvalidoException(
 					"Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
 		}
-		if (!dataDeNascimento.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}")) {
+		if (!validaData(dataDeNascimento)) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Formato de data invalido.");
 		}
 
 		this.nome = nome;
 		this.email = email;
 		this.dataDeNascimento = dataDeNascimento;
+	}
+
+	public boolean validaData(String dataDeNascimento) {
+		return dataDeNascimento.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}");
+	}
+
+	public boolean validaNome(String nome) {
+		return nome.trim().matches("[ a-zA-Z]+");
+	}
+
+	public boolean validaEmail(String email) {
+		if (email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+") || email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+				return true;
+		}return false;
 	}
 
 	@Override
