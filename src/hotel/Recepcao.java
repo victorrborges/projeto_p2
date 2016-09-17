@@ -3,6 +3,7 @@ package hotel;
 import java.util.List;
 
 import easyaccept.EasyAccept;
+import exceptions.HospedeInvalidoException;
 import exceptions.SistemaInvalidoException;
 
 import java.util.ArrayList;
@@ -47,14 +48,36 @@ public class Recepcao {
 		return hospede.getEmail();
 	}
 
-	public void atualizaCadastro(String id, String atributo, String valor) {
+	public void atualizaCadastro(String id,String atributo,String valor) throws Exception {
 		Hospede hospede = buscaHospede(id);
-		if (atributo.equalsIgnoreCase("nome")) {
+		if(atributo.equalsIgnoreCase("nome")){
+			if(valor == null || valor.trim().isEmpty()){
+				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede nao pode ser vazio."); 
+			}
+			if(!valor.trim().matches("[ a-zA-Z]*")){
+				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede esta invalido.");
+			}
 			hospede.setNome(valor);
-		} else if (atributo.equalsIgnoreCase("email")) {
+		}else if(atributo.equalsIgnoreCase("email")){
+			if(valor == null || valor.trim().isEmpty()){
+				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido."); 
+			}
+			if(!valor.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")){
+				if(!valor.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")){
+					throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
+				}
+			}
 			hospede.setEmail(valor);
+		}else if(atributo.equalsIgnoreCase("data de nascimento")){
+			if(valor == null || valor.trim().isEmpty()){
+				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio."); 
+			}
+			if(!valor.trim().matches("\\d{2}/\\d{2}/\\d{4}")){
+				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Formato de data invalido.");
+			}
+			
+			hospede.setAno(valor);
 		}
-		hospede.setAno(valor);
 	}
 
 	private Hospede buscaHospede(String id) {
