@@ -2,6 +2,9 @@ package hotel;
 
 import java.util.List;
 
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
+
 import easyaccept.EasyAccept;
 import exceptions.HospedeInvalidoException;
 import exceptions.RecepcaoInvalidaException;
@@ -65,7 +68,8 @@ public class Recepcao {
 		} else if (atributo.equalsIgnoreCase("email")){
 			if(valor == null || valor.trim().isEmpty()){
 				throw new RecepcaoInvalidaException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
-			}if (!valor.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+			}
+			if (!valor.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")) {
 				if (!valor.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
 					throw new RecepcaoInvalidaException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
 				}
@@ -77,6 +81,9 @@ public class Recepcao {
 			}
 			if(!valor.trim().matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}")){
 				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Formato de data invalido.");
+			}
+			if(!validaIdade(valor)){
+				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
 			}
 			
 			buscaHospede(id).setAno(valor);
@@ -119,6 +126,23 @@ public class Recepcao {
 			return Quartos.SIMPLES;
 		} else {
 			return Quartos.LUXO;
+		}
+	}
+	
+	private boolean validaIdade(String data){
+		String[] dataNasc = data.split("/");
+		int dia = Integer.parseInt(dataNasc[0]);
+		int mes = Integer.parseInt(dataNasc[1]);
+		int ano = Integer.parseInt(dataNasc[2]);
+		LocalDate dataDeNascimento = new LocalDate(ano, mes, dia);
+		LocalDate hoje = new LocalDate();
+		Years anos = Years.yearsBetween(dataDeNascimento, hoje);
+		int qtdeDeAnos = anos.getYears();
+		
+		if(qtdeDeAnos >= 18){
+			return true;
+		} else {
+			return false;
 		}
 	}
 

@@ -1,5 +1,7 @@
 package hotel;
 
+import org.joda.time.*;
+
 import exceptions.HospedeInvalidoException;
 
 public class Hospede {
@@ -27,6 +29,9 @@ public class Hospede {
 		if (!validaData(dataDeNascimento)) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Formato de data invalido.");
 		}
+		if (!validaIdade(dataDeNascimento)){
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
+		}
 
 		this.nome = nome;
 		this.email = email;
@@ -45,6 +50,23 @@ public class Hospede {
 		if (email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+") || email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
 				return true;
 		}return false;
+	}
+
+	public boolean validaIdade(String data){
+		String[] dataNasc = data.split("/");
+		int dia = Integer.parseInt(dataNasc[0]);
+		int mes = Integer.parseInt(dataNasc[1]);
+		int ano = Integer.parseInt(dataNasc[2]);
+		LocalDate dataDeNascimento = new LocalDate(ano, mes, dia);
+		LocalDate hoje = new LocalDate();
+		Years anos = Years.yearsBetween(dataDeNascimento, hoje);
+		int qtdeDeAnos = anos.getYears();
+		
+		if(qtdeDeAnos >= 18){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -100,11 +122,6 @@ public class Hospede {
 
 	public void setAno(String dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
-	}
-	
-	private boolean validaIdade(String data){
-		
-		return true;
 	}
 
 }
