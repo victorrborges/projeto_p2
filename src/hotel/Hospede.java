@@ -6,29 +6,30 @@ public class Hospede {
 	private String nome;
 	private String email;
 	private String dataDeNascimento;
-	
-	public Hospede(String nome, String email, String dataDeNascimento) throws HospedeInvalidoException{
-		if(nome == null || nome.trim().isEmpty()){
+
+	public Hospede(String nome, String email, String dataDeNascimento) throws HospedeInvalidoException {
+		if (nome == null || nome.trim().isEmpty()) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
 		}
-		if(!nome.trim().matches("[ a-zA-Z]*")){
+		if (!nome.trim().matches("[ a-zA-Z]*")) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
 		}
-		if(email == null || email.trim().isEmpty()){
+		if (email == null || email.trim().isEmpty()) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
 		}
-		if(!email.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")){
-			if(!email.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")){
+		if (!email.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")) {
+			if (!email.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")) {
 				throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
 			}
 		}
-		if(dataDeNascimento == null || dataDeNascimento.trim().isEmpty()){
-			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
+		if (dataDeNascimento == null || dataDeNascimento.trim().isEmpty()) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
 		}
-		if(!dataDeNascimento.matches("\\d{2}/\\d{2}/\\d{4}")){
+		if (!dataDeNascimento.matches("\\d{2}/\\d{2}/\\d{4}")) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Formato de data invalido.");
 		}
-		
+
 		this.nome = nome;
 		this.email = email;
 		this.dataDeNascimento = dataDeNascimento;
@@ -88,5 +89,5 @@ public class Hospede {
 	public void setAno(String dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
-	
+
 }
