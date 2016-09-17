@@ -31,7 +31,10 @@ public class Recepcao {
 		return email;
 	}
 
-	public void removeHospede(String id) {
+	public void removeHospede(String id) throws Exception {
+		if (!id.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")) {
+			throw new HospedeInvalidoException("Erro na remocao do Hospede. Formato de email invalido.");
+		}
 		cadastros.remove(buscaHospede(id));
 	}
 
@@ -48,25 +51,11 @@ public class Recepcao {
 		return hospede.getEmail();
 	}
 
-	public void atualizaCadastro(String id,String atributo,String valor) throws Exception {
+	public void atualizaCadastro(String id, String atributo, String valor) throws Exception {
 		Hospede hospede = buscaHospede(id);
-		if(atributo.equalsIgnoreCase("nome")){
-			if(valor == null || valor.trim().isEmpty()){
-				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede nao pode ser vazio."); 
-			}
-			if(!valor.trim().matches("[ a-zA-Z]*")){
-				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede esta invalido.");
-			}
+		if (atributo.equalsIgnoreCase("nome")) {
 			hospede.setNome(valor);
-		}else if(atributo.equalsIgnoreCase("email")){
-			if(valor == null || valor.trim().isEmpty()){
-				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido."); 
-			}
-			if(!valor.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")){
-				if(!valor.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")){
-					throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
-				}
-			}
+		} else if (atributo.equalsIgnoreCase("email")) {
 			hospede.setEmail(valor);
 		}else if(atributo.equalsIgnoreCase("data de nascimento")){
 			if(valor == null || valor.trim().isEmpty()){
@@ -78,32 +67,16 @@ public class Recepcao {
 			
 			hospede.setAno(valor);
 		}
+		hospede.setAno(valor);
 	}
 
-	private Hospede buscaHospede(String id) {
+	private Hospede buscaHospede(String id) throws Exception {
 		for (Hospede hospede : cadastros.keySet()) {
 			if (hospede.getEmail().equals(id)) {
 				return hospede;
 			}
 		}
-		return null;
-	}
-
-	public boolean contemHospede(Hospede hospede) {
-		return cadastros.containsKey(hospede);
-	}
-
-	public boolean fazCheckIn(Hospede hospede, Estadia estadia) throws Exception {
-		if (hospede == null) {
-			throw new Exception("Hospede nao pode ser nulo");
-		}
-		if (estadia == null) {
-			throw new Exception("Estadia nao pode ser nulo");
-		}
-		if (!contemHospede(hospede)) {
-			throw new Exception("Hospede nao cadastrado no sistema");
-		}
-		return cadastros.get(hospede).add(estadia);
+		throw new Exception("Hospede nao cadastrado.");
 	}
 
 	public static void main(String[] args) {
