@@ -18,7 +18,9 @@ public class Hospede {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
 		}
 		if(!email.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")){
-			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
+			if(!email.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")){
+				throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
+			}
 		}
 		if(dataDeNascimento == null || dataDeNascimento.trim().isEmpty()){
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
