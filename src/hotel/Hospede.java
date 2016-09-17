@@ -1,15 +1,21 @@
 package hotel;
 
+import exceptions.HospedeInvalidoException;
+
 public class Hospede {
 	private String nome;
 	private String email;
 	private String datadenascimento;
 	
-	public Hospede(String nome, String email,String datadenascimento){
+	public Hospede(String nome, String email,String datadenascimento) throws HospedeInvalidoException{
+		if(nome == null || nome.trim().isEmpty()){
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
+		}if(!nome.trim().matches("[ a-zA-Z] * ")){
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
+		}
 		this.nome = nome;
 		this.email = email;
 		this.datadenascimento = datadenascimento;
-		;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package hotel;
 import java.util.List;
 
 import easyaccept.EasyAccept;
+import exceptions.SistemaInvalidoException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class Recepcao {
 	public void fechaSistema(){
 		
 	}
-	public String cadastraHospede(String nome,String email,String dataDeNascimento){
+	public String cadastraHospede(String nome,String email,String dataDeNascimento) throws SistemaInvalidoException{
 		Hospede hospede = new Hospede(nome, email, dataDeNascimento);
 		List<Estadia> estadias = new ArrayList<Estadia>();
 		this.cadastros.put(hospede,estadias);
@@ -56,8 +57,7 @@ public class Recepcao {
 		}return null;
 	}
 	public static void main(String[] args) {
-		Hospede hospede = new Hospede("wesley", "sdf", "1152");
-		args = new String[] { "hotel.Recepcao", "acceptance_test/testes_uc1.txt"};
+		args = new String[] { "hotel.Recepcao", "acceptance_test/testes_uc1.txt","acceptance_test/testes_uc1_exception.txt"};
 		System.out.println();
 		EasyAccept.main(args);
 	}
