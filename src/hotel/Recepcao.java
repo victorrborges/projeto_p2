@@ -4,6 +4,7 @@ import java.util.List;
 
 import easyaccept.EasyAccept;
 import exceptions.HospedeInvalidoException;
+import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
 
 import java.util.ArrayList;
@@ -33,16 +34,16 @@ public class Recepcao {
 
 	public void removeHospede(String id) throws Exception {
 		if (!id.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")) {
-			throw new HospedeInvalidoException("Erro na remocao do Hospede. Formato de email invalido.");
+			if (!id.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")) {
+				throw new RecepcaoInvalidaException("Erro na remocao do Hospede. Formato de email invalido.");
+			}
+			throw new RecepcaoInvalidaException("Erro na remocao do Hospede. Formato de email invalido.");
 		}
 		cadastros.remove(buscaHospede(id));
 	}
 
 	public String getInfoHospede(String id, String atributo) throws Exception {
 		Hospede hospede = buscaHospede(id);
-		if (hospede == null) {
-			throw new Exception("Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
-		}
 		if (atributo.equalsIgnoreCase("nome")) {
 			return hospede.getNome();
 		} else if (atributo.equalsIgnoreCase("Data de Nascimento")) {
@@ -52,11 +53,21 @@ public class Recepcao {
 	}
 
 	public void atualizaCadastro(String id, String atributo, String valor) throws Exception {
-		Hospede hospede = buscaHospede(id);
 		if (atributo.equalsIgnoreCase("nome")) {
-			hospede.setNome(valor);
-		} else if (atributo.equalsIgnoreCase("email")) {
-			hospede.setEmail(valor);
+			if(valor == null || valor.trim().isEmpty()){
+				throw new RecepcaoInvalidaException("Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
+			}if (!valor.trim().matches("[ a-zA-Z]*")) {
+				throw new RecepcaoInvalidaException("Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede esta invalido.");
+			}buscaHospede(id).setNome(valor);
+		} else if (atributo.equalsIgnoreCase("email")){
+			if(valor == null || valor.trim().isEmpty()){
+				throw new RecepcaoInvalidaException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
+			}if (!valor.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")) {
+				if (!valor.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")) {
+					throw new RecepcaoInvalidaException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
+				}
+			}
+			buscaHospede(id).setEmail(valor);
 		}else if(atributo.equalsIgnoreCase("data de nascimento")){
 			if(valor == null || valor.trim().isEmpty()){
 				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio."); 
@@ -65,9 +76,8 @@ public class Recepcao {
 				throw new HospedeInvalidoException("Erro na atualizacao do cadastro de Hospede. Formato de data invalido.");
 			}
 			
-			hospede.setAno(valor);
+			buscaHospede(id).setAno(valor);
 		}
-		hospede.setAno(valor);
 	}
 
 	private Hospede buscaHospede(String id) throws Exception {
@@ -76,7 +86,7 @@ public class Recepcao {
 				return hospede;
 			}
 		}
-		throw new Exception("Hospede nao cadastrado.");
+		throw new Exception("Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
 	}
 
 	public static void main(String[] args) {
