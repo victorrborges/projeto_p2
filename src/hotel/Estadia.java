@@ -35,7 +35,7 @@ public class Estadia {
 		this.gastos = gastos;
 	}
 	
-	public double totalPago(){
+	public double getPrecoTotal(){
 		double gastoTotal = 0.0;
 		gastoTotal = this.getQtdeDias() * this.getQuarto().getDiaria();
 		gastoTotal += this.getGastos();

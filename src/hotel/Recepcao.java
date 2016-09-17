@@ -90,7 +90,7 @@ public class Recepcao {
 		}
 	}
 	
-	public boolean realizaCheckin(String email, int qtdeDias, String idQuarto, String tipoQuarto) throws Exception {
+	public void realizaCheckin(String email, int qtdeDias, String idQuarto, String tipoQuarto) throws Exception {
 
 		if (email == null || email.trim().isEmpty()) {
 			throw new HospedeInvalidoException("Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
@@ -116,7 +116,27 @@ public class Recepcao {
 		}
 		
 		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto), qtdeDias);
-		return cadastros.get(buscado).add(estadia);
+		cadastros.get(buscado).add(estadia);
+	}
+	
+	public double realizaCheckout(String email, String quarto) throws Exception {
+		if (email == null || email.trim().isEmpty()){
+			throw new HospedeInvalidoException("Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
+		}
+		if(!validaEmail(email)){
+			throw new HospedeInvalidoException("Erro ao realizar checkout. Email do(a) hospede esta invalido.");
+		}
+		if(quarto == null || quarto.trim().isEmpty() || (!quarto.matches("[0-9]+[ A-Z]"))){
+			throw new HospedeInvalidoException("Erro ao realizar checkout. ID do quarto invalido, use apenas numeros ou letras.");
+		}
+		Hospede hospede = this.buscaHospede(email);
+		List<Estadia> estadias = this.cadastros.get(hospede);
+		Estadia estadia = this.buscaEstadia(hospede, quarto);
+		double precoTotal = estadia.getPrecoTotal();
+		estadias.remove(estadia);
+		this.cadastros.put(hospede, estadias);
+		return precoTotal;
+		
 	}
 	
 	private Quartos getTipoQuarto(String tipo) {
@@ -146,6 +166,22 @@ public class Recepcao {
 		}
 	}
 
+	private boolean validaEmail(String email) {
+		if (email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+") || email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+				return true;
+		}return false;
+	}
+	
+	private Estadia buscaEstadia(Hospede hospede, String quarto){
+		List<Estadia> arrayDeQuartos = this.cadastros.get(hospede);
+		for (Estadia estadia : arrayDeQuartos){
+			if (estadia.getQuarto().equals(quarto)){
+				return estadia;
+			}
+		}
+		return null;
+	}
+	
 	private Hospede buscaHospede(String id) throws Exception {
 		for (Hospede hospede : cadastros.keySet()) {
 			if (hospede.getEmail().equals(id)) {
@@ -158,7 +194,8 @@ public class Recepcao {
 	public static void main(String[] args) {
 		args = new String[] { "hotel.Recepcao", "acceptance_test/testes_uc1.txt",
 				"acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc2.txt",
-				"acceptance_test/testes_uc2_exception.txt"};
+				"acceptance_test/testes_uc2_exception.txt", "acceptance_test/testes_uc3.txt",
+				"acceptance_test/testes_uc3_exception.txt"};
 		System.out.println();
 		EasyAccept.main(args);
 	}
