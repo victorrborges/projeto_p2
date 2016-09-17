@@ -33,8 +33,8 @@ public class Recepcao {
 	}
 
 	public void removeHospede(String id) throws Exception {
-		if (!id.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")) {
-			if (!id.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")) {
+		if (!id.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+			if (!id.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
 				throw new RecepcaoInvalidaException("Erro na remocao do Hospede. Formato de email invalido.");
 			}
 			throw new RecepcaoInvalidaException("Erro na remocao do Hospede. Formato de email invalido.");
@@ -44,6 +44,9 @@ public class Recepcao {
 
 	public String getInfoHospede(String id, String atributo) throws Exception {
 		Hospede hospede = buscaHospede(id);
+		if(hospede == null){
+			throw new Exception("Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
+		}
 		if (atributo.equalsIgnoreCase("nome")) {
 			return hospede.getNome();
 		} else if (atributo.equalsIgnoreCase("Data de Nascimento")) {
@@ -62,8 +65,8 @@ public class Recepcao {
 		} else if (atributo.equalsIgnoreCase("email")){
 			if(valor == null || valor.trim().isEmpty()){
 				throw new RecepcaoInvalidaException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
-			}if (!valor.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")) {
-				if (!valor.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")) {
+			}if (!valor.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+				if (!valor.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
 					throw new RecepcaoInvalidaException("Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
 				}
 			}
@@ -79,6 +82,45 @@ public class Recepcao {
 			buscaHospede(id).setAno(valor);
 		}
 	}
+	
+	public boolean realizaCheckin(String email, int qtdeDias, String idQuarto, String tipoQuarto) throws Exception {
+
+		if (email == null || email.trim().isEmpty()) {
+			throw new HospedeInvalidoException("Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
+		}
+		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+			if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+				throw new HospedeInvalidoException("Erro ao realizar checkin. Email do(a) hospede esta invalido.");
+			}
+		}
+		if (idQuarto == null || idQuarto.trim().isEmpty() || (!idQuarto.matches("[0-9]+[ A-Z]"))) {
+			throw new Exception("Erro ao realizar checkin. ID do quarto invalido, use apenas numeros ou letras.");
+		}
+		if (qtdeDias <= 0) {
+			throw new Exception("Erro ao realizar checkin. Quantidade de dias esta invalida.");
+		}
+		if (!(tipoQuarto.equalsIgnoreCase("Presidencial") || tipoQuarto.equals("Simples")
+				|| tipoQuarto.equalsIgnoreCase("Luxo"))) {
+			throw new Exception("Erro ao realizar checkin. Tipo de quarto invalido.");
+		}
+		Hospede buscado = buscaHospede(email);
+		if (buscado == null) {
+			throw new Exception("Erro ao realizar checkin. Hospede de email " + email + " nao foi cadastrado(a).");
+		}
+		
+		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto), qtdeDias);
+		return cadastros.get(buscado).add(estadia);
+	}
+	
+	private Quartos getTipoQuarto(String tipo) {
+		if (tipo.equalsIgnoreCase("Presidencial")) {
+			return Quartos.PRESIDENCIAL;
+		} else if (tipo.equals("Simples")) {
+			return Quartos.SIMPLES;
+		} else {
+			return Quartos.LUXO;
+		}
+	}
 
 	private Hospede buscaHospede(String id) throws Exception {
 		for (Hospede hospede : cadastros.keySet()) {
@@ -86,12 +128,13 @@ public class Recepcao {
 				return hospede;
 			}
 		}
-		throw new Exception("Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
+		return null;
 	}
 
 	public static void main(String[] args) {
 		args = new String[] { "hotel.Recepcao", "acceptance_test/testes_uc1.txt",
-				"acceptance_test/testes_uc1_exception.txt" };
+				"acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc2.txt",
+				"acceptance_test/testes_uc2_exception.txt"};
 		System.out.println();
 		EasyAccept.main(args);
 	}

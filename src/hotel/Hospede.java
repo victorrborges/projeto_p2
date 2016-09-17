@@ -11,14 +11,14 @@ public class Hospede {
 		if (nome == null || nome.trim().isEmpty()) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
 		}
-		if (!nome.trim().matches("[ a-zA-Z]*")) {
+		if (!nome.trim().matches("[ a-zA-Z]+")) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
 		}
 		if (email == null || email.trim().isEmpty()) {
 			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
 		}
-		if (!email.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*")) {
-			if (!email.matches("[ a-zA-Z]*@[ a-zA-Z]*\\.[ a-zA-Z]*\\.[ a-zA-Z]*")) {
+		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+			if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
 				throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
 			}
 		}
@@ -88,6 +88,11 @@ public class Hospede {
 
 	public void setAno(String dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
+	}
+	
+	private boolean validaIdade(String data){
+		
+		return true;
 	}
 
 }
