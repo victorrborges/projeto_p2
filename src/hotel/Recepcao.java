@@ -92,7 +92,7 @@ public class Recepcao {
 		} else {
 			double precoTotal = 0;
 			for (Estadia est : estadias) {
-				precoTotal += est.getPrecoTotal();
+				precoTotal += est.getGastos();
 			}
 			return "R$" + precoTotal;
 		}
@@ -182,7 +182,7 @@ public class Recepcao {
 		Hospede hospede = this.buscaHospede(email);
 		List<Estadia> estadias = this.cadastros.get(hospede);
 		Estadia estadia = this.buscaEstadia(hospede, quarto);
-		double precoTotal = estadia.getPrecoTotal();
+		double precoTotal = estadia.getGastos();
 		estadias.remove(estadia);
 		this.cadastros.put(hospede, estadias);
 		return precoTotal;
