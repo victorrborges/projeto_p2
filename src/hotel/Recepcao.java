@@ -17,6 +17,8 @@ import java.util.HashMap;
 public class Recepcao {
 	private HashMap<Hospede, List<Estadia>> cadastros;
 	private double total;
+	private int saida = 0;
+	private String saindo = "";
 
 	public Recepcao() {
 		this.cadastros = new HashMap<Hospede, List<Estadia> >();
@@ -46,8 +48,12 @@ public class Recepcao {
 	public String consultaTransacoes(String atributo){
 		System.out.println(cadastros.keySet());
 		if(atributo.equalsIgnoreCase("Quantidade")){
-			return String.format("%d", totalAtivas());
-		}return null;
+			return String.format("%d", saida);
+		}else if(atributo.equals("Total")){
+			return String.format("R$%.2f", total);
+		}else{
+			return saindo.substring(0, saindo.length()-1);
+		}
 			
 	}
 
@@ -124,7 +130,10 @@ public class Recepcao {
 	public int totalAtivas(){
 		int cont = 0;
 		for(Hospede hospede : cadastros.keySet()){
-			cont += cadastros.get(hospede).size();
+			if(cadastros.get(hospede).size() == 0){
+				cont += 1;
+			}
+		
 		}return cont;
 	}
 
@@ -215,6 +224,9 @@ public class Recepcao {
 		Hospede hospede = this.buscaHospede(email);	
 		Estadia estadia = this.buscaEstadia(hospede, quarto);
 		double precoTotal = estadia.getGastos();
+		total += precoTotal;
+		saida += 1;
+		saindo += String.format("%s;", hospede.getNome());
 		cadastros.get(hospede).remove(estadia);
 		return String.format("R$%.2f", precoTotal);
 
