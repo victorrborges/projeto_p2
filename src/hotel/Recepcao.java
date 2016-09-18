@@ -1,6 +1,7 @@
 package hotel;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
@@ -94,8 +95,18 @@ public class Recepcao {
 			for (Estadia est : estadias) {
 				precoTotal += est.getGastos();
 			}
-			return "R$" + precoTotal;
+			
+			return String.format("R$%.2f", precoTotal);
 		}
+	}
+	private boolean verificaQuarto(String quarto){
+		for(Hospede hospede : cadastros.keySet()){
+			for(Estadia est : cadastros.get(hospede)){
+				if(est.getQuarto().getId().equals(quarto)){
+					return true;
+				}
+			}
+		}return false;
 	}
 
 	public void atualizaCadastro(String id, String atributo, String valor) throws Exception {
@@ -158,6 +169,9 @@ public class Recepcao {
 		}
 		if (getTipoQuarto(tipoQuarto) == null) {
 			throw new Exception("Erro ao realizar checkin. Tipo de quarto invalido.");
+		}
+		if(verificaQuarto(idQuarto)){
+			throw new Exception("Erro ao realizar checkin. Quarto "+idQuarto+" ja esta ocupado.");
 		}
 		Hospede buscado = buscaHospede(email);
 		if (buscado == null) {
