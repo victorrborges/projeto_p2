@@ -182,7 +182,7 @@ public class Recepcao {
 		cadastros.get(buscado).add(estadia);
 	}
 
-	public double realizaCheckout(String email, String quarto) throws Exception {
+	public String realizaCheckout(String email, String quarto) throws Exception {
 		if (email == null || email.trim().isEmpty()) {
 			throw new HospedeInvalidoException("Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
 		}
@@ -193,13 +193,11 @@ public class Recepcao {
 			throw new HospedeInvalidoException(
 					"Erro ao realizar checkout. ID do quarto invalido, use apenas numeros ou letras.");
 		}
-		Hospede hospede = this.buscaHospede(email);
-		List<Estadia> estadias = this.cadastros.get(hospede);
+		Hospede hospede = this.buscaHospede(email);	
 		Estadia estadia = this.buscaEstadia(hospede, quarto);
 		double precoTotal = estadia.getGastos();
-		estadias.remove(estadia);
-		this.cadastros.put(hospede, estadias);
-		return precoTotal;
+		cadastros.get(hospede).remove(estadia);
+		return String.format("R$%.2f", precoTotal);
 
 	}
 
@@ -241,7 +239,7 @@ public class Recepcao {
 	private Estadia buscaEstadia(Hospede hospede, String quarto) {
 		List<Estadia> arrayDeQuartos = this.cadastros.get(hospede);
 		for (Estadia estadia : arrayDeQuartos) {
-			if (estadia.getQuarto().equals(quarto)) {
+			if (estadia.getQuarto().getId().equalsIgnoreCase(quarto)) {
 				return estadia;
 			}
 		}
