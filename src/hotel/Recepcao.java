@@ -17,7 +17,7 @@ public class Recepcao {
 	private HashMap<Hospede, List<Estadia>> cadastros;
 
 	public Recepcao() {
-		this.cadastros = new HashMap<>();
+		this.cadastros = new HashMap<Hospede, List<Estadia> >();
 	}
 
 	public void iniciaSistema() {
@@ -99,6 +99,8 @@ public class Recepcao {
 	}
 
 	public void atualizaCadastro(String id, String atributo, String valor) throws Exception {
+		Hospede hospede = buscaHospede(id);
+		List<Estadia> list = cadastros.get(hospede);
 		if (atributo.equalsIgnoreCase("nome")) {
 			if (valor == null || valor.trim().isEmpty()) {
 				throw new RecepcaoInvalidaException(
@@ -108,7 +110,7 @@ public class Recepcao {
 				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede esta invalido.");
 			}
-			buscaHospede(id).setNome(valor);
+			hospede.setNome(valor);
 		} else if (atributo.equalsIgnoreCase("email")) {
 			if (valor == null || valor.trim().isEmpty()) {
 				throw new RecepcaoInvalidaException(
@@ -120,7 +122,7 @@ public class Recepcao {
 							"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
 				}
 			}
-			buscaHospede(id).setEmail(valor);
+			hospede.setEmail(valor);
 		} else if (atributo.equalsIgnoreCase("data de nascimento")) {
 			if (valor == null || valor.trim().isEmpty()) {
 				throw new HospedeInvalidoException(
@@ -135,8 +137,9 @@ public class Recepcao {
 						"Erro na atualizacao do cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
 			}
 
-			buscaHospede(id).setAno(valor);
+			hospede.setAno(valor);
 		}
+		cadastros.put(hospede, list);
 	}
 
 	public void realizaCheckin(String email, int qtdeDias, String idQuarto, String tipoQuarto) throws Exception {
@@ -153,8 +156,7 @@ public class Recepcao {
 		if (qtdeDias <= 0) {
 			throw new Exception("Erro ao realizar checkin. Quantidade de dias esta invalida.");
 		}
-		if (!(tipoQuarto.equalsIgnoreCase("Presidencial") || tipoQuarto.equals("Simples")
-				|| tipoQuarto.equalsIgnoreCase("Luxo"))) {
+		if (getTipoQuarto(tipoQuarto) == null) {
 			throw new Exception("Erro ao realizar checkin. Tipo de quarto invalido.");
 		}
 		Hospede buscado = buscaHospede(email);
@@ -190,11 +192,11 @@ public class Recepcao {
 	private Quartos getTipoQuarto(String tipo) {
 		if (tipo.equalsIgnoreCase("Presidencial")) {
 			return Quartos.PRESIDENCIAL;
-		} else if (tipo.equals("Simples")) {
+		} else if (tipo.equalsIgnoreCase("simples")) {
 			return Quartos.SIMPLES;
-		} else {
+		} else if(tipo.equalsIgnoreCase("luxo")){
 			return Quartos.LUXO;
-		}
+		}return null;
 	}
 
 	private boolean validaIdade(String data) {
@@ -234,7 +236,7 @@ public class Recepcao {
 
 	private Hospede buscaHospede(String id) throws Exception {
 		for (Hospede hospede : cadastros.keySet()) {
-			if (hospede.getEmail().equals(id)) {
+			if (hospede.getEmail().equalsIgnoreCase(id)){
 				return hospede;
 			}
 		}

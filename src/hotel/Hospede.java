@@ -1,6 +1,8 @@
 package hotel;
 
-import org.joda.time.*;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 
 import exceptions.HospedeInvalidoException;
 
@@ -74,6 +76,7 @@ public class Hospede {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dataDeNascimento == null) ? 0 : dataDeNascimento.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -91,6 +94,11 @@ public class Hospede {
 			if (other.dataDeNascimento != null)
 				return false;
 		} else if (!dataDeNascimento.equals(other.dataDeNascimento))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
