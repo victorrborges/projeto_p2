@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 public class Recepcao {
 	private HashMap<Hospede, List<Estadia>> cadastros;
+	private double total;
 
 	public Recepcao() {
 		this.cadastros = new HashMap<Hospede, List<Estadia> >();
@@ -42,12 +43,20 @@ public class Recepcao {
 		}
 		cadastros.remove(buscaHospede(id));
 	}
+	public String consultaTransacoes(String atributo){
+		System.out.println(cadastros.keySet());
+		if(atributo.equalsIgnoreCase("Quantidade")){
+			return String.format("%d", totalAtivas());
+		}return null;
+			
+	}
 
 	public String getInfoHospede(String id, String atributo) throws Exception {
 		Hospede hospede = buscaHospede(id);
 		if (hospede == null) {
 			throw new Exception("Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
 		}
+
 		if (atributo.equalsIgnoreCase("nome")) {
 			return hospede.getNome();
 		} else if (atributo.equalsIgnoreCase("Data de Nascimento")) {
@@ -91,13 +100,17 @@ public class Recepcao {
 			}
 			return quartos;
 		} else {
-			double precoTotal = 0;
-			for (Estadia est : estadias) {
-				precoTotal += est.getGastos();
-			}
-			
-			return String.format("R$%.2f", precoTotal);
+			return getTotal(estadias);
 		}
+	}
+
+	public String getTotal(List<Estadia> estadias) {
+		double precoTotal = 0;
+		for (Estadia est : estadias) {
+			precoTotal += est.getGastos();
+		}
+		
+		return String.format("R$%.2f", precoTotal);
 	}
 	private boolean verificaQuarto(String quarto){
 		for(Hospede hospede : cadastros.keySet()){
@@ -107,6 +120,12 @@ public class Recepcao {
 				}
 			}
 		}return false;
+	}
+	public int totalAtivas(){
+		int cont = 0;
+		for(Hospede hospede : cadastros.keySet()){
+			cont += cadastros.get(hospede).size();
+		}return cont;
 	}
 
 	public void atualizaCadastro(String id, String atributo, String valor) throws Exception {
