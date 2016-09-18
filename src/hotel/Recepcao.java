@@ -11,6 +11,10 @@ import exceptions.HospedeInvalidoException;
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,9 +23,15 @@ public class Recepcao {
 	private double total;
 	private int saida = 0;
 	private String saindo = "";
+	private File arquivo; 
+	private File file;
 
-	public Recepcao() {
+	public Recepcao() throws IOException {
 		this.cadastros = new HashMap<Hospede, List<Estadia> >();
+		this.file = new File("historicoHospedes");
+		file.mkdir();
+		this.arquivo =  new File("historicoHospedes/hospede.txt");
+		arquivo.createNewFile();
 	}
 
 	public void iniciaSistema() {
@@ -68,6 +78,15 @@ public class Recepcao {
 			return hospede.getAno();
 		}
 		return hospede.getEmail();
+	}
+	public void grava(String nome,String email,double total) throws IOException{
+		FileWriter tal = new FileWriter(arquivo);
+		BufferedWriter escrever = new BufferedWriter(tal);
+		escrever.write(nome);
+		escrever.write(email);
+		escrever.close();
+		tal.close();
+	
 	}
 
 	public String getInfoHospedagem(String id, String atributo) throws Exception {
@@ -226,6 +245,7 @@ public class Recepcao {
 		total += precoTotal;
 		saida += 1;
 		saindo += String.format("%s;", hospede.getNome());
+		grava(hospede.getNome(), hospede.getEmail(), precoTotal);
 		cadastros.get(hospede).remove(estadia);
 		return String.format("R$%.2f", precoTotal);
 
