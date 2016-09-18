@@ -46,7 +46,6 @@ public class Recepcao {
 		cadastros.remove(buscaHospede(id));
 	}
 	public String consultaTransacoes(String atributo){
-		System.out.println(cadastros.keySet());
 		if(atributo.equalsIgnoreCase("Quantidade")){
 			return String.format("%d", saida);
 		}else if(atributo.equals("Total")){
@@ -291,7 +290,6 @@ public class Recepcao {
 				"acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc2.txt",
 				"acceptance_test/testes_uc2_exception.txt", "acceptance_test/testes_uc3.txt",
 				"acceptance_test/testes_uc3_exception.txt" };
-		System.out.println();
 		EasyAccept.main(args);
 	}
 }

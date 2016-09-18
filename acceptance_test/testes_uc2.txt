@@ -45,6 +45,8 @@ expect "2" getInfoHospedagem email="ines@brasil.com.br" atributo="Hospedagens at
 expect "1B,2B" getInfoHospedagem email="ines@brasil.com.br" atributo="Quarto"
 expect "R$1250,00" getInfoHospedagem email="ines@brasil.com.br" atributo="Total"
 
+atualizaCadastro id=agnetha@monomusic.se atributo="Email" valor="agnetha@abba.se"
+
 #########################################################################
 # Quartos jah ocupados nao podem ser usados para criar outra hospedagem #
 #########################################################################

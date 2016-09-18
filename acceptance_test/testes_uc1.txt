@@ -56,6 +56,3 @@ expectError "Erro na consulta de hospede. Hospede de email robyn@sverige.se nao 
 expectError "Erro na consulta de hospede. Hospede de email robyn@sverige.se nao foi cadastrado(a)." getInfoHospede id=${id4} atributo="Data de Nascimento"
 
 fechaSistema
-
-
-
