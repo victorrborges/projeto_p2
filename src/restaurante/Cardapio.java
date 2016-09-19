@@ -2,6 +2,8 @@ package restaurante;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import exceptions.PratoInvalidoException;
+import exceptions.RefeicaoInvalidaException;
 
 public class Cardapio {
 	private HashSet<PratoSimples> pratos;
@@ -91,7 +93,7 @@ public class Cardapio {
 		}
 		refeicoes.add(refeicao);	
 	}
-	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
+	public void cadastraPrato(String nome, double preco, String descricao) throws PratoInvalidoException {
 		PratoSimples prato = new PratoSimples(nome, preco, descricao);
 		pratos.add(prato);
 	}
