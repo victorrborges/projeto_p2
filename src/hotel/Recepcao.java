@@ -20,8 +20,9 @@ import java.util.HashMap;
 
 public class Recepcao {
 	private HashMap<Hospede, List<Estadia>> cadastros;
+	private List<Hospede> historicoHospedes;
+	private List<String> historicoDeGastos; 
 	private double total;
-	private int saida = 0;
 	private String saindo = "";
 	private File arquivo; 
 	private File file;
@@ -32,6 +33,8 @@ public class Recepcao {
 		file.mkdir();
 		this.arquivo =  new File("historicoHospedes/hospede.txt");
 		arquivo.createNewFile();
+		this.historicoHospedes = new ArrayList<>();
+		historicoDeGastos = new ArrayList<>();
 	}
 
 	public void iniciaSistema() {
@@ -57,7 +60,7 @@ public class Recepcao {
 	}
 	public String consultaTransacoes(String atributo){
 		if(atributo.equalsIgnoreCase("Quantidade")){
-			return String.format("%d", saida);
+			return String.format("%d", historicoHospedes.size());
 		}else if(atributo.equals("Total")){
 			return String.format("R$%.2f", total);
 		}else{
@@ -227,6 +230,13 @@ public class Recepcao {
 		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto), qtdeDias);
 		cadastros.get(buscado).add(estadia);
 	}
+	public String consultaTransacoes(String atributo,int indice){
+		if(atributo.equalsIgnoreCase("Nome")){
+			return historicoHospedes.get(indice).getNome();
+		}else{
+			return historicoDeGastos.get(indice);
+		}
+	}
 
 	public String realizaCheckout(String email, String quarto) throws Exception {
 		if (email == null || email.trim().isEmpty()) {
@@ -242,8 +252,10 @@ public class Recepcao {
 		Hospede hospede = this.buscaHospede(email);	
 		Estadia estadia = this.buscaEstadia(hospede, quarto);
 		double precoTotal = estadia.getGastos();
+		historicoHospedes.add(hospede);
+		int indi = historicoHospedes.indexOf(hospede);
+		historicoDeGastos.add(getTotal(cadastros.get(hospede)));
 		total += precoTotal;
-		saida += 1;
 		saindo += String.format("%s;", hospede.getNome());
 		grava(hospede.getNome(), hospede.getEmail(), precoTotal);
 		cadastros.get(hospede).remove(estadia);
