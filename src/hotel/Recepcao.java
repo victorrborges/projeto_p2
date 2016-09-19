@@ -253,7 +253,6 @@ public class Recepcao {
 		Estadia estadia = this.buscaEstadia(hospede, quarto);
 		double precoTotal = estadia.getGastos();
 		historicoHospedes.add(hospede);
-		int indi = historicoHospedes.indexOf(hospede);
 		historicoDeGastos.add(getTotal(cadastros.get(hospede)));
 		total += precoTotal;
 		saindo += String.format("%s;", hospede.getNome());
