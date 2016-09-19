@@ -1,17 +1,18 @@
 package restaurante;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Cardapio {
-	private HashSet<Prato> pratos;
+	private HashSet<PratoSimples> pratos;
 	private HashSet<Refeicao> refeicoes;
 	
 	public Cardapio(){
-		this.pratos = new HashSet<Prato>();
+		this.pratos = new HashSet<PratoSimples>();
 		this.refeicoes = new HashSet<Refeicao>();
 	}
 	
-	public HashSet<Prato> getPratos() {
+	public HashSet<PratoSimples> getPratos() {
 		return pratos;
 	}
 	
@@ -19,11 +20,11 @@ public class Cardapio {
 		return refeicoes;
 	}
 
-	public void addPrato(Prato prato){
+	public void addPrato(PratoSimples prato){
 		this.pratos.add(prato);
 	}
 	
-	public void removePrato(Prato prato){
+	public void removePrato(PratoSimples prato){
 		this.pratos.remove(prato);
 	}
 	
@@ -36,7 +37,7 @@ public class Cardapio {
 	}
 
 	public String consultaCardapioPrato(String nome, String atributo){
-		Prato prato = this.buscaPrato(nome);		
+		PratoSimples prato = this.buscaPrato(nome);		
 		if(atributo.equalsIgnoreCase("preco")){
 			String stringPreco = String.format("%.2f", prato.getPreco());
 			stringPreco = stringPreco.replace(".", ",");
@@ -48,13 +49,51 @@ public class Cardapio {
 		return null;
 	}
 	
-	public Prato buscaPrato(String nome){
-		for(Prato prato : pratos){
+	public PratoSimples buscaPrato(String nome){
+		for(PratoSimples prato : pratos){
 			if(nome.equals(prato.getNome())){
 				return prato;
 			}
 		}
 		return null;
+	}
+	private boolean validaPratos(ArrayList<Prato> pratos){
+		for (Prato prato : pratos){
+			if (!getPratos().contains(prato)){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private ArrayList<Prato> arrayPratos(String[] componentes){
+		ArrayList<Prato> arrayDePratos = new ArrayList<Prato>();
+		for(int i = 0; i < componentes.length; i += 1){
+			arrayDePratos.add(buscaPrato(componentes[i]));
+		}
+		return arrayDePratos;
+	}
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
+		if (componentes.trim().isEmpty()){
+			throw new Exception("Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
+		}
+		Refeicao refeicao = new Refeicao(nome, descricao);
+		String[] arrayComponentes = componentes.split(";");
+		if (arrayComponentes.length < 3 || arrayComponentes.length > 4){
+			throw new Exception("Erro no cadastro de refeicao completa. Uma refeicao completa deve possuir no minimo 3 e no maximo 4 pratos.");
+		}
+		ArrayList<Prato> arrayPratos = arrayPratos(arrayComponentes);
+		if (!validaPratos(arrayPratos)){
+			throw new Exception("Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
+		}
+		for(Prato item : arrayPratos){
+			refeicao.addPrato(item);
+		}
+		refeicoes.add(refeicao);	
+	}
+	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
+		PratoSimples prato = new PratoSimples(nome, preco, descricao);
+		pratos.add(prato);
 	}
 	
 	public String consultaCardapioRefeicao(String nome, String atributo){
