@@ -21,17 +21,17 @@ import java.util.HashMap;
 public class Recepcao {
 	private HashMap<Hospede, List<Estadia>> cadastros;
 	private List<Hospede> historicoHospedes;
-	private List<String> historicoDeGastos; 
+	private List<String> historicoDeGastos;
 	private double total;
 	private String saindo = "";
-	private File arquivo; 
+	private File arquivo;
 	private File file;
 
 	public Recepcao() throws IOException {
-		this.cadastros = new HashMap<Hospede, List<Estadia> >();
+		this.cadastros = new HashMap<Hospede, List<Estadia>>();
 		this.file = new File("historicoHospedes");
 		file.mkdir();
-		this.arquivo =  new File("historicoHospedes/hospede.txt");
+		this.arquivo = new File("historicoHospedes/hospede.txt");
 		arquivo.createNewFile();
 		this.historicoHospedes = new ArrayList<>();
 		historicoDeGastos = new ArrayList<>();
@@ -58,16 +58,6 @@ public class Recepcao {
 		}
 		cadastros.remove(buscaHospede(id));
 	}
-	public String consultaTransacoes(String atributo){
-		if(atributo.equalsIgnoreCase("Quantidade")){
-			return String.format("%d", historicoHospedes.size());
-		}else if(atributo.equals("Total")){
-			return String.format("R$%.2f", total);
-		}else{
-			return saindo.substring(0, saindo.length()-1);
-		}
-			
-	}
 
 	public String getInfoHospede(String id, String atributo) throws Exception {
 		Hospede hospede = buscaHospede(id);
@@ -82,14 +72,15 @@ public class Recepcao {
 		}
 		return hospede.getEmail();
 	}
-	public void grava(String nome,String email,double total) throws IOException{
+
+	public void grava(String nome, String email, double total) throws IOException {
 		FileWriter tal = new FileWriter(arquivo);
 		BufferedWriter escrever = new BufferedWriter(tal);
 		escrever.write(nome);
 		escrever.write(email);
 		escrever.close();
 		tal.close();
-	
+
 	}
 
 	public String getInfoHospedagem(String id, String atributo) throws Exception {
@@ -120,7 +111,7 @@ public class Recepcao {
 			int contador = 0;
 			for (Estadia est : estadias) {
 				quartos += est.getQuarto().getId();
-				if (contador < estadias.size()-1) {
+				if (contador < estadias.size() - 1) {
 					quartos += ",";
 				}
 				contador++;
@@ -136,26 +127,30 @@ public class Recepcao {
 		for (Estadia est : estadias) {
 			precoTotal += est.getGastos();
 		}
-		
+
 		return String.format("R$%.2f", precoTotal);
 	}
-	private boolean verificaQuarto(String quarto){
-		for(Hospede hospede : cadastros.keySet()){
-			for(Estadia est : cadastros.get(hospede)){
-				if(est.getQuarto().getId().equals(quarto)){
+
+	private boolean verificaQuarto(String quarto) {
+		for (Hospede hospede : cadastros.keySet()) {
+			for (Estadia est : cadastros.get(hospede)) {
+				if (est.getQuarto().getId().equals(quarto)) {
 					return true;
 				}
 			}
-		}return false;
+		}
+		return false;
 	}
-	public int totalAtivas(){
+
+	public int totalAtivas() {
 		int cont = 0;
-		for(Hospede hospede : cadastros.keySet()){
-			if(cadastros.get(hospede).size() == 0){
+		for (Hospede hospede : cadastros.keySet()) {
+			if (cadastros.get(hospede).size() == 0) {
 				cont += 1;
 			}
-		
-		}return cont;
+
+		}
+		return cont;
 	}
 
 	public void atualizaCadastro(String id, String atributo, String valor) throws Exception {
@@ -219,8 +214,8 @@ public class Recepcao {
 		if (getTipoQuarto(tipoQuarto) == null) {
 			throw new Exception("Erro ao realizar checkin. Tipo de quarto invalido.");
 		}
-		if(verificaQuarto(idQuarto)){
-			throw new Exception("Erro ao realizar checkin. Quarto "+idQuarto+" ja esta ocupado.");
+		if (verificaQuarto(idQuarto)) {
+			throw new Exception("Erro ao realizar checkin. Quarto " + idQuarto + " ja esta ocupado.");
 		}
 		Hospede buscado = buscaHospede(email);
 		if (buscado == null) {
@@ -229,13 +224,6 @@ public class Recepcao {
 
 		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto), qtdeDias);
 		cadastros.get(buscado).add(estadia);
-	}
-	public String consultaTransacoes(String atributo,int indice){
-		if(atributo.equalsIgnoreCase("Nome")){
-			return historicoHospedes.get(indice).getNome();
-		}else{
-			return historicoDeGastos.get(indice);
-		}
 	}
 
 	public String realizaCheckout(String email, String quarto) throws Exception {
@@ -249,11 +237,11 @@ public class Recepcao {
 			throw new HospedeInvalidoException(
 					"Erro ao realizar checkout. ID do quarto invalido, use apenas numeros ou letras.");
 		}
-		Hospede hospede = this.buscaHospede(email);	
+		Hospede hospede = this.buscaHospede(email);
 		Estadia estadia = this.buscaEstadia(hospede, quarto);
 		double precoTotal = estadia.getGastos();
 		historicoHospedes.add(hospede);
-		historicoDeGastos.add(getTotal(cadastros.get(hospede)));
+		historicoDeGastos.add(String.format("R$%.2f", precoTotal));
 		total += precoTotal;
 		saindo += String.format("%s;", hospede.getNome());
 		grava(hospede.getNome(), hospede.getEmail(), precoTotal);
@@ -262,14 +250,37 @@ public class Recepcao {
 
 	}
 
+	public String consultaTransacoes(String atributo) {
+		if (atributo.equalsIgnoreCase("Quantidade")) {
+			return String.format("%d", historicoHospedes.size());
+		} else if (atributo.equals("Total")) {
+			return String.format("R$%.2f", total);
+		} else {
+			return saindo.substring(0, saindo.length() - 1);
+		}
+
+	}
+
+	public String consultaTransacoes(String atributo, int indice) throws Exception {
+		if (indice < 0) {
+			throw new Exception("Erro na consulta de transacoes. Indice invalido.");
+		}
+		if (atributo.equalsIgnoreCase("Nome")) {
+			return historicoHospedes.get(indice).getNome();
+		} else {
+			return historicoDeGastos.get(indice);
+		}
+	}
+
 	private Quartos getTipoQuarto(String tipo) {
 		if (tipo.equalsIgnoreCase("Presidencial")) {
 			return Quartos.PRESIDENCIAL;
 		} else if (tipo.equalsIgnoreCase("simples")) {
 			return Quartos.SIMPLES;
-		} else if(tipo.equalsIgnoreCase("luxo")){
+		} else if (tipo.equalsIgnoreCase("luxo")) {
 			return Quartos.LUXO;
-		}return null;
+		}
+		return null;
 	}
 
 	private boolean validaIdade(String data) {
@@ -309,7 +320,7 @@ public class Recepcao {
 
 	private Hospede buscaHospede(String id) throws Exception {
 		for (Hospede hospede : cadastros.keySet()) {
-			if (hospede.getEmail().equalsIgnoreCase(id)){
+			if (hospede.getEmail().equalsIgnoreCase(id)) {
 				return hospede;
 			}
 		}
