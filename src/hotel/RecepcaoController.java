@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 import validacao.ValidaHospede;
 
-public class HotelController {
+public class RecepcaoController {
 	private HashMap<Hospede, List<Estadia>> cadastros;
 	private List<Hospede> historicoHospedes;
 	private List<String> historicoDeGastos;
@@ -19,7 +19,7 @@ public class HotelController {
 	private String saindo = "";
 	private ValidaHospede valida;
 
-	public HotelController() {
+	public RecepcaoController() {
 		this.cadastros = new HashMap<Hospede, List<Estadia>>();
 		this.historicoHospedes = new ArrayList<>();
 		this.historicoDeGastos = new ArrayList<>();

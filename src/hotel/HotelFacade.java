@@ -6,11 +6,11 @@ import easyaccept.EasyAccept;
 import exceptions.SistemaInvalidoException;
 
 public class HotelFacade {
-	private HotelController recepcao;
+	private RecepcaoController recepcao;
 	private RestauranteController restaurante;
 
 	public HotelFacade() throws IOException {
-		this.recepcao = new HotelController();
+		this.recepcao = new RecepcaoController();
 		this.restaurante = new RestauranteController();
 	}
 
