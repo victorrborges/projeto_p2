@@ -1,26 +1,18 @@
 package hotel;
 
-import exceptions.EstadiaInvalidaException;
-import exceptions.QuartoInvalidoException;
-
 public class Estadia {
 	private Quarto quarto;
 	private int qtdeDias;
 	private double gastos;
 
-	public Estadia(String id, TipoQuarto diaria, int qtdeDias)
-			throws EstadiaInvalidaException, QuartoInvalidoException {
-		if (id == null || id.trim().isEmpty()) {
-			throw new EstadiaInvalidaException("Id nao pode ser nulo ou vazio");
-		}
-		if (qtdeDias <= 0) {
-			throw new EstadiaInvalidaException(
-					"Quantidade de dias nao pode ser menor que 1");
-		}
-		if (diaria != TipoQuarto.SIMPLES && diaria != TipoQuarto.LUXO
-				&& diaria != TipoQuarto.PRESIDENCIAL) {
-			throw new EstadiaInvalidaException("Tipo de quarto invalido");
-		}
+	/**
+	 * Classe Estadia, composta por um quarto e uma quantidade de dias
+	 * 
+	 * @param id
+	 * @param diaria
+	 * @param qtdeDias
+	 */
+	public Estadia(String id, TipoQuarto diaria, int qtdeDias) {
 		this.quarto = new Quarto(id, diaria);
 		this.qtdeDias = qtdeDias;
 		this.gastos = diaria.getPreco() * this.qtdeDias;
@@ -48,6 +40,29 @@ public class Estadia {
 
 	public void setGastos(double gastos) {
 		this.gastos = gastos;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + qtdeDias;
+		result = prime * result + ((quarto == null) ? 0 : quarto.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Estadia)) {
+			return false;
+		}
+
+		Estadia estadia = (Estadia) obj;
+		if (estadia.getQtdeDias() == getQtdeDias() && estadia.getQuarto().equals(getQuarto())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

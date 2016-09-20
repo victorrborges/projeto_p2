@@ -1,18 +1,18 @@
 package hotel;
 
-import exceptions.QuartoInvalidoException;
-
 public class Quarto {
 	private String id;
 	private TipoQuarto diaria;
 
-	public Quarto(String id, TipoQuarto diaria) throws QuartoInvalidoException {
-		if (id == null || id.trim().isEmpty()) {
-			throw new QuartoInvalidoException("Id nao pode ser nulo ou vazio");
-		}
-		if (diaria != TipoQuarto.SIMPLES && diaria != TipoQuarto.LUXO && diaria != TipoQuarto.PRESIDENCIAL) {
-			throw new QuartoInvalidoException("Tipo de quarto invalido");
-		}
+	/**
+	 * @param id
+	 *            "Numero do quarto"
+	 * @param diaria
+	 *            Valor da diaria que varia de acordo com o tipo, Simples, Luxo
+	 *            ou Presidencial
+	 */
+
+	public Quarto(String id, TipoQuarto diaria) {
 		this.id = id;
 		this.diaria = diaria;
 	}

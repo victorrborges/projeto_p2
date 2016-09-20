@@ -1,6 +1,5 @@
 package hotel;
 
-import java.io.IOException;
 import restaurante.RestauranteController;
 import easyaccept.EasyAccept;
 import exceptions.SistemaInvalidoException;
@@ -9,7 +8,11 @@ public class HotelFacade {
 	private RecepcaoController recepcao;
 	private RestauranteController restaurante;
 
-	public HotelFacade() throws IOException {
+	/**
+	 * Delega os metodos a RecepcaoController e ao RestauranteController
+	 * 
+	 */
+	public HotelFacade() {
 		this.recepcao = new RecepcaoController();
 		this.restaurante = new RestauranteController();
 	}
@@ -75,6 +78,10 @@ public class HotelFacade {
 		}
 	}
 
+	public int totalAtivas() {
+		return recepcao.totalAtivas();
+	}
+
 	public String consultaTransacoes(String atributo) {
 		return recepcao.consultaTransacoes(atributo);
 	}
@@ -93,10 +100,6 @@ public class HotelFacade {
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
-	}
-
-	public int totalAtivas() {
-		return recepcao.totalAtivas();
 	}
 
 	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {

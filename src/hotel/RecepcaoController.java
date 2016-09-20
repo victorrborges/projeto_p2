@@ -19,6 +19,9 @@ public class RecepcaoController {
 	private String saindo = "";
 	private ValidaHospede valida;
 
+	/**
+	 * Responsavel pela logica de funcionamente
+	 */
 	public RecepcaoController() {
 		this.cadastros = new HashMap<Hospede, List<Estadia>>();
 		this.historicoHospedes = new ArrayList<>();
@@ -33,6 +36,17 @@ public class RecepcaoController {
 	public void fechaSistema() {
 
 	}
+
+	/**
+	 * Cadastra um hospede, caso seu nome, email e data de nascimento passados
+	 * sejam validos
+	 *
+	 * @param nome
+	 * @param email
+	 * @param dataDeNascimento
+	 * @return email
+	 * @throws SistemaInvalidoException
+	 */
 
 	public String cadastraHospede(String nome, String email, String dataDeNascimento) throws SistemaInvalidoException {
 		if (nome == null || nome.trim().isEmpty()) {
@@ -64,6 +78,12 @@ public class RecepcaoController {
 		return email;
 	}
 
+	/**
+	 * Remove um hospede do hotel
+	 * 
+	 * @param id
+	 * @throws SistemaInvalidoException
+	 */
 	public void removeHospede(String id) throws SistemaInvalidoException {
 		if (!valida.validaEmail(id)) {
 			throw new RecepcaoInvalidaException("Erro na remocao do Hospede. Formato de email invalido.");
@@ -86,6 +106,17 @@ public class RecepcaoController {
 		return hospede.getEmail();
 	}
 
+	/**
+	 * Recebe o email do hospede e pode retornar o numero de hospedagens ativas,
+	 * os quartos que estao relacionados ao hospede ou o total em realcao ao
+	 * preco das estadias do hospede, de acordo com o "atributo" passado como
+	 * parametro
+	 * 
+	 * @param id
+	 * @param atributo
+	 * @return
+	 * @throws SistemaInvalidoException
+	 */
 	public String getInfoHospedagem(String id, String atributo) throws SistemaInvalidoException {
 
 		if (id == null || id.trim().isEmpty()) {
@@ -126,6 +157,12 @@ public class RecepcaoController {
 		}
 	}
 
+	/**
+	 * Retorna o preco total de acordo com as estadias de um hospede
+	 * 
+	 * @param estadias
+	 * @return
+	 */
 	public String getTotal(List<Estadia> estadias) {
 		double precoTotal = 0;
 		for (Estadia est : estadias) {
@@ -135,6 +172,12 @@ public class RecepcaoController {
 		return String.format("R$%.2f", precoTotal);
 	}
 
+	/**
+	 * Verifica se um quarto ja esta ocupado
+	 * 
+	 * @param quarto
+	 * @return
+	 */
 	private boolean verificaQuarto(String quarto) {
 		for (Hospede hospede : cadastros.keySet()) {
 			for (Estadia est : cadastros.get(hospede)) {
@@ -146,6 +189,11 @@ public class RecepcaoController {
 		return false;
 	}
 
+	/**
+	 * Retorna o numero de hospedagens ativas
+	 * 
+	 * @return
+	 */
 	public int totalAtivas() {
 		int cont = 0;
 		for (Hospede hospede : cadastros.keySet()) {
@@ -157,6 +205,15 @@ public class RecepcaoController {
 		return cont;
 	}
 
+	/**
+	 * Atualizar o nome, email ou data de nascimento do hospede de acordo com o
+	 * "atributo" passado como prametro
+	 * 
+	 * @param id
+	 * @param atributo
+	 * @param valor
+	 * @throws SistemaInvalidoException
+	 */
 	public void atualizaCadastro(String id, String atributo, String valor) throws SistemaInvalidoException {
 		Hospede hospede = buscaHospede(id);
 		List<Estadia> list = cadastros.get(hospede);
@@ -201,8 +258,17 @@ public class RecepcaoController {
 		cadastros.put(hospede, list);
 	}
 
+	/**
+	 * Associa um hospede a uma ou mais estadias
+	 * 
+	 * @param email
+	 * @param qtdeDias
+	 * @param idQuarto
+	 * @param tipoQuarto
+	 * @throws SistemaInvalidoException
+	 */
 	public void realizaCheckin(String email, int qtdeDias, String idQuarto, String tipoQuarto)
-			throws SistemaInvalidoException, Exception {
+			throws SistemaInvalidoException {
 
 		if (email == null || email.trim().isEmpty()) {
 			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
@@ -233,6 +299,14 @@ public class RecepcaoController {
 		cadastros.get(buscado).add(estadia);
 	}
 
+	/**
+	 * Remove uma estadia do hospede e registra o historico de lucros do hotel
+	 * 
+	 * @param email
+	 * @param quarto
+	 * @return
+	 * @throws SistemaInvalidoException
+	 */
 	public String realizaCheckout(String email, String quarto) throws SistemaInvalidoException {
 		if (email == null || email.trim().isEmpty()) {
 			throw new RecepcaoInvalidaException("Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
@@ -256,6 +330,13 @@ public class RecepcaoController {
 
 	}
 
+	/**
+	 * Consulta as transacoes, retornando o total ou a quantidade em relacao aos
+	 * checkouts realizados
+	 * 
+	 * @param atributo
+	 * @return
+	 */
 	public String consultaTransacoes(String atributo) {
 		if (atributo.equalsIgnoreCase("Quantidade")) {
 			return String.format("%d", historicoHospedes.size());
@@ -267,6 +348,15 @@ public class RecepcaoController {
 
 	}
 
+	/**
+	 * Consulta as transacoes, retornando o nome do hospede ou o valor total de
+	 * acordo com o indice de checkout realizado
+	 * 
+	 * @param atributo
+	 * @param indice
+	 * @return
+	 * @throws SistemaInvalidoException
+	 */
 	public String consultaTransacoes(String atributo, int indice) throws SistemaInvalidoException {
 		if (indice < 0 || indice >= historicoHospedes.size()) {
 			throw new RecepcaoInvalidaException("Erro na consulta de transacoes. Indice invalido.");
@@ -290,6 +380,13 @@ public class RecepcaoController {
 		return null;
 	}
 
+	/**
+	 * Busca uma estadia de acordo com o hospede e o quarto
+	 * 
+	 * @param hospede
+	 * @param quarto
+	 * @return
+	 */
 	private Estadia buscaEstadia(Hospede hospede, String quarto) {
 		List<Estadia> arrayDeQuartos = this.cadastros.get(hospede);
 		for (Estadia estadia : arrayDeQuartos) {
@@ -300,6 +397,12 @@ public class RecepcaoController {
 		return null;
 	}
 
+	/**
+	 * Busca um hospede de acordo com seu email
+	 * 
+	 * @param id
+	 * @return
+	 */
 	private Hospede buscaHospede(String id) {
 		for (Hospede hospede : cadastros.keySet()) {
 			if (hospede.getEmail().equalsIgnoreCase(id)) {
