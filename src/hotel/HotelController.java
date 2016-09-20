@@ -2,11 +2,14 @@ package hotel;
 
 import java.util.List;
 
+import exceptions.EstadiaInvalidaException;
 import exceptions.HospedeInvalidoException;
 import exceptions.RecepcaoInvalidaException;
+import exceptions.SistemaInvalidoException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import validacao.ValidaHospede;
 
 public class HotelController {
@@ -33,7 +36,7 @@ public class HotelController {
 	}
 
 	public String cadastraHospede(String nome, String email,
-			String dataDeNascimento) throws HospedeInvalidoException {
+			String dataDeNascimento) throws SistemaInvalidoException {
 		if (nome == null || nome.trim().isEmpty()) {
 			throw new HospedeInvalidoException(
 					"Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
@@ -68,7 +71,7 @@ public class HotelController {
 		return email;
 	}
 
-	public void removeHospede(String id) throws Exception {
+	public void removeHospede(String id) throws SistemaInvalidoException {
 		if (!valida.validaEmail(id)) {
 			throw new RecepcaoInvalidaException(
 					"Erro na remocao do Hospede. Formato de email invalido.");
@@ -76,10 +79,11 @@ public class HotelController {
 		cadastros.remove(buscaHospede(id));
 	}
 
-	public String getInfoHospede(String id, String atributo) throws Exception {
+	public String getInfoHospede(String id, String atributo)
+			throws SistemaInvalidoException {
 		Hospede hospede = buscaHospede(id);
 		if (hospede == null) {
-			throw new Exception(
+			throw new RecepcaoInvalidaException(
 					"Erro na consulta de hospede. Hospede de email " + id
 							+ " nao foi cadastrado(a).");
 		}
@@ -93,7 +97,7 @@ public class HotelController {
 	}
 
 	public String getInfoHospedagem(String id, String atributo)
-			throws Exception {
+			throws SistemaInvalidoException {
 
 		if (id == null || id.trim().isEmpty()) {
 			throw new RecepcaoInvalidaException(
@@ -106,7 +110,7 @@ public class HotelController {
 		Hospede hospede = buscaHospede(id);
 
 		if (hospede == null) {
-			throw new Exception(
+			throw new RecepcaoInvalidaException(
 					"Erro na consulta de hospede. Hospede de email " + id
 							+ " nao foi cadastrado(a).");
 		}
@@ -168,7 +172,7 @@ public class HotelController {
 	}
 
 	public void atualizaCadastro(String id, String atributo, String valor)
-			throws Exception {
+			throws SistemaInvalidoException {
 		Hospede hospede = buscaHospede(id);
 		List<Estadia> list = cadastros.get(hospede);
 		if (atributo.equalsIgnoreCase("nome")) {
@@ -195,15 +199,15 @@ public class HotelController {
 
 		} else if (atributo.equalsIgnoreCase("data de nascimento")) {
 			if (valor == null || valor.trim().isEmpty()) {
-				throw new HospedeInvalidoException(
+				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
 			}
 			if (!valida.validaData(valor)) {
-				throw new HospedeInvalidoException(
+				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Formato de data invalido.");
 			}
 			if (!valida.validaIdade(valor)) {
-				throw new HospedeInvalidoException(
+				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
 			}
 
@@ -213,36 +217,38 @@ public class HotelController {
 	}
 
 	public void realizaCheckin(String email, int qtdeDias, String idQuarto,
-			String tipoQuarto) throws Exception {
+			String tipoQuarto) throws SistemaInvalidoException, Exception {
 
 		if (email == null || email.trim().isEmpty()) {
-			throw new HospedeInvalidoException(
+			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaEmail(email)) {
-			throw new HospedeInvalidoException(
+			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkin. Email do(a) hospede esta invalido.");
 		}
 		if (!valida.validaIdQuarto(idQuarto)) {
-			throw new Exception(
+			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkin. ID do quarto invalido, use apenas numeros ou letras.");
 		}
 		if (qtdeDias <= 0) {
-			throw new Exception(
+			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkin. Quantidade de dias esta invalida.");
 		}
 		if (getTipoQuarto(tipoQuarto) == null) {
-			throw new Exception(
+			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkin. Tipo de quarto invalido.");
 		}
 		if (verificaQuarto(idQuarto)) {
-			throw new Exception("Erro ao realizar checkin. Quarto " + idQuarto
-					+ " ja esta ocupado.");
+			throw new RecepcaoInvalidaException(
+					"Erro ao realizar checkin. Quarto " + idQuarto
+							+ " ja esta ocupado.");
 		}
 		Hospede buscado = buscaHospede(email);
 		if (buscado == null) {
-			throw new Exception("Erro ao realizar checkin. Hospede de email "
-					+ email + " nao foi cadastrado(a).");
+			throw new RecepcaoInvalidaException(
+					"Erro ao realizar checkin. Hospede de email " + email
+							+ " nao foi cadastrado(a).");
 		}
 
 		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto),
@@ -250,17 +256,18 @@ public class HotelController {
 		cadastros.get(buscado).add(estadia);
 	}
 
-	public String realizaCheckout(String email, String quarto) throws Exception {
+	public String realizaCheckout(String email, String quarto)
+			throws SistemaInvalidoException {
 		if (email == null || email.trim().isEmpty()) {
-			throw new HospedeInvalidoException(
+			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaEmail(email)) {
-			throw new HospedeInvalidoException(
+			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkout. Email do(a) hospede esta invalido.");
 		}
 		if (!valida.validaIdQuarto(quarto)) {
-			throw new HospedeInvalidoException(
+			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkout. ID do quarto invalido, use apenas numeros ou letras.");
 		}
 		Hospede hospede = this.buscaHospede(email);
@@ -287,9 +294,9 @@ public class HotelController {
 	}
 
 	public String consultaTransacoes(String atributo, int indice)
-			throws Exception {
+			throws RecepcaoInvalidaException {
 		if (indice < 0 || indice >= historicoHospedes.size()) {
-			throw new Exception(
+			throw new RecepcaoInvalidaException(
 					"Erro na consulta de transacoes. Indice invalido.");
 		}
 
@@ -321,7 +328,7 @@ public class HotelController {
 		return null;
 	}
 
-	private Hospede buscaHospede(String id) throws Exception {
+	private Hospede buscaHospede(String id) {
 		for (Hospede hospede : cadastros.keySet()) {
 			if (hospede.getEmail().equalsIgnoreCase(id)) {
 				return hospede;
