@@ -14,29 +14,14 @@ public class Refeicao {
 		this.pratos = new ArrayList<Prato>();
 	}
 
-	/**
-	 * Pega o nome da refeicao.
-	 * 
-	 * @return Retorna uma String que representa o nome da refeicao.
-	 */
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * Muda o nome de uma refeicao.
-	 * 
-	 * @param nome Novo nome.
-	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * Pega o preco da refeicao.
-	 * 
-	 * @return Retorna um double que representa o preco da refeicao com desconto.
-	 */
 	public double getPreco() {
 		double precoTotal = 0.0;
 		for (Prato prato : pratos) {
@@ -45,38 +30,18 @@ public class Refeicao {
 		return precoTotal * DESCONTO;
 	}
 
-	/**
-	 * Pega a descricao da refeicao.
-	 * 
-	 * @return Retorna uma String que representa a descricao.
-	 */
 	public String getDescricao() {
 		return this.descricao;
 	}
 
-	/**
-	 * Muda a descricao.
-	 * 
-	 * @param descricao Nova descricao.
-	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-	/**
-	 * Pega a lista de pratos que a refeicao contem.
-	 * 
-	 * @return Retorna a lista de Prato.
-	 */
 	public ArrayList<Prato> getPratos() {
 		return pratos;
 	}
 
-	/**
-	 * Muda os pratos da refeicao.
-	 * 
-	 * @param pratos Uma lista de pratos.
-	 */
 	public void setPratos(ArrayList<Prato> pratos) {
 		this.pratos = pratos;
 	}
