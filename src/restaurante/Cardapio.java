@@ -3,7 +3,6 @@ package restaurante;
 import java.util.ArrayList;
 import java.util.HashSet;
 import exceptions.PratoInvalidoException;
-import exceptions.RefeicaoInvalidaException;
 
 public class Cardapio {
 	private HashSet<PratoSimples> pratos;

@@ -2,16 +2,12 @@ package hotel;
 
 import java.util.List;
 
-import org.joda.time.LocalDate;
-import org.joda.time.Years;
-
-import easyaccept.EasyAccept;
 import exceptions.HospedeInvalidoException;
 import exceptions.RecepcaoInvalidaException;
-import exceptions.SistemaInvalidoException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import validacao.ValidaHospede;
 
 public class HotelController {
 	private HashMap<Hospede, List<Estadia>> cadastros;
@@ -19,11 +15,13 @@ public class HotelController {
 	private List<String> historicoDeGastos;
 	private double total;
 	private String saindo = "";
+	private ValidaHospede valida;
 
 	public HotelController() {
 		this.cadastros = new HashMap<Hospede, List<Estadia>>();
 		this.historicoHospedes = new ArrayList<>();
 		this.historicoDeGastos = new ArrayList<>();
+		valida = new ValidaHospede();
 	}
 
 	public void iniciaSistema() {
@@ -35,7 +33,35 @@ public class HotelController {
 	}
 
 	public String cadastraHospede(String nome, String email,
-			String dataDeNascimento) throws SistemaInvalidoException {
+			String dataDeNascimento) throws HospedeInvalidoException {
+		if (nome == null || nome.trim().isEmpty()) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
+		}
+		if (!valida.validaNome(nome)) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
+		}
+		if (email == null || email.trim().isEmpty()) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
+		}
+		if (!valida.validaEmail(email)) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
+		}
+		if (dataDeNascimento == null || dataDeNascimento.trim().isEmpty()) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
+		}
+		if (!valida.validaData(dataDeNascimento)) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Formato de data invalido.");
+		}
+		if (!valida.validaIdade(dataDeNascimento)) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
+		}
 		Hospede hospede = new Hospede(nome, email, dataDeNascimento);
 		List<Estadia> estadias = new ArrayList<Estadia>();
 		this.cadastros.put(hospede, estadias);
@@ -43,7 +69,7 @@ public class HotelController {
 	}
 
 	public void removeHospede(String id) throws Exception {
-		if (!validaEmail(id)) {
+		if (!valida.validaEmail(id)) {
 			throw new RecepcaoInvalidaException(
 					"Erro na remocao do Hospede. Formato de email invalido.");
 		}
@@ -73,7 +99,7 @@ public class HotelController {
 			throw new RecepcaoInvalidaException(
 					"Erro ao checar hospedagem ativa. Email do(a) hospede nao pode ser vazio.");
 		}
-		if (!validaEmail(id)) {
+		if (!valida.validaEmail(id)) {
 			throw new RecepcaoInvalidaException(
 					"Erro ao checar hospedagem ativa. Email do(a) hospede esta invalido.");
 		}
@@ -150,7 +176,7 @@ public class HotelController {
 				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
 			}
-			if (!valor.trim().matches("[ a-zA-Z]*")) {
+			if (!valida.validaNome(valor)) {
 				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede esta invalido.");
 			}
@@ -160,7 +186,7 @@ public class HotelController {
 				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
 			}
-			if (!validaEmail(valor)) {
+			if (!valida.validaEmail(valor)) {
 				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
 
@@ -172,11 +198,11 @@ public class HotelController {
 				throw new HospedeInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
 			}
-			if (!validaData(valor)) {
+			if (!valida.validaData(valor)) {
 				throw new HospedeInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Formato de data invalido.");
 			}
-			if (!validaIdade(valor)) {
+			if (!valida.validaIdade(valor)) {
 				throw new HospedeInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
 			}
@@ -193,12 +219,11 @@ public class HotelController {
 			throw new HospedeInvalidoException(
 					"Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
 		}
-		if (!validaEmail(email)) {
+		if (!valida.validaEmail(email)) {
 			throw new HospedeInvalidoException(
 					"Erro ao realizar checkin. Email do(a) hospede esta invalido.");
 		}
-		if (idQuarto == null || idQuarto.trim().isEmpty()
-				|| (!idQuarto.matches("[0-9]+[ A-Z]"))) {
+		if (!valida.validaIdQuarto(idQuarto)) {
 			throw new Exception(
 					"Erro ao realizar checkin. ID do quarto invalido, use apenas numeros ou letras.");
 		}
@@ -230,12 +255,11 @@ public class HotelController {
 			throw new HospedeInvalidoException(
 					"Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
 		}
-		if (!validaEmail(email)) {
+		if (!valida.validaEmail(email)) {
 			throw new HospedeInvalidoException(
 					"Erro ao realizar checkout. Email do(a) hospede esta invalido.");
 		}
-		if (quarto == null || quarto.trim().isEmpty()
-				|| (!quarto.matches("[0-9]+[ A-Z]"))) {
+		if (!valida.validaIdQuarto(quarto)) {
 			throw new HospedeInvalidoException(
 					"Erro ao realizar checkout. ID do quarto invalido, use apenas numeros ou letras.");
 		}
@@ -306,35 +330,4 @@ public class HotelController {
 		return null;
 	}
 
-	private boolean validaIdade(String data) {
-		String[] dataNasc = data.split("/");
-		int dia = Integer.parseInt(dataNasc[0]);
-		int mes = Integer.parseInt(dataNasc[1]);
-		int ano = Integer.parseInt(dataNasc[2]);
-		LocalDate dataDeNascimento = new LocalDate(ano, mes, dia);
-		LocalDate hoje = new LocalDate();
-		Years anos = Years.yearsBetween(dataDeNascimento, hoje);
-		int qtdeDeAnos = anos.getYears();
-
-		if (qtdeDeAnos >= 18) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean validaEmail(String email) {
-		if (email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
-				|| email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean validaData(String dataDeNascimento) {
-		return dataDeNascimento
-				.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}");
-	}
-
-	
 }

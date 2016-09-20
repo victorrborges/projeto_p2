@@ -1,83 +1,15 @@
 package hotel;
 
-import org.joda.time.LocalDate;
-import org.joda.time.Years;
-
-import exceptions.HospedeInvalidoException;
-
 public class Hospede {
 	private String nome;
 	private String email;
 	private String dataDeNascimento;
 
-	public Hospede(String nome, String email, String dataDeNascimento)
-			throws HospedeInvalidoException {
-		if (nome == null || nome.trim().isEmpty()) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
-		}
-		if (!validaNome(nome)) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
-		}
-		if (email == null || email.trim().isEmpty()) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
-		}
-		if (!validaEmail(email)) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
-		}
-		if (dataDeNascimento == null || dataDeNascimento.trim().isEmpty()) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
-		}
-		if (!validaData(dataDeNascimento)) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Formato de data invalido.");
-		}
-		if (!validaIdade(dataDeNascimento)) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
-		}
+	public Hospede(String nome, String email, String dataDeNascimento) {
 
 		this.nome = nome;
 		this.email = email;
 		this.dataDeNascimento = dataDeNascimento;
-	}
-
-	public boolean validaData(String dataDeNascimento) {
-		return dataDeNascimento
-				.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}");
-	}
-
-	public boolean validaNome(String nome) {
-		return nome.trim().matches("[ a-zA-Z]+");
-	}
-
-	public boolean validaEmail(String email) {
-		if (email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
-				|| email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean validaIdade(String data) {
-		String[] dataNasc = data.split("/");
-		int dia = Integer.parseInt(dataNasc[0]);
-		int mes = Integer.parseInt(dataNasc[1]);
-		int ano = Integer.parseInt(dataNasc[2]);
-		LocalDate dataDeNascimento = new LocalDate(ano, mes, dia);
-		LocalDate hoje = new LocalDate();
-		Years anos = Years.yearsBetween(dataDeNascimento, hoje);
-		int qtdeDeAnos = anos.getYears();
-
-		if (qtdeDeAnos >= 18) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public String getNome() {
