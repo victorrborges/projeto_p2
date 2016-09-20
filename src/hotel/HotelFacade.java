@@ -22,42 +22,63 @@ public class HotelFacade {
 
 	public String cadastraHospede(String nome, String email,
 			String dataDeNascimento) throws SistemaInvalidoException {
-		return recepcao.cadastraHospede(nome, email, dataDeNascimento);
+		try{
+			return recepcao.cadastraHospede(nome, email, dataDeNascimento);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
+		
 	}
 
 	public void removeHospede(String id) throws Exception {
-		recepcao.removeHospede(id);
+		try{
+			recepcao.removeHospede(id);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
 	}
 
 	public String getInfoHospede(String id, String atributo) throws Exception {
-		return recepcao.getInfoHospede(id, atributo);
+		try{
+			return recepcao.getInfoHospede(id, atributo);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
 	}
 
 	public String getInfoHospedagem(String id, String atributo)
 			throws Exception {
-		return recepcao.getInfoHospedagem(id, atributo);
-	}
-
-	public String getTotal(List<Estadia> estadias) {
-		return recepcao.getTotal(estadias);
-	}
-
-	public int totalAtivas() {
-		return recepcao.totalAtivas();
+		try{
+			return recepcao.getInfoHospedagem(id, atributo);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
 	}
 
 	public void atualizaCadastro(String id, String atributo, String valor)
 			throws Exception {
-		recepcao.atualizaCadastro(id, atributo, valor);
+		try{
+			recepcao.atualizaCadastro(id, atributo, valor);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
 	}
 
 	public void realizaCheckin(String email, int qtdeDias, String idQuarto,
 			String tipoQuarto) throws Exception {
-		recepcao.realizaCheckin(email, qtdeDias, idQuarto, tipoQuarto);
+		try{
+			recepcao.realizaCheckin(email, qtdeDias, idQuarto, tipoQuarto);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
 	}
 
 	public String realizaCheckout(String email, String quarto) throws Exception {
-		return recepcao.realizaCheckout(email, quarto);
+		try{
+			return recepcao.realizaCheckout(email, quarto);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
 	}
 
 	public String consultaTransacoes(String atributo) {
@@ -66,22 +87,40 @@ public class HotelFacade {
 
 	public String consultaTransacoes(String atributo, int indice)
 			throws Exception {
-		return recepcao.consultaTransacoes(atributo, indice);
+		try{
+			return recepcao.consultaTransacoes(atributo, indice);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
 	}
 
 	public void cadastraPrato(String nome, double preco, String descricao)
 			throws Exception {
-		restaurante.cadastraPrato(nome, preco, descricao);
+		try{
+			restaurante.cadastraPrato(nome, preco, descricao);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
+	}public int totalAtivas() {
+		return recepcao.totalAtivas();
 	}
 
 	public void cadastraRefeicao(String nome, String descricao,
 			String componentes) throws Exception {
-		restaurante.cadastraRefeicao(nome, descricao, componentes);
+		try{
+			restaurante.cadastraRefeicao(nome, descricao, componentes);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
 	}
 
 	public String consultaRestaurante(String nome, String atributo)
 			throws Exception {
-		return restaurante.consultaRestaurante(nome, atributo);
+		try{
+			return restaurante.consultaRestaurante(nome, atributo);
+		}catch(SistemaInvalidoException ex){
+			throw new SistemaInvalidoException(ex.getMessage());
+		}
 	}
 
 	public void fechaSistema() {
