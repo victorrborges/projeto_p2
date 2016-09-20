@@ -6,7 +6,6 @@ import java.util.HashSet;
 import exceptions.CardapioInvalidoException;
 import exceptions.PratoInvalidoException;
 import exceptions.RestauranteInvalidoException;
-import exceptions.SistemaInvalidoException;
 
 public class Cardapio {
 	private HashSet<PratoSimples> pratos;
