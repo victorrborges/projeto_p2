@@ -12,21 +12,18 @@ public class RestauranteController {
 	public void iniciaSistema() {
 	}
 
-	public void cadastraPrato(String nome, double preco, String descricao)
-			throws Exception {
+	public void cadastraPrato(String nome, double preco, String descricao) throws RestauranteInvalidoException {
 		cardapio.cadastraPrato(nome, preco, descricao);
 	}
 
-	public void cadastraRefeicao(String nome, String descricao,
-			String componentes) throws RestauranteInvalidoException {
+	public void cadastraRefeicao(String nome, String descricao, String componentes)
+			throws RestauranteInvalidoException {
 		cardapio.cadastraRefeicao(nome, descricao, componentes);
 	}
 
-	public String consultaRestaurante(String nome, String atributo)
-			throws Exception {
+	public String consultaRestaurante(String nome, String atributo) throws RestauranteInvalidoException {
 		if (nome.trim().isEmpty()) {
-			throw new RestauranteInvalidoException(
-					"Erro na consulta do restaurante. Nome do prato esto vazio.");
+			throw new RestauranteInvalidoException("Erro na consulta do restaurante. Nome do prato esto vazio.");
 		}
 		if (cardapio.contemPrato(nome)) {
 			return cardapio.consultaCardapioPrato(nome, atributo);

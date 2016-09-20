@@ -1,11 +1,8 @@
 package restaurante;
 
-import exceptions.PratoInvalidoException;
-
 public class PratoSimples extends Prato {
 
-	public PratoSimples(String nome, double preco, String descricao)
-			throws PratoInvalidoException {
+	public PratoSimples(String nome, double preco, String descricao) {
 		super(nome, preco, descricao);
 	}
 

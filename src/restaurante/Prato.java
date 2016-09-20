@@ -1,28 +1,11 @@
 package restaurante;
 
-import exceptions.PratoInvalidoException;
-
-;
-
 public class Prato {
 	private String nome;
 	private double preco;
 	private String descricao;
 
-	public Prato(String nome, double preco, String descricao)
-			throws PratoInvalidoException {
-		if (nome == null || nome.trim().isEmpty()) {
-			throw new PratoInvalidoException(
-					"Erro no cadastro do prato. Nome do prato esta vazio.");
-		}
-		if (preco < 0) {
-			throw new PratoInvalidoException(
-					"Erro no cadastro do prato. Preco do prato eh invalido.");
-		}
-		if (descricao.trim().isEmpty()) {
-			throw new PratoInvalidoException(
-					"Erro no cadastro do prato. Descricao do prato esta vazia.");
-		}
+	public Prato(String nome, double preco, String descricao) {
 		this.nome = nome;
 		this.preco = preco;
 		this.descricao = descricao;
@@ -50,6 +33,30 @@ public class Prato {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(preco);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Prato)) {
+			return false;
+		}
+		Prato prato = (Prato) obj;
+		if (prato.getDescricao().equals(getDescricao()) && prato.getPreco() == getPreco()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

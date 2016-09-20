@@ -1,7 +1,6 @@
 package restaurante;
 
 import java.util.ArrayList;
-import exceptions.RefeicaoInvalidaException;
 
 public class Refeicao {
 	private String nome;
@@ -9,16 +8,7 @@ public class Refeicao {
 	private ArrayList<Prato> pratos;
 	private static final double DESCONTO = 0.9;
 
-	public Refeicao(String nome, String descricao)
-			throws RefeicaoInvalidaException {
-		if (nome == null || nome.trim().isEmpty()) {
-			throw new RefeicaoInvalidaException(
-					"Erro no cadastro de refeicao. Nome da refeicao esta vazio.");
-		}
-		if (descricao.trim().isEmpty()) {
-			throw new RefeicaoInvalidaException(
-					"Erro no cadastro de refeicao. Descricao da refeicao esta vazia.");
-		}
+	public Refeicao(String nome, String descricao) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.pratos = new ArrayList<Prato>();
@@ -60,6 +50,29 @@ public class Refeicao {
 		this.pratos.add(prato);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((pratos == null) ? 0 : pratos.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Refeicao)) {
+			return false;
+		}
+		Refeicao refeicao = (Refeicao) obj;
+		if (refeicao.getDescricao().equals(getDescricao()) && refeicao.getPratos().equals(getPratos())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
 	public String toString() {
 		String toString = this.getDescricao() + " Serao servidos: ";
 		int indice = 0;
@@ -72,4 +85,5 @@ public class Refeicao {
 		return toString;
 
 	}
+
 }

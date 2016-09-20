@@ -3,8 +3,8 @@ package restaurante;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import exceptions.CardapioInvalidoException;
 import exceptions.PratoInvalidoException;
+import exceptions.RefeicaoInvalidaException;
 import exceptions.RestauranteInvalidoException;
 
 public class Cardapio {
@@ -79,21 +79,26 @@ public class Cardapio {
 		return arrayDePratos;
 	}
 
-	public void cadastraRefeicao(String nome, String descricao,
-			String componentes) throws RestauranteInvalidoException {
+	public void cadastraRefeicao(String nome, String descricao, String componentes)
+			throws RestauranteInvalidoException {
+		if (nome == null || nome.trim().isEmpty()) {
+			throw new RefeicaoInvalidaException("Erro no cadastro de refeicao. Nome da refeicao esta vazio.");
+		}
+		if (descricao.trim().isEmpty()) {
+			throw new RefeicaoInvalidaException("Erro no cadastro de refeicao. Descricao da refeicao esta vazia.");
+		}
 		if (componentes.trim().isEmpty()) {
-			throw new CardapioInvalidoException(
-					"Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
+			throw new RefeicaoInvalidaException("Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
 		}
 		Refeicao refeicao = new Refeicao(nome, descricao);
 		String[] arrayComponentes = componentes.split(";");
 		if (arrayComponentes.length < 3 || arrayComponentes.length > 4) {
-			throw new CardapioInvalidoException(
+			throw new RefeicaoInvalidaException(
 					"Erro no cadastro de refeicao completa. Uma refeicao completa deve possuir no minimo 3 e no maximo 4 pratos.");
 		}
 		ArrayList<Prato> arrayPratos = arrayPratos(arrayComponentes);
 		if (!validaPratos(arrayPratos)) {
-			throw new CardapioInvalidoException(
+			throw new RefeicaoInvalidaException(
 					"Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
 		}
 		for (Prato item : arrayPratos) {
@@ -102,8 +107,16 @@ public class Cardapio {
 		refeicoes.add(refeicao);
 	}
 
-	public void cadastraPrato(String nome, double preco, String descricao)
-			throws PratoInvalidoException {
+	public void cadastraPrato(String nome, double preco, String descricao) throws RestauranteInvalidoException {
+		if (nome == null || nome.trim().isEmpty()) {
+			throw new PratoInvalidoException("Erro no cadastro do prato. Nome do prato esta vazio.");
+		}
+		if (preco < 0) {
+			throw new PratoInvalidoException("Erro no cadastro do prato. Preco do prato eh invalido.");
+		}
+		if (descricao.trim().isEmpty()) {
+			throw new PratoInvalidoException("Erro no cadastro do prato. Descricao do prato esta vazia.");
+		}
 		PratoSimples prato = new PratoSimples(nome, preco, descricao);
 		pratos.add(prato);
 	}

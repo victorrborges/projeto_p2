@@ -34,31 +34,25 @@ public class HotelController {
 
 	}
 
-	public String cadastraHospede(String nome, String email,
-			String dataDeNascimento) throws SistemaInvalidoException {
+	public String cadastraHospede(String nome, String email, String dataDeNascimento) throws SistemaInvalidoException {
 		if (nome == null || nome.trim().isEmpty()) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaNome(nome)) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
 		}
 		if (email == null || email.trim().isEmpty()) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaEmail(email)) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
 		}
 		if (dataDeNascimento == null || dataDeNascimento.trim().isEmpty()) {
 			throw new HospedeInvalidoException(
 					"Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaData(dataDeNascimento)) {
-			throw new HospedeInvalidoException(
-					"Erro no cadastro de Hospede. Formato de data invalido.");
+			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Formato de data invalido.");
 		}
 		if (!valida.validaIdade(dataDeNascimento)) {
 			throw new HospedeInvalidoException(
@@ -72,19 +66,16 @@ public class HotelController {
 
 	public void removeHospede(String id) throws SistemaInvalidoException {
 		if (!valida.validaEmail(id)) {
-			throw new RecepcaoInvalidaException(
-					"Erro na remocao do Hospede. Formato de email invalido.");
+			throw new RecepcaoInvalidaException("Erro na remocao do Hospede. Formato de email invalido.");
 		}
 		cadastros.remove(buscaHospede(id));
 	}
 
-	public String getInfoHospede(String id, String atributo)
-			throws SistemaInvalidoException {
+	public String getInfoHospede(String id, String atributo) throws SistemaInvalidoException {
 		Hospede hospede = buscaHospede(id);
 		if (hospede == null) {
 			throw new RecepcaoInvalidaException(
-					"Erro na consulta de hospede. Hospede de email " + id
-							+ " nao foi cadastrado(a).");
+					"Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
 		}
 
 		if (atributo.equalsIgnoreCase("nome")) {
@@ -95,31 +86,27 @@ public class HotelController {
 		return hospede.getEmail();
 	}
 
-	public String getInfoHospedagem(String id, String atributo)
-			throws SistemaInvalidoException {
+	public String getInfoHospedagem(String id, String atributo) throws SistemaInvalidoException {
 
 		if (id == null || id.trim().isEmpty()) {
 			throw new RecepcaoInvalidaException(
 					"Erro ao checar hospedagem ativa. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaEmail(id)) {
-			throw new RecepcaoInvalidaException(
-					"Erro ao checar hospedagem ativa. Email do(a) hospede esta invalido.");
+			throw new RecepcaoInvalidaException("Erro ao checar hospedagem ativa. Email do(a) hospede esta invalido.");
 		}
 		Hospede hospede = buscaHospede(id);
 
 		if (hospede == null) {
 			throw new RecepcaoInvalidaException(
-					"Erro na consulta de hospede. Hospede de email " + id
-							+ " nao foi cadastrado(a).");
+					"Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
 		}
 
 		List<Estadia> estadias = cadastros.get(hospede);
 
 		if (estadias.size() == 0) {
 			throw new RecepcaoInvalidaException(
-					"Erro na consulta de hospedagem. Hospede "
-							+ hospede.getNome() + " nao esta hospedado(a).");
+					"Erro na consulta de hospedagem. Hospede " + hospede.getNome() + " nao esta hospedado(a).");
 		}
 		if (atributo.equalsIgnoreCase("Hospedagens Ativas")) {
 			return String.valueOf(estadias.size());
@@ -170,8 +157,7 @@ public class HotelController {
 		return cont;
 	}
 
-	public void atualizaCadastro(String id, String atributo, String valor)
-			throws SistemaInvalidoException {
+	public void atualizaCadastro(String id, String atributo, String valor) throws SistemaInvalidoException {
 		Hospede hospede = buscaHospede(id);
 		List<Estadia> list = cadastros.get(hospede);
 		if (atributo.equalsIgnoreCase("nome")) {
@@ -215,55 +201,44 @@ public class HotelController {
 		cadastros.put(hospede, list);
 	}
 
-	public void realizaCheckin(String email, int qtdeDias, String idQuarto,
-			String tipoQuarto) throws SistemaInvalidoException, Exception {
+	public void realizaCheckin(String email, int qtdeDias, String idQuarto, String tipoQuarto)
+			throws SistemaInvalidoException, Exception {
 
 		if (email == null || email.trim().isEmpty()) {
-			throw new RecepcaoInvalidaException(
-					"Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
+			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaEmail(email)) {
-			throw new RecepcaoInvalidaException(
-					"Erro ao realizar checkin. Email do(a) hospede esta invalido.");
+			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Email do(a) hospede esta invalido.");
 		}
 		if (!valida.validaIdQuarto(idQuarto)) {
 			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkin. ID do quarto invalido, use apenas numeros ou letras.");
 		}
 		if (qtdeDias <= 0) {
-			throw new RecepcaoInvalidaException(
-					"Erro ao realizar checkin. Quantidade de dias esta invalida.");
+			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Quantidade de dias esta invalida.");
 		}
 		if (getTipoQuarto(tipoQuarto) == null) {
-			throw new RecepcaoInvalidaException(
-					"Erro ao realizar checkin. Tipo de quarto invalido.");
+			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Tipo de quarto invalido.");
 		}
 		if (verificaQuarto(idQuarto)) {
-			throw new RecepcaoInvalidaException(
-					"Erro ao realizar checkin. Quarto " + idQuarto
-							+ " ja esta ocupado.");
+			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Quarto " + idQuarto + " ja esta ocupado.");
 		}
 		Hospede buscado = buscaHospede(email);
 		if (buscado == null) {
 			throw new RecepcaoInvalidaException(
-					"Erro ao realizar checkin. Hospede de email " + email
-							+ " nao foi cadastrado(a).");
+					"Erro ao realizar checkin. Hospede de email " + email + " nao foi cadastrado(a).");
 		}
 
-		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto),
-				qtdeDias);
+		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto), qtdeDias);
 		cadastros.get(buscado).add(estadia);
 	}
 
-	public String realizaCheckout(String email, String quarto)
-			throws SistemaInvalidoException {
+	public String realizaCheckout(String email, String quarto) throws SistemaInvalidoException {
 		if (email == null || email.trim().isEmpty()) {
-			throw new RecepcaoInvalidaException(
-					"Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
+			throw new RecepcaoInvalidaException("Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaEmail(email)) {
-			throw new RecepcaoInvalidaException(
-					"Erro ao realizar checkout. Email do(a) hospede esta invalido.");
+			throw new RecepcaoInvalidaException("Erro ao realizar checkout. Email do(a) hospede esta invalido.");
 		}
 		if (!valida.validaIdQuarto(quarto)) {
 			throw new RecepcaoInvalidaException(
@@ -292,11 +267,9 @@ public class HotelController {
 
 	}
 
-	public String consultaTransacoes(String atributo, int indice)
-			throws RecepcaoInvalidaException {
+	public String consultaTransacoes(String atributo, int indice) throws SistemaInvalidoException {
 		if (indice < 0 || indice >= historicoHospedes.size()) {
-			throw new RecepcaoInvalidaException(
-					"Erro na consulta de transacoes. Indice invalido.");
+			throw new RecepcaoInvalidaException("Erro na consulta de transacoes. Indice invalido.");
 		}
 
 		if (atributo.equalsIgnoreCase("Nome")) {
