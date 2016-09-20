@@ -326,12 +326,4 @@ public class Recepcao {
 		}
 		return null;
 	}
-
-	public static void main(String[] args) {
-		args = new String[] { "hotel.Recepcao", "acceptance_test/testes_uc1.txt",
-				"acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc2.txt",
-				"acceptance_test/testes_uc2_exception.txt", "acceptance_test/testes_uc3.txt",
-				"acceptance_test/testes_uc3_exception.txt" };
-		EasyAccept.main(args);
-	}
 }

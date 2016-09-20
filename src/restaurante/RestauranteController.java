@@ -33,12 +33,7 @@ public class RestauranteController {
 	}
 	
 	public void fechaSistema() {
+
 	}
-	
-	public static void main(String[] args) {
-		args = new String[] { "restaurante.RestauranteController", "acceptance_test/testes_uc4.txt",
-				"acceptance_test/testes_uc4_exception.txt"};
-		System.out.println();
-		EasyAccept.main(args);
-	}
+
 }
