@@ -1,6 +1,6 @@
 package exceptions;
 
-public class PratoInvalidoException extends Exception {
+public class PratoInvalidoException extends RestauranteInvalidoException {
 
 	private static final long serialVersionUID = 1L;
 

@@ -2,7 +2,11 @@ package restaurante;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import exceptions.CardapioInvalidoException;
 import exceptions.PratoInvalidoException;
+import exceptions.RestauranteInvalidoException;
+import exceptions.SistemaInvalidoException;
 
 public class Cardapio {
 	private HashSet<PratoSimples> pratos;
@@ -74,18 +78,18 @@ public class Cardapio {
 		}
 		return arrayDePratos;
 	}
-	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws RestauranteInvalidoException {
 		if (componentes.trim().isEmpty()){
-			throw new Exception("Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
+			throw new CardapioInvalidoException("Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
 		}
 		Refeicao refeicao = new Refeicao(nome, descricao);
 		String[] arrayComponentes = componentes.split(";");
 		if (arrayComponentes.length < 3 || arrayComponentes.length > 4){
-			throw new Exception("Erro no cadastro de refeicao completa. Uma refeicao completa deve possuir no minimo 3 e no maximo 4 pratos.");
+			throw new CardapioInvalidoException("Erro no cadastro de refeicao completa. Uma refeicao completa deve possuir no minimo 3 e no maximo 4 pratos.");
 		}
 		ArrayList<Prato> arrayPratos = arrayPratos(arrayComponentes);
 		if (!validaPratos(arrayPratos)){
-			throw new Exception("Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
+			throw new CardapioInvalidoException("Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
 		}
 		for(Prato item : arrayPratos){
 			refeicao.addPrato(item);

@@ -1,8 +1,6 @@
 package hotel;
 
 import java.io.IOException;
-import java.util.List;
-
 import restaurante.RestauranteController;
 import easyaccept.EasyAccept;
 import exceptions.SistemaInvalidoException;

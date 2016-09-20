@@ -1,6 +1,6 @@
 package exceptions;
 
-public class RefeicaoInvalidaException extends Exception {
+public class RefeicaoInvalidaException extends RestauranteInvalidoException {
 
 	private static final long serialVersionUID = 1L;
 

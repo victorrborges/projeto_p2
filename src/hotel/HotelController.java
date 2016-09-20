@@ -2,7 +2,6 @@ package hotel;
 
 import java.util.List;
 
-import exceptions.EstadiaInvalidaException;
 import exceptions.HospedeInvalidoException;
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;

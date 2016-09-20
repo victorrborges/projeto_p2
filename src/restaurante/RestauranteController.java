@@ -1,6 +1,6 @@
 package restaurante;
 
-import easyaccept.EasyAccept;
+import exceptions.RestauranteInvalidoException;
 
 public class RestauranteController {
 	private Cardapio cardapio;
@@ -16,13 +16,13 @@ public class RestauranteController {
 		cardapio.cadastraPrato(nome, preco, descricao);
 	}
 
-	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws RestauranteInvalidoException{
 		cardapio.cadastraRefeicao(nome, descricao, componentes);	
 	}
 	
 	public String consultaRestaurante(String nome, String atributo) throws Exception {
 		if (nome.trim().isEmpty()){
-			throw new Exception("Erro na consulta do restaurante. Nome do prato esto vazio.");
+			throw new RestauranteInvalidoException("Erro na consulta do restaurante. Nome do prato esto vazio.");
 		}
 		if (cardapio.contemPrato(nome)){
 			return cardapio.consultaCardapioPrato(nome, atributo);
