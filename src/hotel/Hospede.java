@@ -1,6 +1,5 @@
 package hotel;
 
-
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
@@ -11,28 +10,35 @@ public class Hospede {
 	private String email;
 	private String dataDeNascimento;
 
-	public Hospede(String nome, String email, String dataDeNascimento) throws HospedeInvalidoException {
+	public Hospede(String nome, String email, String dataDeNascimento)
+			throws HospedeInvalidoException {
 		if (nome == null || nome.trim().isEmpty()) {
-			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
 		}
 		if (!validaNome(nome)) {
-			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.");
 		}
 		if (email == null || email.trim().isEmpty()) {
-			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
 		}
-		if(!validaEmail(email)){
-			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
+		if (!validaEmail(email)) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
 		}
 		if (dataDeNascimento == null || dataDeNascimento.trim().isEmpty()) {
 			throw new HospedeInvalidoException(
 					"Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
 		}
 		if (!validaData(dataDeNascimento)) {
-			throw new HospedeInvalidoException("Erro no cadastro de Hospede. Formato de data invalido.");
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. Formato de data invalido.");
 		}
-		if (!validaIdade(dataDeNascimento)){
-			throw new HospedeInvalidoException("Erro no cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
+		if (!validaIdade(dataDeNascimento)) {
+			throw new HospedeInvalidoException(
+					"Erro no cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
 		}
 
 		this.nome = nome;
@@ -41,7 +47,8 @@ public class Hospede {
 	}
 
 	public boolean validaData(String dataDeNascimento) {
-		return dataDeNascimento.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}");
+		return dataDeNascimento
+				.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}");
 	}
 
 	public boolean validaNome(String nome) {
@@ -49,12 +56,14 @@ public class Hospede {
 	}
 
 	public boolean validaEmail(String email) {
-		if (email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+") || email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-				return true;
-		}return false;
+		if (email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
+				|| email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+			return true;
+		}
+		return false;
 	}
 
-	public boolean validaIdade(String data){
+	public boolean validaIdade(String data) {
 		String[] dataNasc = data.split("/");
 		int dia = Integer.parseInt(dataNasc[0]);
 		int mes = Integer.parseInt(dataNasc[1]);
@@ -63,14 +72,13 @@ public class Hospede {
 		LocalDate hoje = new LocalDate();
 		Years anos = Years.yearsBetween(dataDeNascimento, hoje);
 		int qtdeDeAnos = anos.getYears();
-		
-		if(qtdeDeAnos >= 18){
+
+		if (qtdeDeAnos >= 18) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
 
 	public String getNome() {
 		return nome;
@@ -110,29 +118,18 @@ public class Hospede {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (!(obj instanceof Hospede)) {
+			return false;
+		}
+		Hospede hospede = (Hospede) obj;
+
+		if (hospede.getAno().equals(getAno())
+				&& hospede.getNome().equals(getNome())
+				&& hospede.getEmail().equals(getEmail())) {
 			return true;
-		if (obj == null)
+		} else {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Hospede other = (Hospede) obj;
-		if (dataDeNascimento == null) {
-			if (other.dataDeNascimento != null)
-				return false;
-		} else if (!dataDeNascimento.equals(other.dataDeNascimento))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		return true;
+		}
 	}
 
 }
