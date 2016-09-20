@@ -1,7 +1,6 @@
 package hotel;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
@@ -11,30 +10,20 @@ import exceptions.HospedeInvalidoException;
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Recepcao {
+public class HotelController {
 	private HashMap<Hospede, List<Estadia>> cadastros;
 	private List<Hospede> historicoHospedes;
 	private List<String> historicoDeGastos;
 	private double total;
 	private String saindo = "";
-	private File arquivo;
-	private File file;
 
-	public Recepcao() throws IOException {
+	public HotelController() {
 		this.cadastros = new HashMap<Hospede, List<Estadia>>();
-		this.file = new File("historicoHospedes");
-		file.mkdir();
-		this.arquivo = new File("historicoHospedes/hospede.txt");
-		arquivo.createNewFile();
 		this.historicoHospedes = new ArrayList<>();
-		historicoDeGastos = new ArrayList<>();
+		this.historicoDeGastos = new ArrayList<>();
 	}
 
 	public void iniciaSistema() {
@@ -45,7 +34,8 @@ public class Recepcao {
 
 	}
 
-	public String cadastraHospede(String nome, String email, String dataDeNascimento) throws SistemaInvalidoException {
+	public String cadastraHospede(String nome, String email,
+			String dataDeNascimento) throws SistemaInvalidoException {
 		Hospede hospede = new Hospede(nome, email, dataDeNascimento);
 		List<Estadia> estadias = new ArrayList<Estadia>();
 		this.cadastros.put(hospede, estadias);
@@ -54,7 +44,8 @@ public class Recepcao {
 
 	public void removeHospede(String id) throws Exception {
 		if (!validaEmail(id)) {
-			throw new RecepcaoInvalidaException("Erro na remocao do Hospede. Formato de email invalido.");
+			throw new RecepcaoInvalidaException(
+					"Erro na remocao do Hospede. Formato de email invalido.");
 		}
 		cadastros.remove(buscaHospede(id));
 	}
@@ -62,7 +53,9 @@ public class Recepcao {
 	public String getInfoHospede(String id, String atributo) throws Exception {
 		Hospede hospede = buscaHospede(id);
 		if (hospede == null) {
-			throw new Exception("Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
+			throw new Exception(
+					"Erro na consulta de hospede. Hospede de email " + id
+							+ " nao foi cadastrado(a).");
 		}
 
 		if (atributo.equalsIgnoreCase("nome")) {
@@ -73,36 +66,31 @@ public class Recepcao {
 		return hospede.getEmail();
 	}
 
-	public void grava(String nome, String email, double total) throws IOException {
-		FileWriter tal = new FileWriter(arquivo);
-		BufferedWriter escrever = new BufferedWriter(tal);
-		escrever.write(nome);
-		escrever.write(email);
-		escrever.close();
-		tal.close();
-
-	}
-
-	public String getInfoHospedagem(String id, String atributo) throws Exception {
+	public String getInfoHospedagem(String id, String atributo)
+			throws Exception {
 
 		if (id == null || id.trim().isEmpty()) {
 			throw new RecepcaoInvalidaException(
 					"Erro ao checar hospedagem ativa. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!validaEmail(id)) {
-			throw new RecepcaoInvalidaException("Erro ao checar hospedagem ativa. Email do(a) hospede esta invalido.");
+			throw new RecepcaoInvalidaException(
+					"Erro ao checar hospedagem ativa. Email do(a) hospede esta invalido.");
 		}
 		Hospede hospede = buscaHospede(id);
 
 		if (hospede == null) {
-			throw new Exception("Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
+			throw new Exception(
+					"Erro na consulta de hospede. Hospede de email " + id
+							+ " nao foi cadastrado(a).");
 		}
 
 		List<Estadia> estadias = cadastros.get(hospede);
 
 		if (estadias.size() == 0) {
 			throw new RecepcaoInvalidaException(
-					"Erro na consulta de hospedagem. Hospede " + hospede.getNome() + " nao esta hospedado(a).");
+					"Erro na consulta de hospedagem. Hospede "
+							+ hospede.getNome() + " nao esta hospedado(a).");
 		}
 		if (atributo.equalsIgnoreCase("Hospedagens Ativas")) {
 			return String.valueOf(estadias.size());
@@ -153,7 +141,8 @@ public class Recepcao {
 		return cont;
 	}
 
-	public void atualizaCadastro(String id, String atributo, String valor) throws Exception {
+	public void atualizaCadastro(String id, String atributo, String valor)
+			throws Exception {
 		Hospede hospede = buscaHospede(id);
 		List<Estadia> list = cadastros.get(hospede);
 		if (atributo.equalsIgnoreCase("nome")) {
@@ -171,19 +160,19 @@ public class Recepcao {
 				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
 			}
-			if (!valor.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-				if (!valor.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-					throw new RecepcaoInvalidaException(
-							"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
-				}
+			if (!validaEmail(valor)) {
+				throw new RecepcaoInvalidaException(
+						"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
+
 			}
 			hospede.setEmail(valor);
+
 		} else if (atributo.equalsIgnoreCase("data de nascimento")) {
 			if (valor == null || valor.trim().isEmpty()) {
 				throw new HospedeInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
 			}
-			if (!valor.trim().matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}")) {
+			if (!validaData(valor)) {
 				throw new HospedeInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Formato de data invalido.");
 			}
@@ -197,43 +186,56 @@ public class Recepcao {
 		cadastros.put(hospede, list);
 	}
 
-	public void realizaCheckin(String email, int qtdeDias, String idQuarto, String tipoQuarto) throws Exception {
+	public void realizaCheckin(String email, int qtdeDias, String idQuarto,
+			String tipoQuarto) throws Exception {
 
 		if (email == null || email.trim().isEmpty()) {
-			throw new HospedeInvalidoException("Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
+			throw new HospedeInvalidoException(
+					"Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!validaEmail(email)) {
-			throw new HospedeInvalidoException("Erro ao realizar checkin. Email do(a) hospede esta invalido.");
+			throw new HospedeInvalidoException(
+					"Erro ao realizar checkin. Email do(a) hospede esta invalido.");
 		}
-		if (idQuarto == null || idQuarto.trim().isEmpty() || (!idQuarto.matches("[0-9]+[ A-Z]"))) {
-			throw new Exception("Erro ao realizar checkin. ID do quarto invalido, use apenas numeros ou letras.");
+		if (idQuarto == null || idQuarto.trim().isEmpty()
+				|| (!idQuarto.matches("[0-9]+[ A-Z]"))) {
+			throw new Exception(
+					"Erro ao realizar checkin. ID do quarto invalido, use apenas numeros ou letras.");
 		}
 		if (qtdeDias <= 0) {
-			throw new Exception("Erro ao realizar checkin. Quantidade de dias esta invalida.");
+			throw new Exception(
+					"Erro ao realizar checkin. Quantidade de dias esta invalida.");
 		}
 		if (getTipoQuarto(tipoQuarto) == null) {
-			throw new Exception("Erro ao realizar checkin. Tipo de quarto invalido.");
+			throw new Exception(
+					"Erro ao realizar checkin. Tipo de quarto invalido.");
 		}
 		if (verificaQuarto(idQuarto)) {
-			throw new Exception("Erro ao realizar checkin. Quarto " + idQuarto + " ja esta ocupado.");
+			throw new Exception("Erro ao realizar checkin. Quarto " + idQuarto
+					+ " ja esta ocupado.");
 		}
 		Hospede buscado = buscaHospede(email);
 		if (buscado == null) {
-			throw new Exception("Erro ao realizar checkin. Hospede de email " + email + " nao foi cadastrado(a).");
+			throw new Exception("Erro ao realizar checkin. Hospede de email "
+					+ email + " nao foi cadastrado(a).");
 		}
 
-		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto), qtdeDias);
+		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto),
+				qtdeDias);
 		cadastros.get(buscado).add(estadia);
 	}
 
 	public String realizaCheckout(String email, String quarto) throws Exception {
 		if (email == null || email.trim().isEmpty()) {
-			throw new HospedeInvalidoException("Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
+			throw new HospedeInvalidoException(
+					"Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!validaEmail(email)) {
-			throw new HospedeInvalidoException("Erro ao realizar checkout. Email do(a) hospede esta invalido.");
+			throw new HospedeInvalidoException(
+					"Erro ao realizar checkout. Email do(a) hospede esta invalido.");
 		}
-		if (quarto == null || quarto.trim().isEmpty() || (!quarto.matches("[0-9]+[ A-Z]"))) {
+		if (quarto == null || quarto.trim().isEmpty()
+				|| (!quarto.matches("[0-9]+[ A-Z]"))) {
 			throw new HospedeInvalidoException(
 					"Erro ao realizar checkout. ID do quarto invalido, use apenas numeros ou letras.");
 		}
@@ -244,7 +246,6 @@ public class Recepcao {
 		historicoDeGastos.add(String.format("R$%.2f", precoTotal));
 		total += precoTotal;
 		saindo += String.format("%s;", hospede.getNome());
-		grava(hospede.getNome(), hospede.getEmail(), precoTotal);
 		cadastros.get(hospede).remove(estadia);
 		return String.format("R$%.2f", precoTotal);
 
@@ -261,10 +262,13 @@ public class Recepcao {
 
 	}
 
-	public String consultaTransacoes(String atributo, int indice) throws Exception {
-		if (indice < 0) {
-			throw new Exception("Erro na consulta de transacoes. Indice invalido.");
+	public String consultaTransacoes(String atributo, int indice)
+			throws Exception {
+		if (indice < 0 || indice >= historicoHospedes.size()) {
+			throw new Exception(
+					"Erro na consulta de transacoes. Indice invalido.");
 		}
+
 		if (atributo.equalsIgnoreCase("Nome")) {
 			return historicoHospedes.get(indice).getNome();
 		} else {
@@ -272,13 +276,32 @@ public class Recepcao {
 		}
 	}
 
-	private Quartos getTipoQuarto(String tipo) {
+	private TipoQuarto getTipoQuarto(String tipo) {
 		if (tipo.equalsIgnoreCase("Presidencial")) {
-			return Quartos.PRESIDENCIAL;
+			return TipoQuarto.PRESIDENCIAL;
 		} else if (tipo.equalsIgnoreCase("simples")) {
-			return Quartos.SIMPLES;
+			return TipoQuarto.SIMPLES;
 		} else if (tipo.equalsIgnoreCase("luxo")) {
-			return Quartos.LUXO;
+			return TipoQuarto.LUXO;
+		}
+		return null;
+	}
+
+	private Estadia buscaEstadia(Hospede hospede, String quarto) {
+		List<Estadia> arrayDeQuartos = this.cadastros.get(hospede);
+		for (Estadia estadia : arrayDeQuartos) {
+			if (estadia.getQuarto().getId().equalsIgnoreCase(quarto)) {
+				return estadia;
+			}
+		}
+		return null;
+	}
+
+	private Hospede buscaHospede(String id) throws Exception {
+		for (Hospede hospede : cadastros.keySet()) {
+			if (hospede.getEmail().equalsIgnoreCase(id)) {
+				return hospede;
+			}
 		}
 		return null;
 	}
@@ -308,22 +331,10 @@ public class Recepcao {
 		return false;
 	}
 
-	private Estadia buscaEstadia(Hospede hospede, String quarto) {
-		List<Estadia> arrayDeQuartos = this.cadastros.get(hospede);
-		for (Estadia estadia : arrayDeQuartos) {
-			if (estadia.getQuarto().getId().equalsIgnoreCase(quarto)) {
-				return estadia;
-			}
-		}
-		return null;
+	public boolean validaData(String dataDeNascimento) {
+		return dataDeNascimento
+				.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}");
 	}
 
-	private Hospede buscaHospede(String id) throws Exception {
-		for (Hospede hospede : cadastros.keySet()) {
-			if (hospede.getEmail().equalsIgnoreCase(id)) {
-				return hospede;
-			}
-		}
-		return null;
-	}
+	
 }

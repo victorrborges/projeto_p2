@@ -8,14 +8,14 @@ public class Estadia {
 	private int qtdeDias;
 	private double gastos;
 
-	public Estadia(String id, Quartos diaria, int qtdeDias) throws EstadiaInvalidaException, QuartoInvalidoException {
+	public Estadia(String id, TipoQuarto diaria, int qtdeDias) throws EstadiaInvalidaException, QuartoInvalidoException {
 		if (id == null || id.trim().isEmpty()) {
 			throw new EstadiaInvalidaException("Id nao pode ser nulo ou vazio");
 		}
 		if (qtdeDias <= 0) {
 			throw new EstadiaInvalidaException("Quantidade de dias nao pode ser menor que 1");
 		}
-		if (diaria != Quartos.SIMPLES && diaria != Quartos.LUXO && diaria != Quartos.PRESIDENCIAL) {
+		if (diaria != TipoQuarto.SIMPLES && diaria != TipoQuarto.LUXO && diaria != TipoQuarto.PRESIDENCIAL) {
 			throw new EstadiaInvalidaException("Tipo de quarto invalido");
 		}
 		this.quarto = new Quarto(id, diaria);

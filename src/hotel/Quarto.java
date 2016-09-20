@@ -4,13 +4,13 @@ import exceptions.QuartoInvalidoException;
 
 public class Quarto {
 	private String id;
-	private Quartos diaria;
+	private TipoQuarto diaria;
 
-	public Quarto(String id, Quartos diaria) throws QuartoInvalidoException {
+	public Quarto(String id, TipoQuarto diaria) throws QuartoInvalidoException {
 		if (id == null || id.trim().isEmpty()) {
 			throw new QuartoInvalidoException("Id nao pode ser nulo ou vazio");
 		}
-		if (diaria != Quartos.SIMPLES && diaria != Quartos.LUXO && diaria != Quartos.PRESIDENCIAL) {
+		if (diaria != TipoQuarto.SIMPLES && diaria != TipoQuarto.LUXO && diaria != TipoQuarto.PRESIDENCIAL) {
 			throw new QuartoInvalidoException("Tipo de quarto invalido");
 		}
 		this.id = id;
