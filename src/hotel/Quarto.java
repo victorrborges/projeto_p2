@@ -10,7 +10,8 @@ public class Quarto {
 		if (id == null || id.trim().isEmpty()) {
 			throw new QuartoInvalidoException("Id nao pode ser nulo ou vazio");
 		}
-		if (diaria != TipoQuarto.SIMPLES && diaria != TipoQuarto.LUXO && diaria != TipoQuarto.PRESIDENCIAL) {
+		if (diaria != TipoQuarto.SIMPLES && diaria != TipoQuarto.LUXO
+				&& diaria != TipoQuarto.PRESIDENCIAL) {
 			throw new QuartoInvalidoException("Tipo de quarto invalido");
 		}
 		this.id = id;

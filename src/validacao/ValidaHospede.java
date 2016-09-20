@@ -5,12 +5,13 @@ import org.joda.time.Years;
 
 public class ValidaHospede {
 
-	public ValidaHospede(){}
-	
+	public ValidaHospede() {
+	}
+
 	public boolean validaNome(String nome) {
 		return nome.trim().matches("[ a-zA-Z]+");
 	}
-	
+
 	public boolean validaIdade(String data) {
 		String[] dataNasc = data.split("/");
 		int dia = Integer.parseInt(dataNasc[0]);
@@ -32,8 +33,7 @@ public class ValidaHospede {
 		if (email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
 				|| email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
 			return true;
-		}
-		else{
+		} else {
 			return false;
 		}
 	}
@@ -42,14 +42,12 @@ public class ValidaHospede {
 		return dataDeNascimento
 				.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}");
 	}
-	
-	public boolean validaIdQuarto(String id){
-		if(id == null || id.trim().isEmpty()
-				|| (!id.matches("[0-9]+[ A-Z]"))){
+
+	public boolean validaIdQuarto(String id) {
+		if (id == null || id.trim().isEmpty() || (!id.matches("[0-9]+[ A-Z]"))) {
 			return false;
-		}
-		else{
+		} else {
 			return true;
 		}
-}
+	}
 }

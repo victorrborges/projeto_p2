@@ -9,12 +9,15 @@ public class Refeicao {
 	private ArrayList<Prato> pratos;
 	private static final double DESCONTO = 0.9;
 
-	public Refeicao(String nome, String descricao) throws RefeicaoInvalidaException {
+	public Refeicao(String nome, String descricao)
+			throws RefeicaoInvalidaException {
 		if (nome == null || nome.trim().isEmpty()) {
-			throw new RefeicaoInvalidaException("Erro no cadastro de refeicao. Nome da refeicao esta vazio.");
+			throw new RefeicaoInvalidaException(
+					"Erro no cadastro de refeicao. Nome da refeicao esta vazio.");
 		}
 		if (descricao.trim().isEmpty()) {
-			throw new RefeicaoInvalidaException("Erro no cadastro de refeicao. Descricao da refeicao esta vazia.");
+			throw new RefeicaoInvalidaException(
+					"Erro no cadastro de refeicao. Descricao da refeicao esta vazia.");
 		}
 		this.nome = nome;
 		this.descricao = descricao;
