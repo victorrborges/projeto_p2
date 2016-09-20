@@ -10,27 +10,57 @@ public class Prato {
 		this.preco = preco;
 		this.descricao = descricao;
 	}
-
+	
+	/**
+	 * Pega o nome do Prato.
+	 * 
+	 * @return Retorna uma String que representa o nome do Prato.
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * Muda o nome do Prato.
+	 * 
+	 * @param nome Novo nome.
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Pega o Preco do prato.
+	 * 
+	 * @return Retorna um double que representa o preco do prato.
+	 */
 	public double getPreco() {
 		return preco;
 	}
-
+	
+	/**
+	 * Muda o Preco do prato.
+	 * 
+	 * @param preco Novo preco.
+	 */
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 
+	/**
+	 * Pega a Descricao do prato.
+	 * 
+	 * @return Retorna uma String que representa a descricao do prato.
+	 */
 	public String getDescricao() {
 		return descricao;
 	}
 
+	/**
+	 * Muda a descricao.
+	 * 
+	 * @param descricao Nova descricao.
+	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
