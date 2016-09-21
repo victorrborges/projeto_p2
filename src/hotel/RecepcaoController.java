@@ -311,7 +311,7 @@ public class RecepcaoController {
 	 * @param email
 	 * @param quarto
 	 * @return
-	 * 			Retorna o preco da estadia
+	 * 		Retorna o preco da estadia
 	 * @throws SistemaInvalidoException
 	 */
 	public String realizaCheckout(String email, String quarto) throws SistemaInvalidoException {
@@ -342,9 +342,8 @@ public class RecepcaoController {
 	 * 
 	 * @param atributo
 	 * 			Quantidade, total ou nome
-	 * @return
-	 * 			Retorna a quantidade, o total em relacao aos
-	 * 			checkouts realizados ou o nome dos hospedes que fizeram checkout
+	 * @return Retorna a quantidade, o total em relacao aos
+	 * 		   checkouts realizados ou o nome dos hospedes que fizeram checkout
 	 */
 	public String consultaTransacoes(String atributo) {
 		if (atributo.equalsIgnoreCase("Quantidade")) {
