@@ -358,7 +358,7 @@ public class RecepcaoController {
 	}
 
 	/**
-	 * Consulta as transacoes as realizacoes de acordo com o indice
+	 * Consulta as transacoes  realizacoes de acordo com o indice
 	 * 
 	 * @param atributo
 	 *            Nome, total
