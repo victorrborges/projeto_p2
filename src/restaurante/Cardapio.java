@@ -37,7 +37,8 @@ public class Cardapio {
 	/**
 	 * Adiciona um prato simples no set pratos.
 	 * 
-	 * @param prato Recebe um Prato Simples.
+	 * @param prato
+	 *            Recebe um Prato Simples.
 	 */
 	public void addPrato(PratoSimples prato) {
 		this.pratos.add(prato);
@@ -46,7 +47,8 @@ public class Cardapio {
 	/**
 	 * Remove um prato simples do set pratos.
 	 * 
-	 * @param prato Recebe um Prato Simples.
+	 * @param prato
+	 *            Recebe um Prato Simples.
 	 */
 	public void removePrato(PratoSimples prato) {
 		this.pratos.remove(prato);
@@ -55,7 +57,8 @@ public class Cardapio {
 	/**
 	 * Adiciona uma refeicao no set de refeicoes.
 	 * 
-	 * @param refeicao Recebe uma Refeicao.
+	 * @param refeicao
+	 *            Recebe uma Refeicao.
 	 */
 	public void addRefeicao(Refeicao refeicao) {
 		this.refeicoes.add(refeicao);
@@ -64,7 +67,8 @@ public class Cardapio {
 	/**
 	 * Remove uma refeicao no set de refeicoes.
 	 * 
-	 * @param refeicao Recebe uma Refeicao.
+	 * @param refeicao
+	 *            Recebe uma Refeicao.
 	 */
 	public void removeRefeicao(Refeicao refeicao) {
 		this.refeicoes.remove(refeicao);
@@ -73,11 +77,14 @@ public class Cardapio {
 	/**
 	 * Consulta informacoes de um prato no set de Pratos Simples.
 	 * 
-	 * @param nome	O nome do prato simples.
-	 * @param atributo O tipo de consulta, se eh o preco ou a descricao.
+	 * @param nome
+	 *            O nome do prato simples.
+	 * @param atributo
+	 *            O tipo de consulta, se eh o preco ou a descricao.
 	 * 
-	 * @return Retorna uma String que representa a Descricao do prato ou o seu preco, no formato: "R$0,00".
- 	 */
+	 * @return Retorna uma String que representa a Descricao do prato ou o seu
+	 *         preco, no formato: "R$0,00".
+	 */
 	public String consultaCardapioPrato(String nome, String atributo) {
 		PratoSimples prato = this.buscaPrato(nome);
 		if (atributo.equalsIgnoreCase("preco")) {
@@ -94,9 +101,11 @@ public class Cardapio {
 	/**
 	 * Busca um Prato Simples no set de Pratos Simples.
 	 * 
-	 * @param nome Nome do prato.
+	 * @param nome
+	 *            Nome do prato.
 	 * 
-	 * @return Retorna um Prato Simples, se o prato foi achado e null caso contrario.
+	 * @return Retorna um Prato Simples, se o prato foi achado e null caso
+	 *         contrario.
 	 */
 	public PratoSimples buscaPrato(String nome) {
 		for (PratoSimples prato : pratos) {
@@ -110,8 +119,10 @@ public class Cardapio {
 	/**
 	 * Verifica se os pratos da lista de Pratos estao no cardapio.
 	 * 
-	 * @param pratos Lista de pratos.
-	 * @return Retorna true se todos estiverem no cardapio, false caso contrario.
+	 * @param pratos
+	 *            Lista de pratos.
+	 * @return Retorna true se todos estiverem no cardapio, false caso
+	 *         contrario.
 	 */
 	private boolean validaPratos(ArrayList<Prato> pratos) {
 		for (Prato prato : pratos) {
@@ -125,7 +136,9 @@ public class Cardapio {
 	/**
 	 * Cria uma lista de pratos simples a partir dos nomes de cada prato.
 	 * 
-	 * @param componentes Um array de String, em que cada componente do array representa o nome de um Prato.
+	 * @param componentes
+	 *            Um array de String, em que cada componente do array representa
+	 *            o nome de um Prato.
 	 * @return Retorna uma lista de Pratos.
 	 */
 	private ArrayList<Prato> arrayPratos(String[] componentes) {
@@ -139,9 +152,12 @@ public class Cardapio {
 	/**
 	 * Cadastra uma refeicao no cadarpio.
 	 * 
-	 * @param nome Nome do prato.
-	 * @param descricao Descricao do prato.
-	 * @param componentes Pratos que a refeicao contem.
+	 * @param nome
+	 *            Nome do prato.
+	 * @param descricao
+	 *            Descricao do prato.
+	 * @param componentes
+	 *            Pratos que a refeicao contem.
 	 * @throws RestauranteInvalidoException
 	 */
 	public void cadastraRefeicao(String nome, String descricao, String componentes)
@@ -171,13 +187,16 @@ public class Cardapio {
 		}
 		refeicoes.add(refeicao);
 	}
-	
+
 	/**
 	 * Cadastra um Prato Simples.
 	 * 
-	 * @param nome Nome do prato.
-	 * @param preco Preco do prato.
-	 * @param descricao Descricao do prato.
+	 * @param nome
+	 *            Nome do prato.
+	 * @param preco
+	 *            Preco do prato.
+	 * @param descricao
+	 *            Descricao do prato.
 	 * @throws RestauranteInvalidoException
 	 */
 	public void cadastraPrato(String nome, double preco, String descricao) throws RestauranteInvalidoException {
@@ -197,9 +216,12 @@ public class Cardapio {
 	/**
 	 * Consulta informacoes de uma refeicao no set de Refeicoes.
 	 * 
-	 * @param nome Nome da refeicao.
-	 * @param atributo Informacao que quer saber, preco ou descricao.
-	 * @return Retorna Preco se o atributo for preco, Descricao se o atributo for descricao.
+	 * @param nome
+	 *            Nome da refeicao.
+	 * @param atributo
+	 *            Informacao que quer saber, preco ou descricao.
+	 * @return Retorna Preco se o atributo for preco, Descricao se o atributo
+	 *         for descricao.
 	 */
 	public String consultaCardapioRefeicao(String nome, String atributo) {
 		Refeicao refeicao = this.buscaRefeicao(nome);
@@ -217,8 +239,10 @@ public class Cardapio {
 	/**
 	 * Busca uma refeicao pelo nome no set de Refeicoes.
 	 * 
-	 * @param nome Nome da Refeicao.
-	 * @return Retorna uma refeicao se houver uma com o nome passado, null caso contrario.
+	 * @param nome
+	 *            Nome da Refeicao.
+	 * @return Retorna uma refeicao se houver uma com o nome passado, null caso
+	 *         contrario.
 	 */
 	public Refeicao buscaRefeicao(String nome) {
 		for (Refeicao refeicao : refeicoes) {
@@ -232,7 +256,8 @@ public class Cardapio {
 	/**
 	 * Verifica se o prato ja foi cadastrado.
 	 * 
-	 * @param nome Nome do prato.
+	 * @param nome
+	 *            Nome do prato.
 	 * @return Retorna true caso ja foi cadastrado, falso caso contrario.
 	 */
 	public boolean contemPrato(String nome) {
@@ -242,10 +267,12 @@ public class Cardapio {
 			return false;
 		}
 	}
+
 	/**
 	 * Verifica se a refeicao ja foi cadastrada.
 	 * 
-	 * @param nome Nome da refeicao.
+	 * @param nome
+	 *            Nome da refeicao.
 	 * @return Retorna true caso ja foi cadastrado, falso caso contrario.
 	 */
 	public boolean contemRefeicao(String nome) {

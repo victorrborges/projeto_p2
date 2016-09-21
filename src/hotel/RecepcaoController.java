@@ -82,6 +82,7 @@ public class RecepcaoController {
 	 * Remove um hospede do hotel
 	 * 
 	 * @param id
+	 * 			Email do hospede
 	 * @throws SistemaInvalidoException
 	 */
 	public void removeHospede(String id) throws SistemaInvalidoException {
@@ -107,14 +108,16 @@ public class RecepcaoController {
 	}
 
 	/**
-	 * Recebe o email do hospede e pode retornar o numero de hospedagens ativas,
-	 * os quartos que estao relacionados ao hospede ou o total em realcao ao
-	 * preco das estadias do hospede, de acordo com o "atributo" passado como
-	 * parametro
+	 * Recebe o email do hospede e um atributo, retornando informacao do hospede
 	 * 
 	 * @param id
+	 * 			Email do hospede
 	 * @param atributo
+	 * 			Pode ser Hospedanges Ativas, Quarto ou Total
 	 * @return
+	 * 			Retorna o numero de hospedagens ativas, 
+	 * 			os quartos que estao relacionados ao hospede ou o total em relacao ao 
+	 * 			preco das estadias do hospede
 	 * @throws SistemaInvalidoException
 	 */
 	public String getInfoHospedagem(String id, String atributo) throws SistemaInvalidoException {
@@ -206,12 +209,15 @@ public class RecepcaoController {
 	}
 
 	/**
-	 * Atualizar o nome, email ou data de nascimento do hospede de acordo com o
-	 * "atributo" passado como prametro
+	 * Atualiza o nome, email ou data de nascimento do hospede
 	 * 
 	 * @param id
+	 * 			Email do hospede
 	 * @param atributo
+	 * 			Nome, email ou data de nascimento do hospede
 	 * @param valor
+	 * 			Sera o novo nome, email ou data de nascimento do hospede, de acordo com
+	 * 			o atributo
 	 * @throws SistemaInvalidoException
 	 */
 	public void atualizaCadastro(String id, String atributo, String valor) throws SistemaInvalidoException {
@@ -305,6 +311,7 @@ public class RecepcaoController {
 	 * @param email
 	 * @param quarto
 	 * @return
+	 * 			Retorna o preco da estadia
 	 * @throws SistemaInvalidoException
 	 */
 	public String realizaCheckout(String email, String quarto) throws SistemaInvalidoException {
@@ -331,11 +338,13 @@ public class RecepcaoController {
 	}
 
 	/**
-	 * Consulta as transacoes, retornando o total ou a quantidade em relacao aos
-	 * checkouts realizados
+	 * Consulta as transacoes realizadas
 	 * 
 	 * @param atributo
+	 * 			Quantidade, total ou nome
 	 * @return
+	 * 			Retorna a quantidade, o total em relacao aos
+	 * 			checkouts realizados ou o nome dos hospedes que fizeram checkout
 	 */
 	public String consultaTransacoes(String atributo) {
 		if (atributo.equalsIgnoreCase("Quantidade")) {
@@ -349,12 +358,14 @@ public class RecepcaoController {
 	}
 
 	/**
-	 * Consulta as transacoes, retornando o nome do hospede ou o valor total de
-	 * acordo com o indice de checkout realizado
+	 * Consulta as transacoes as realizacoes de acordo com o indice
 	 * 
 	 * @param atributo
+	 *            Nome, total
 	 * @param indice
-	 * @return
+	 *            Indice do checkout
+	 * @return Retorna o nome do hospede ou o valor total de acordo com o indice
+	 *         de checkout realizado
 	 * @throws SistemaInvalidoException
 	 */
 	public String consultaTransacoes(String atributo, int indice) throws SistemaInvalidoException {

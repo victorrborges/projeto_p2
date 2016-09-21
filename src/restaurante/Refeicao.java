@@ -8,6 +8,15 @@ public class Refeicao {
 	private ArrayList<Prato> pratos;
 	private static final double DESCONTO = 0.9;
 
+	/**
+	 * Classe refeicao, possui um nome, uma descricao propria e uma sequencia de
+	 * pratos
+	 * 
+	 * @param nome
+	 *            Nome da refeicao
+	 * @param descricao
+	 *            Descricao da refeicao
+	 */
 	public Refeicao(String nome, String descricao) {
 		this.nome = nome;
 		this.descricao = descricao;
@@ -22,6 +31,11 @@ public class Refeicao {
 		this.nome = nome;
 	}
 
+	/**
+	 * Retorna o preco da refeicao com o desconto
+	 * 
+	 * @return
+	 */
 	public double getPreco() {
 		double precoTotal = 0.0;
 		for (Prato prato : pratos) {
@@ -49,7 +63,8 @@ public class Refeicao {
 	/**
 	 * Adiciona um prato na lista de pratos da refeicao.
 	 * 
-	 * @param prato Um Prato.
+	 * @param prato
+	 *            Um Prato.
 	 */
 	public void addPrato(Prato prato) {
 		this.pratos.add(prato);

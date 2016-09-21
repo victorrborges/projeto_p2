@@ -5,12 +5,21 @@ public class Prato {
 	private double preco;
 	private String descricao;
 
+	/**
+	 * 
+	 * @param nome
+	 *            Nome do prato
+	 * @param preco
+	 *            Preco do prato
+	 * @param descricao
+	 *            Descricao do prato
+	 */
 	public Prato(String nome, double preco, String descricao) {
 		this.nome = nome;
 		this.preco = preco;
 		this.descricao = descricao;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -22,7 +31,7 @@ public class Prato {
 	double getPreco() {
 		return preco;
 	}
-	
+
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
