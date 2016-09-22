@@ -5,8 +5,17 @@ public class Hospede {
 	private String email;
 	private String dataDeNascimento;
 
+	/**
+	 * Classe Hospede
+	 * 
+	 * @param nome
+	 * 		Nome do Hospede
+	 * @param email
+	 * 		Email do Hospede
+	 * @param dataDeNascimento
+	 *		Data de Nascimento do Hospede
+	 */
 	public Hospede(String nome, String email, String dataDeNascimento) {
-
 		this.nome = nome;
 		this.email = email;
 		this.dataDeNascimento = dataDeNascimento;

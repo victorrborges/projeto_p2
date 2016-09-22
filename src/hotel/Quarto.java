@@ -5,11 +5,13 @@ public class Quarto {
 	private TipoQuarto diaria;
 
 	/**
+	 * Classe Quarto
+	 * 
 	 * @param id
-	 *            "Numero do quarto"
+	 *		Id do quarto
 	 * @param diaria
-	 *            Valor da diaria que varia de acordo com o tipo, Simples, Luxo
-	 *            ou Presidencial
+	 *		Valor da diaria que varia de acordo com o tipo, Simples, Luxo
+	 *      ou Presidencial
 	 */
 
 	public Quarto(String id, TipoQuarto diaria) {
