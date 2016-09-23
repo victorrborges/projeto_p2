@@ -9,11 +9,11 @@ public class Estadia {
 	 * Classe Estadia, composta por um quarto e uma quantidade de dias
 	 * 
 	 * @param id
-	 * 		Id do Quarto
+	 *            Id do Quarto
 	 * @param diaria
-	 * 		Tipo quarto
+	 *            Tipo quarto
 	 * @param qtdeDias
-	 *		Quantidade de dias da estadia
+	 *            Quantidade de dias da estadia
 	 */
 	public Estadia(String id, TipoQuarto diaria, int qtdeDias) {
 		this.quarto = new Quarto(id, diaria);

@@ -8,10 +8,10 @@ public class Quarto {
 	 * Classe Quarto
 	 * 
 	 * @param id
-	 *		Id do quarto
+	 *            Id do quarto
 	 * @param diaria
-	 *		Valor da diaria que varia de acordo com o tipo, Simples, Luxo
-	 *      ou Presidencial
+	 *            Valor da diaria que varia de acordo com o tipo, Simples, Luxo
+	 *            ou Presidencial
 	 */
 
 	public Quarto(String id, TipoQuarto diaria) {

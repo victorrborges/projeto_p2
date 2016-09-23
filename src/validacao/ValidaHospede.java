@@ -39,8 +39,7 @@ public class ValidaHospede {
 	}
 
 	public boolean validaData(String dataDeNascimento) {
-		return dataDeNascimento
-				.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}");
+		return dataDeNascimento.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}");
 	}
 
 	public boolean validaIdQuarto(String id) {

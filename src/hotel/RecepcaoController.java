@@ -47,7 +47,7 @@ public class RecepcaoController {
 	 *            Email do hospede
 	 * @param dataDeNascimento
 	 *            Data de nascimento do hospede
-	 * @return email
+	 * @return email Retorna email do hospede.
 	 * @throws SistemaInvalidoException
 	 */
 
@@ -167,7 +167,7 @@ public class RecepcaoController {
 	 * 
 	 * @param estadias
 	 *            List de estadias
-	 * @return
+	 * @return Retorna o preco acumulado de todas estadias.
 	 */
 	public String getTotal(List<Estadia> estadias) {
 		double precoTotal = 0;
@@ -183,7 +183,8 @@ public class RecepcaoController {
 	 * 
 	 * @param quarto
 	 *            Id quarto
-	 * @return
+	 * @return Retorna true caso o quarto esteja ocupado ou false caso
+	 *         contrario.
 	 */
 	private boolean verificaQuarto(String quarto) {
 		for (Hospede hospede : cadastros.keySet()) {
@@ -197,9 +198,9 @@ public class RecepcaoController {
 	}
 
 	/**
-	 * Retorna o numero de hospedagens ativas
+	 * Conta a quantidade de hospedagens ativas
 	 * 
-	 * @return
+	 * @return Retorna o numero de hospedagens ativas.
 	 */
 	public int totalAtivas() {
 		int cont = 0;
@@ -403,10 +404,11 @@ public class RecepcaoController {
 	 * Busca uma estadia de acordo com o hospede e o quarto
 	 * 
 	 * @param hospede
-	 *            Hospede
+	 *            Objeto do tipo Hospede
 	 * @param quarto
 	 *            Id do quarto
-	 * @return
+	 * @return Retorna null caso nao encontre a estadia ou um objeto do tipo
+	 *         Estadia caso contrario.
 	 */
 	private Estadia buscaEstadia(Hospede hospede, String quarto) {
 		List<Estadia> arrayDeQuartos = this.cadastros.get(hospede);
@@ -423,7 +425,8 @@ public class RecepcaoController {
 	 * 
 	 * @param id
 	 *            Email do hospede
-	 * @return
+	 * @return Retorna um objeto do tipo Hospede caso ele seja encontrado ou
+	 *         null caso contrario.
 	 */
 	private Hospede buscaHospede(String id) {
 		for (Hospede hospede : cadastros.keySet()) {

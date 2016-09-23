@@ -9,11 +9,11 @@ public class Hospede {
 	 * Classe Hospede
 	 * 
 	 * @param nome
-	 * 		Nome do Hospede
+	 *            Nome do Hospede
 	 * @param email
-	 * 		Email do Hospede
+	 *            Email do Hospede
 	 * @param dataDeNascimento
-	 *		Data de Nascimento do Hospede
+	 *            Data de Nascimento do Hospede
 	 */
 	public Hospede(String nome, String email, String dataDeNascimento) {
 		this.nome = nome;
@@ -49,9 +49,7 @@ public class Hospede {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((dataDeNascimento == null) ? 0 : dataDeNascimento.hashCode());
+		result = prime * result + ((dataDeNascimento == null) ? 0 : dataDeNascimento.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
@@ -64,8 +62,7 @@ public class Hospede {
 		}
 		Hospede hospede = (Hospede) obj;
 
-		if (hospede.getAno().equals(getAno())
-				&& hospede.getNome().equals(getNome())
+		if (hospede.getAno().equals(getAno()) && hospede.getNome().equals(getNome())
 				&& hospede.getEmail().equals(getEmail())) {
 			return true;
 		} else {
