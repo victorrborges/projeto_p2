@@ -8,20 +8,20 @@ import exceptions.RefeicaoInvalidaException;
 import exceptions.RestauranteInvalidoException;
 
 public class Cardapio {
-	private HashSet<PratoSimples> pratos;
+	private HashSet<Prato> pratos;
 	private HashSet<Refeicao> refeicoes;
 
 	public Cardapio() {
-		this.pratos = new HashSet<PratoSimples>();
+		this.pratos = new HashSet<Prato>();
 		this.refeicoes = new HashSet<Refeicao>();
 	}
 
 	/**
-	 * Pega o conjunto de Pratos Simples.
+	 * Pega o conjunto de Pratos.
 	 * 
 	 * @return Retorna um Set de Pratos.
 	 */
-	public HashSet<PratoSimples> getPratos() {
+	public HashSet<Prato> getPratos() {
 		return pratos;
 	}
 
@@ -35,22 +35,23 @@ public class Cardapio {
 	}
 
 	/**
-	 * Adiciona um prato simples no set pratos.
+	 * Adiciona um prato no set pratos.
 	 * 
 	 * @param prato
-	 *            Recebe um Prato Simples.
+	 *            Recebe um Prato.
+	 * 
 	 */
-	public void addPrato(PratoSimples prato) {
+	public void addPrato(Prato prato) {
 		this.pratos.add(prato);
 	}
 
 	/**
-	 * Remove um prato simples do set pratos.
+	 * Remove um prato do set pratos.
 	 * 
 	 * @param prato
-	 *            Recebe um Prato Simples.
+	 *            Recebe um Prato .
 	 */
-	public void removePrato(PratoSimples prato) {
+	public void removePrato(Prato prato) {
 		this.pratos.remove(prato);
 	}
 
@@ -75,10 +76,10 @@ public class Cardapio {
 	}
 
 	/**
-	 * Consulta informacoes de um prato no set de Pratos Simples.
+	 * Consulta informacoes de um prato no set de Pratos.
 	 * 
 	 * @param nome
-	 *            O nome do prato simples.
+	 *            O nome do prato.
 	 * @param atributo
 	 *            O tipo de consulta, se eh o preco ou a descricao.
 	 * 
@@ -86,7 +87,7 @@ public class Cardapio {
 	 *         preco, no formato: "R$0,00".
 	 */
 	public String consultaCardapioPrato(String nome, String atributo) {
-		PratoSimples prato = this.buscaPrato(nome);
+		Prato prato = this.buscaPrato(nome);
 		if (atributo.equalsIgnoreCase("preco")) {
 			String stringPreco = String.format("%.2f", prato.getPreco());
 			stringPreco = stringPreco.replace(".", ",");
@@ -99,16 +100,15 @@ public class Cardapio {
 	}
 
 	/**
-	 * Busca um Prato Simples no set de Pratos Simples.
+	 * Busca um Prato no set de Pratos.
 	 * 
 	 * @param nome
 	 *            Nome do prato.
 	 * 
-	 * @return Retorna um Prato Simples, se o prato foi achado e null caso
-	 *         contrario.
+	 * @return Retorna um Prato, se o prato foi achado e null caso contrario.
 	 */
-	public PratoSimples buscaPrato(String nome) {
-		for (PratoSimples prato : pratos) {
+	public Prato buscaPrato(String nome) {
+		for (Prato prato : pratos) {
 			if (nome.equals(prato.getNome())) {
 				return prato;
 			}
@@ -134,7 +134,7 @@ public class Cardapio {
 	}
 
 	/**
-	 * Cria uma lista de pratos simples a partir dos nomes de cada prato.
+	 * Cria uma lista de pratos a partir dos nomes de cada prato.
 	 * 
 	 * @param componentes
 	 *            Um array de String, em que cada componente do array representa
@@ -189,7 +189,7 @@ public class Cardapio {
 	}
 
 	/**
-	 * Cadastra um Prato Simples.
+	 * Cadastra um Prato.
 	 * 
 	 * @param nome
 	 *            Nome do prato.
@@ -209,7 +209,7 @@ public class Cardapio {
 		if (descricao.trim().isEmpty()) {
 			throw new PratoInvalidoException("Erro no cadastro do prato. Descricao do prato esta vazia.");
 		}
-		PratoSimples prato = new PratoSimples(nome, preco, descricao);
+		Prato prato = new Prato(nome, preco, descricao);
 		pratos.add(prato);
 	}
 

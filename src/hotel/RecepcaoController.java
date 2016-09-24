@@ -389,6 +389,12 @@ public class RecepcaoController {
 		}
 	}
 
+	/**
+	 * 
+	 * @param tipo
+	 *            String correspondente ao tipo de quarto
+	 * @return Retorna um tipo de quarto
+	 */
 	private TipoQuarto getTipoQuarto(String tipo) {
 		if (tipo.equalsIgnoreCase("Presidencial")) {
 			return TipoQuarto.PRESIDENCIAL;
