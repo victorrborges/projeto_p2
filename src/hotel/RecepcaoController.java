@@ -1,5 +1,6 @@
 package hotel;
 
+
 import java.util.List;
 
 import exceptions.HospedeInvalidoException;
@@ -13,28 +14,16 @@ import validacao.ValidaHospede;
 
 public class RecepcaoController {
 	private HashMap<Hospede, List<Estadia>> cadastros;
-	private List<Hospede> historicoHospedes;
-	private List<String> historicoDeGastos;
-	private double total;
-	private String saindo = "";
 	private ValidaHospede valida;
-
+	private Registrador registrador;
+	
 	/**
 	 * Responsavel pela logica de funcionamente
 	 */
 	public RecepcaoController() {
 		this.cadastros = new HashMap<Hospede, List<Estadia>>();
-		this.historicoHospedes = new ArrayList<>();
-		this.historicoDeGastos = new ArrayList<>();
+		this.registrador = new Registrador();
 		valida = new ValidaHospede();
-	}
-
-	public void iniciaSistema() {
-
-	}
-
-	public void fechaSistema() {
-
 	}
 
 	/**
@@ -179,25 +168,6 @@ public class RecepcaoController {
 	}
 
 	/**
-	 * Verifica se um quarto ja esta ocupado
-	 * 
-	 * @param quarto
-	 *            Id quarto
-	 * @return Retorna true caso o quarto esteja ocupado ou false caso
-	 *         contrario.
-	 */
-	private boolean verificaQuarto(String quarto) {
-		for (Hospede hospede : cadastros.keySet()) {
-			for (Estadia est : cadastros.get(hospede)) {
-				if (est.getQuarto().getId().equals(quarto)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * Conta a quantidade de hospedagens ativas
 	 * 
 	 * @return Retorna o numero de hospedagens ativas.
@@ -338,10 +308,8 @@ public class RecepcaoController {
 		Hospede hospede = this.buscaHospede(email);
 		Estadia estadia = this.buscaEstadia(hospede, quarto);
 		double precoTotal = estadia.getGastos();
-		historicoHospedes.add(hospede);
-		historicoDeGastos.add(String.format("R$%.2f", precoTotal));
-		total += precoTotal;
-		saindo += String.format("%s;", hospede.getNome());
+		
+		registrador.realizaCheckout(hospede, precoTotal);
 		cadastros.get(hospede).remove(estadia);
 		return String.format("R$%.2f", precoTotal);
 
@@ -356,14 +324,7 @@ public class RecepcaoController {
 	 *         ou o nome dos hospedes que fizeram checkout
 	 */
 	public String consultaTransacoes(String atributo) {
-		if (atributo.equalsIgnoreCase("Quantidade")) {
-			return String.format("%d", historicoHospedes.size());
-		} else if (atributo.equals("Total")) {
-			return String.format("R$%.2f", total);
-		} else {
-			return saindo.substring(0, saindo.length() - 1);
-		}
-
+		return registrador.consultaTransacoes(atributo);
 	}
 
 	/**
@@ -378,15 +339,26 @@ public class RecepcaoController {
 	 * @throws SistemaInvalidoException
 	 */
 	public String consultaTransacoes(String atributo, int indice) throws SistemaInvalidoException {
-		if (indice < 0 || indice >= historicoHospedes.size()) {
-			throw new RecepcaoInvalidaException("Erro na consulta de transacoes. Indice invalido.");
-		}
+		return registrador.consultaTransacoes(atributo,indice);
+	}
 
-		if (atributo.equalsIgnoreCase("Nome")) {
-			return historicoHospedes.get(indice).getNome();
-		} else {
-			return historicoDeGastos.get(indice);
+	/**
+	 * Verifica se um quarto ja esta ocupado
+	 * 
+	 * @param quarto
+	 *            Id quarto
+	 * @return Retorna true caso o quarto esteja ocupado ou false caso
+	 *         contrario.
+	 */
+	private boolean verificaQuarto(String quarto) {
+		for (Hospede hospede : cadastros.keySet()) {
+			for (Estadia est : cadastros.get(hospede)) {
+				if (est.getQuarto().getId().equals(quarto)) {
+					return true;
+				}
+			}
 		}
+		return false;
 	}
 
 	/**
