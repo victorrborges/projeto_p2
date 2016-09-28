@@ -66,7 +66,7 @@ public class RecepcaoController {
 		}
 		Hospede hospede = new Hospede(nome, email, dataDeNascimento);
 		this.cadastros.put(email, hospede);
-		return email;
+		return hospede.getEmail();
 	}
 
 	/**

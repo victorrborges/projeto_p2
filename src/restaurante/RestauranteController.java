@@ -57,7 +57,7 @@ public class RestauranteController {
 	 */
 	public String consultaRestaurante(String nome, String atributo) throws RestauranteInvalidoException {
 		if (nome.trim().isEmpty()) {
-			throw new RestauranteInvalidoException("Erro na consulta do restaurante. Nome do prato esto vazio.");
+			throw new RestauranteInvalidoException("Erro na consulta do restaurante. Nome do prato esta vazio.");
 		}
 		if (cardapio.contemPrato(nome)) {
 			return cardapio.consultaCardapioPrato(nome, atributo);
