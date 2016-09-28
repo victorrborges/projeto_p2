@@ -12,6 +12,7 @@ public class Registrador {
 	private List<Hospede> historicoHospedes;
 	private List<String> historicoDeGastos;
 	private double total;
+	private String saida = "";
 	
 	public Registrador() {
 		this.historicoHospedes = new ArrayList<Hospede>();
@@ -42,13 +43,6 @@ public class Registrador {
 			return historicoDeGastos.get(indice);
 		}
 	}
-	public String saidaHospedes(){
-		String saidas = "";
-		for(Hospede hospede : historicoHospedes){
-			saidas += hospede.getNome() + ";";
-		}
-		return saidas.substring(0, saidas.length() -1);
-	}
 	
 	/**
 	 * Consulta as transacoes realizadas
@@ -64,14 +58,14 @@ public class Registrador {
 		} else if (atributo.equals("Total")) {
 			return String.format("R$%.2f", total);
 		} else {
-			return saidaHospedes();
+			return saida.substring(0, saida.length()-1);
 		}
 	}
 	
 	public void realizaCheckout(Hospede hospede, double precoTotal) {
-		
 		historicoHospedes.add(hospede);
 		historicoDeGastos.add(String.format("R$%.2f", precoTotal));
+		saida += hospede.getNome()+";";
 		this.total += precoTotal;
 		}
 	

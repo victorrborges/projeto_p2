@@ -187,7 +187,6 @@ public class RecepcaoController {
 	 * @throws SistemaInvalidoException
 	 */
 	public void atualizaCadastro(String id, String atributo, String valor) throws SistemaInvalidoException {
-		List<Estadia> list = cadastros.get(id).getEstadias();
 		if (atributo.equalsIgnoreCase("nome")) {
 			if (valor == null || valor.trim().isEmpty()) {
 				throw new RecepcaoInvalidaException(
@@ -207,9 +206,9 @@ public class RecepcaoController {
 				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
 			}
-			cadastros.get(id).setEmail(valor);
 			Hospede hospede = cadastros.get(id);
 			cadastros.remove(id);
+			hospede.setEmail(valor);
 			cadastros.put(valor, hospede);
 
 		} else if (atributo.equalsIgnoreCase("data de nascimento")) {
@@ -265,7 +264,7 @@ public class RecepcaoController {
 		if (verificaQuarto(idQuarto)) {
 			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Quarto " + idQuarto + " ja esta ocupado.");
 		}
-		Hospede buscado = buscaHospede(email);
+		Hospede buscado = cadastros.get(email);
 		if (buscado == null) {
 			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkin. Hospede de email " + email + " nao foi cadastrado(a).");
@@ -294,10 +293,9 @@ public class RecepcaoController {
 			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkout. ID do quarto invalido, use apenas numeros ou letras.");
 		}
-		Hospede hospede = this.buscaHospede(email);
-		Estadia estadia = this.buscaEstadia(hospede, quarto);
+		Estadia estadia = buscaEstadia(email, quarto);
 		double precoTotal = estadia.getGastos();
-		
+		Hospede hospede = cadastros.get(email);
 		registrador.realizaCheckout(hospede, precoTotal);
 		cadastros.get(email).getEstadias().remove(estadia);
 		return String.format("R$%.2f", precoTotal);
@@ -374,7 +372,7 @@ public class RecepcaoController {
 	 * @return Retorna null caso nao encontre a estadia ou um objeto do tipo
 	 *         Estadia caso contrario.
 	 */
-	private Estadia buscaEstadia(Hospede hospede, String quarto) {
+	private Estadia buscaEstadia(String hospede, String quarto) {
 		List<Estadia> arrayDeQuartos = this.cadastros.get(hospede).getEstadias();
 		for (Estadia estadia : arrayDeQuartos) {
 			if (estadia.getQuarto().getId().equalsIgnoreCase(quarto)) {
