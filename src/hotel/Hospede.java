@@ -1,9 +1,13 @@
 package hotel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hospede {
 	private String nome;
 	private String email;
 	private String dataDeNascimento;
+	private List<Estadia> estadias;
 
 	/**
 	 * Classe Hospede
@@ -19,6 +23,7 @@ public class Hospede {
 		this.nome = nome;
 		this.email = email;
 		this.dataDeNascimento = dataDeNascimento;
+		this.estadias = new ArrayList<Estadia>();
 	}
 
 	public String getNome() {
@@ -53,6 +58,34 @@ public class Hospede {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
+	}
+	
+	public void adicionaEstadia(String id, String diaria, int qtdeDias){
+		Estadia estadia = new Estadia(id, diaria, qtdeDias);
+		this.estadias.add(estadia);
+	}
+	public boolean verificaQuarto(String quarto){
+		for(Estadia estadia : estadias){
+			if(estadia.getQuarto().getId().equals(quarto)){
+				return true;
+			}
+		}return false;
+	}
+
+	public String getDataDeNascimento() {
+		return dataDeNascimento;
+	}
+
+	public void setDataDeNascimento(String dataDeNascimento) {
+		this.dataDeNascimento = dataDeNascimento;
+	}
+
+	public List<Estadia> getEstadias() {
+		return estadias;
+	}
+
+	public void setEstadias(List<Estadia> estadias) {
+		this.estadias = estadias;
 	}
 
 	@Override

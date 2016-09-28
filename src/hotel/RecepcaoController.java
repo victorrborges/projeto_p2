@@ -13,7 +13,7 @@ import java.util.HashMap;
 import validacao.ValidaHospede;
 
 public class RecepcaoController {
-	private HashMap<Hospede, List<Estadia>> cadastros;
+	private HashMap<String, Hospede> cadastros;
 	private ValidaHospede valida;
 	private Registrador registrador;
 	
@@ -21,7 +21,7 @@ public class RecepcaoController {
 	 * Responsavel pela logica de funcionamente
 	 */
 	public RecepcaoController() {
-		this.cadastros = new HashMap<Hospede, List<Estadia>>();
+		this.cadastros = new HashMap<String, Hospede>();
 		this.registrador = new Registrador();
 		valida = new ValidaHospede();
 	}
@@ -65,8 +65,7 @@ public class RecepcaoController {
 					"Erro no cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
 		}
 		Hospede hospede = new Hospede(nome, email, dataDeNascimento);
-		List<Estadia> estadias = new ArrayList<Estadia>();
-		this.cadastros.put(hospede, estadias);
+		this.cadastros.put(email, hospede);
 		return email;
 	}
 
@@ -81,22 +80,21 @@ public class RecepcaoController {
 		if (!valida.validaEmail(id)) {
 			throw new RecepcaoInvalidaException("Erro na remocao do Hospede. Formato de email invalido.");
 		}
-		cadastros.remove(buscaHospede(id));
+		cadastros.remove(id);
 	}
 
 	public String getInfoHospede(String id, String atributo) throws SistemaInvalidoException {
-		Hospede hospede = buscaHospede(id);
-		if (hospede == null) {
+		if (!cadastros.containsKey(id)) {
 			throw new RecepcaoInvalidaException(
 					"Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
 		}
 
 		if (atributo.equalsIgnoreCase("nome")) {
-			return hospede.getNome();
+			return cadastros.get(id).getNome();
 		} else if (atributo.equalsIgnoreCase("Data de Nascimento")) {
-			return hospede.getAno();
+			return cadastros.get(id).getAno();
 		}
-		return hospede.getEmail();
+		return cadastros.get(id).getEmail();
 	}
 
 	/**
@@ -127,7 +125,7 @@ public class RecepcaoController {
 					"Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
 		}
 
-		List<Estadia> estadias = cadastros.get(hospede);
+		List<Estadia> estadias = cadastros.get(id).getEstadias();
 
 		if (estadias.size() == 0) {
 			throw new RecepcaoInvalidaException(
@@ -173,14 +171,7 @@ public class RecepcaoController {
 	 * @return Retorna o numero de hospedagens ativas.
 	 */
 	public int totalAtivas() {
-		int cont = 0;
-		for (Hospede hospede : cadastros.keySet()) {
-			if (cadastros.get(hospede).size() == 0) {
-				cont += 1;
-			}
-
-		}
-		return cont;
+		return cadastros.keySet().size();
 	}
 
 	/**
@@ -196,8 +187,7 @@ public class RecepcaoController {
 	 * @throws SistemaInvalidoException
 	 */
 	public void atualizaCadastro(String id, String atributo, String valor) throws SistemaInvalidoException {
-		Hospede hospede = buscaHospede(id);
-		List<Estadia> list = cadastros.get(hospede);
+		List<Estadia> list = cadastros.get(id).getEstadias();
 		if (atributo.equalsIgnoreCase("nome")) {
 			if (valor == null || valor.trim().isEmpty()) {
 				throw new RecepcaoInvalidaException(
@@ -207,7 +197,7 @@ public class RecepcaoController {
 				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede esta invalido.");
 			}
-			hospede.setNome(valor);
+			cadastros.get(id).setNome(valor);
 		} else if (atributo.equalsIgnoreCase("email")) {
 			if (valor == null || valor.trim().isEmpty()) {
 				throw new RecepcaoInvalidaException(
@@ -216,9 +206,11 @@ public class RecepcaoController {
 			if (!valida.validaEmail(valor)) {
 				throw new RecepcaoInvalidaException(
 						"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
-
 			}
-			hospede.setEmail(valor);
+			cadastros.get(id).setEmail(valor);
+			Hospede hospede = cadastros.get(id);
+			cadastros.remove(id);
+			cadastros.put(valor, hospede);
 
 		} else if (atributo.equalsIgnoreCase("data de nascimento")) {
 			if (valor == null || valor.trim().isEmpty()) {
@@ -234,9 +226,8 @@ public class RecepcaoController {
 						"Erro na atualizacao do cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
 			}
 
-			hospede.setAno(valor);
+			cadastros.get(id).setAno(valor);
 		}
-		cadastros.put(hospede, list);
 	}
 
 	/**
@@ -279,9 +270,7 @@ public class RecepcaoController {
 			throw new RecepcaoInvalidaException(
 					"Erro ao realizar checkin. Hospede de email " + email + " nao foi cadastrado(a).");
 		}
-
-		Estadia estadia = new Estadia(idQuarto, getTipoQuarto(tipoQuarto), qtdeDias);
-		cadastros.get(buscado).add(estadia);
+		buscado.adicionaEstadia(idQuarto, tipoQuarto, qtdeDias);
 	}
 
 	/**
@@ -310,7 +299,7 @@ public class RecepcaoController {
 		double precoTotal = estadia.getGastos();
 		
 		registrador.realizaCheckout(hospede, precoTotal);
-		cadastros.get(hospede).remove(estadia);
+		cadastros.get(email).getEstadias().remove(estadia);
 		return String.format("R$%.2f", precoTotal);
 
 	}
@@ -351,14 +340,11 @@ public class RecepcaoController {
 	 *         contrario.
 	 */
 	private boolean verificaQuarto(String quarto) {
-		for (Hospede hospede : cadastros.keySet()) {
-			for (Estadia est : cadastros.get(hospede)) {
-				if (est.getQuarto().getId().equals(quarto)) {
-					return true;
-				}
+		for(String hospedes : cadastros.keySet()){
+			if(cadastros.get(hospedes).verificaQuarto(quarto)){
+				return true;
 			}
-		}
-		return false;
+		}return false;
 	}
 
 	/**
@@ -389,7 +375,7 @@ public class RecepcaoController {
 	 *         Estadia caso contrario.
 	 */
 	private Estadia buscaEstadia(Hospede hospede, String quarto) {
-		List<Estadia> arrayDeQuartos = this.cadastros.get(hospede);
+		List<Estadia> arrayDeQuartos = this.cadastros.get(hospede).getEstadias();
 		for (Estadia estadia : arrayDeQuartos) {
 			if (estadia.getQuarto().getId().equalsIgnoreCase(quarto)) {
 				return estadia;
@@ -407,10 +393,8 @@ public class RecepcaoController {
 	 *         null caso contrario.
 	 */
 	private Hospede buscaHospede(String id) {
-		for (Hospede hospede : cadastros.keySet()) {
-			if (hospede.getEmail().equalsIgnoreCase(id)) {
-				return hospede;
-			}
+		if(cadastros.containsKey(id)){
+			return cadastros.get(id);
 		}
 		return null;
 	}

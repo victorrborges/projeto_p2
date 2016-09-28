@@ -15,16 +15,25 @@ public class Estadia {
 	 * @param qtdeDias
 	 *            Quantidade de dias da estadia
 	 */
-	public Estadia(String id, TipoQuarto diaria, int qtdeDias) {
-		this.quarto = new Quarto(id, diaria);
+	public Estadia(String id, String diaria, int qtdeDias) {
+		TipoQuarto tipo = escolheQuarto(diaria);
+		this.quarto = new Quarto(id, tipo);
 		this.qtdeDias = qtdeDias;
-		this.gastos = diaria.getPreco() * this.qtdeDias;
+		this.gastos = tipo.getPreco() * this.qtdeDias;
 	}
 
 	public Quarto getQuarto() {
 		return quarto;
 	}
-
+	public TipoQuarto escolheQuarto(String nome){
+		if(nome.equalsIgnoreCase("simples")){
+			return TipoQuarto.SIMPLES;
+		}else if(nome.equalsIgnoreCase("Luxo")){
+			return TipoQuarto.LUXO;
+		}else{
+			return TipoQuarto.PRESIDENCIAL;
+		}
+	}
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
 	}
