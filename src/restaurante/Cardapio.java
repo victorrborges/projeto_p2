@@ -1,17 +1,24 @@
 package restaurante;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import comparator.ComparaNome;
+import comparator.ComparaPreco;
 import exceptions.PratoInvalidoException;
 import exceptions.RefeicaoInvalidaException;
 import exceptions.RestauranteInvalidoException;
 
 public class Cardapio {
 	private List<Refeicao> refeicoes;
+	private ComparaNome ordenaNome;
+	private ComparaPreco ordenaPreco;
 
 	public Cardapio() {
 		this.refeicoes = new ArrayList<Refeicao>();
+		this.ordenaNome = new ComparaNome();
+		this.ordenaPreco = new ComparaPreco();
 	}
 
 	/**
@@ -53,6 +60,14 @@ public class Cardapio {
 		return null;
 	}
 
+	/**
+	 * Busca uma refeicao no menu
+	 * 
+	 * @param nome
+	 *            Nome da refeicao
+	 * 
+	 * @return Retorna uma Refeicao
+	 */
 	private Refeicao buscaRefeicao(String nome) {
 		for (Refeicao refeicao : refeicoes) {
 			if (nome.equals(refeicao.getNome())) {
@@ -60,6 +75,35 @@ public class Cardapio {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Consulta as refeicoes do menu
+	 * 
+	 * @return Retorna os nomes das refeicoes
+	 */
+	public String consultaMenu() {
+		String saida = "";
+		for (Refeicao refeicao : refeicoes) {
+			saida += refeicao.getNome() + ";";
+		}
+
+		return saida.substring(0, saida.length() - 1);
+	}
+
+	/**
+	 * Ordena o menu de acordo com o atributo.
+	 * 
+	 * @param atributo
+	 *            Ordena pelo nome se o atributo for "Nome" ou preco se o
+	 *            atributo for "Preco"
+	 */
+	public void ordenaMenu(String atributo) {
+		if (atributo.equalsIgnoreCase("Nome")) {
+			Collections.sort(refeicoes, ordenaNome);
+		} else {
+			Collections.sort(refeicoes, ordenaPreco);
+		}
 	}
 
 	/**

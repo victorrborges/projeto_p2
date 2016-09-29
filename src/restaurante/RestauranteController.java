@@ -65,6 +65,25 @@ public class RestauranteController {
 		return cardapio.consultaCardapioRefeicao(nome, atributo);
 	}
 
+	/**
+	 * Responsavel por ordenar o Cardapio.
+	 * 
+	 * @param atributo
+	 *            Especifica a ordenacao, por preco ou por nome.
+	 */
+	public void ordenaMenu(String atributo) {
+		cardapio.ordenaMenu(atributo);
+	}
+
+	/**
+	 * Consulta o cardapio do restaurante.
+	 * 
+	 * @return Retorna os itens do cardapio em forma de String.
+	 */
+	public String consultaMenuRestaurante() {
+		return cardapio.consultaMenu();
+	}
+
 	public void fechaSistema() {
 
 	}

@@ -21,7 +21,8 @@ public class HotelFacade {
 
 	}
 
-	public String cadastraHospede(String nome, String email, String dataDeNascimento) throws Exception {
+	public String cadastraHospede(String nome, String email,
+			String dataDeNascimento) throws Exception {
 		try {
 			return recepcao.cadastraHospede(nome, email, dataDeNascimento);
 		} catch (SistemaInvalidoException ex) {
@@ -46,7 +47,8 @@ public class HotelFacade {
 		}
 	}
 
-	public String getInfoHospedagem(String id, String atributo) throws Exception {
+	public String getInfoHospedagem(String id, String atributo)
+			throws Exception {
 		try {
 			return recepcao.getInfoHospedagem(id, atributo);
 		} catch (SistemaInvalidoException ex) {
@@ -54,7 +56,8 @@ public class HotelFacade {
 		}
 	}
 
-	public void atualizaCadastro(String id, String atributo, String valor) throws Exception {
+	public void atualizaCadastro(String id, String atributo, String valor)
+			throws Exception {
 		try {
 			recepcao.atualizaCadastro(id, atributo, valor);
 		} catch (SistemaInvalidoException ex) {
@@ -62,7 +65,8 @@ public class HotelFacade {
 		}
 	}
 
-	public void realizaCheckin(String email, int qtdeDias, String idQuarto, String tipoQuarto) throws Exception {
+	public void realizaCheckin(String email, int qtdeDias, String idQuarto,
+			String tipoQuarto) throws Exception {
 		try {
 			recepcao.realizaCheckin(email, qtdeDias, idQuarto, tipoQuarto);
 		} catch (SistemaInvalidoException ex) {
@@ -86,7 +90,8 @@ public class HotelFacade {
 		return recepcao.consultaTransacoes(atributo);
 	}
 
-	public String consultaTransacoes(String atributo, int indice) throws Exception {
+	public String consultaTransacoes(String atributo, int indice)
+			throws Exception {
 		try {
 			return recepcao.consultaTransacoes(atributo, indice);
 		} catch (SistemaInvalidoException ex) {
@@ -94,7 +99,8 @@ public class HotelFacade {
 		}
 	}
 
-	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
+	public void cadastraPrato(String nome, double preco, String descricao)
+			throws Exception {
 		try {
 			restaurante.cadastraPrato(nome, preco, descricao);
 		} catch (SistemaInvalidoException ex) {
@@ -102,7 +108,8 @@ public class HotelFacade {
 		}
 	}
 
-	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
+	public void cadastraRefeicao(String nome, String descricao,
+			String componentes) throws Exception {
 		try {
 			restaurante.cadastraRefeicao(nome, descricao, componentes);
 		} catch (SistemaInvalidoException ex) {
@@ -110,7 +117,8 @@ public class HotelFacade {
 		}
 	}
 
-	public String consultaRestaurante(String nome, String atributo) throws Exception {
+	public String consultaRestaurante(String nome, String atributo)
+			throws Exception {
 		try {
 			return restaurante.consultaRestaurante(nome, atributo);
 		} catch (SistemaInvalidoException ex) {
@@ -118,16 +126,29 @@ public class HotelFacade {
 		}
 	}
 
+	public void ordenaMenu(String atributo) {
+		restaurante.ordenaMenu(atributo);
+	}
+
+	public String consultaMenuRestaurante() {
+		return restaurante.consultaMenuRestaurante();
+	}
+
 	public void fechaSistema() {
 
 	}
 
 	public static void main(String[] args) {
-		args = new String[] { "hotel.HotelFacade", "acceptance_test/testes_uc1.txt",
-				"acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc2.txt",
-				"acceptance_test/testes_uc2_exception.txt", "acceptance_test/testes_uc3.txt",
-				"acceptance_test/testes_uc3_exception.txt", "acceptance_test/testes_uc4.txt",
-				"acceptance_test/testes_uc4_exception.txt" };
+		args = new String[] { "hotel.HotelFacade",
+				"acceptance_test/testes_uc1.txt",
+				"acceptance_test/testes_uc1_exception.txt",
+				"acceptance_test/testes_uc2.txt",
+				"acceptance_test/testes_uc2_exception.txt",
+				"acceptance_test/testes_uc3.txt",
+				"acceptance_test/testes_uc3_exception.txt",
+				"acceptance_test/testes_uc4.txt",
+				"acceptance_test/testes_uc4_exception.txt",
+				"acceptance_test/testes_uc5.txt" };
 		EasyAccept.main(args);
 	}
 
