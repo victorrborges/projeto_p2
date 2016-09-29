@@ -1,26 +1,15 @@
 package restaurante;
 
-import java.util.ArrayList;
+public abstract class Refeicao {
 
-public class Refeicao {
 	private String nome;
+	protected double preco;
 	private String descricao;
-	private ArrayList<Prato> pratos;
-	private static final double DESCONTO = 0.9;
 
-	/**
-	 * Classe refeicao, possui um nome, uma descricao propria e uma sequencia de
-	 * pratos
-	 * 
-	 * @param nome
-	 *            Nome da refeicao
-	 * @param descricao
-	 *            Descricao da refeicao
-	 */
-	public Refeicao(String nome, String descricao) {
+	public Refeicao(String nome, double preco, String descricao) {
 		this.nome = nome;
+		this.preco = preco;
 		this.descricao = descricao;
-		this.pratos = new ArrayList<Prato>();
 	}
 
 	public String getNome() {
@@ -31,79 +20,21 @@ public class Refeicao {
 		this.nome = nome;
 	}
 
-	/**
-	 * Retorna o preco da refeicao com o desconto
-	 * 
-	 * @return
-	 */
 	public double getPreco() {
-		double precoTotal = 0.0;
-		for (Prato prato : pratos) {
-			precoTotal += prato.getPreco();
-		}
-		return precoTotal * DESCONTO;
+		return preco;
+	}
+
+	public abstract double calculaPreco();
+
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
 
 	public String getDescricao() {
-		return this.descricao;
+		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public ArrayList<Prato> getPratos() {
-		return pratos;
-	}
-
-	public void setPratos(ArrayList<Prato> pratos) {
-		this.pratos = pratos;
-	}
-
-	/**
-	 * Adiciona um prato na lista de pratos da refeicao.
-	 * 
-	 * @param prato
-	 *            Um Prato.
-	 */
-	public void addPrato(Prato prato) {
-		this.pratos.add(prato);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((pratos == null) ? 0 : pratos.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Refeicao)) {
-			return false;
-		}
-		Refeicao refeicao = (Refeicao) obj;
-		if (refeicao.getDescricao().equals(getDescricao()) && refeicao.getPratos().equals(getPratos())) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public String toString() {
-		String toString = this.getDescricao() + " Serao servidos: ";
-		int indice = 0;
-		for (Prato prato : pratos) {
-			indice += 1;
-			toString += "(" + indice + ") " + prato.getNome() + ", ";
-		}
-		toString = toString + ".";
-		toString = toString.replace(", .", ".");
-		return toString;
-
-	}
-
 }

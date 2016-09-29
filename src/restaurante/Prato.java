@@ -1,9 +1,6 @@
 package restaurante;
 
-public class Prato {
-	private String nome;
-	private double preco;
-	private String descricao;
+public class Prato extends Refeicao {
 
 	/**
 	 * 
@@ -15,40 +12,21 @@ public class Prato {
 	 *            Descricao do prato
 	 */
 	public Prato(String nome, double preco, String descricao) {
-		this.nome = nome;
-		this.preco = preco;
-		this.descricao = descricao;
+		super(nome, preco, descricao);
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(double preco) {
-		this.preco = preco;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public double calculaPreco() {
+		return super.getPreco();
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime
+				* result
+				+ ((super.getDescricao() == null) ? 0 : super.getDescricao()
+						.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(preco);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -61,11 +39,15 @@ public class Prato {
 			return false;
 		}
 		Prato prato = (Prato) obj;
-		if (prato.getDescricao().equals(getDescricao()) && prato.getPreco() == getPreco()) {
+		if (prato.getDescricao().equals(getDescricao())
+				&& prato.getPreco() == getPreco()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
+	public String toString() {
+		return super.getDescricao();
+	}
 }
