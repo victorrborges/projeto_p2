@@ -6,8 +6,6 @@ import java.util.List;
 import exceptions.HospedeInvalidoException;
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import validacao.ValidaHospede;
