@@ -14,32 +14,13 @@ public class Cardapio {
 	private List<Refeicao> refeicoes;
 	private ComparaNome ordenaNome;
 	private ComparaPreco ordenaPreco;
+	private String ordenacaoAtual;
 
 	public Cardapio() {
 		this.refeicoes = new ArrayList<Refeicao>();
 		this.ordenaNome = new ComparaNome();
 		this.ordenaPreco = new ComparaPreco();
-	}
-
-	/**
-	 * Adiciona um prato no set pratos.
-	 * 
-	 * @param prato
-	 *            Recebe um Prato.
-	 * 
-	 */
-	public void addPrato(Refeicao prato) {
-		this.refeicoes.add(prato);
-	}
-
-	/**
-	 * Adiciona uma refeicao no set de refeicoes.
-	 * 
-	 * @param refeicao
-	 *            Recebe uma Refeicao.
-	 */
-	public void addRefeicao(Refeicao refeicao) {
-		this.refeicoes.add(refeicao);
+		this.ordenacaoAtual = "";
 	}
 
 	/**
@@ -101,8 +82,10 @@ public class Cardapio {
 	public void ordenaMenu(String atributo) {
 		if (atributo.equalsIgnoreCase("Nome")) {
 			Collections.sort(refeicoes, ordenaNome);
-		} else {
+			ordenacaoAtual = "nome";
+		} else if (atributo.equalsIgnoreCase("Preco")){
 			Collections.sort(refeicoes, ordenaPreco);
+			ordenacaoAtual = "preco";
 		}
 	}
 
@@ -180,6 +163,7 @@ public class Cardapio {
 			refeicao.addPrato(item);
 		}
 		refeicoes.add(refeicao);
+		this.ordenaMenu(ordenacaoAtual);
 	}
 
 	/**
@@ -209,6 +193,7 @@ public class Cardapio {
 		}
 		Prato prato = new Prato(nome, preco, descricao);
 		refeicoes.add(prato);
+		this.ordenaMenu(ordenacaoAtual);
 	}
 
 	/**
