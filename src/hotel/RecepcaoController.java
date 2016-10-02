@@ -294,7 +294,9 @@ public class RecepcaoController {
 		Estadia estadia = buscaEstadia(email, quarto);
 		double precoTotal = estadia.getGastos();
 		Hospede hospede = cadastros.get(email);
-		registrador.realizaCheckout(hospede, precoTotal);
+		hospede.addPontos(precoTotal);
+		double valorCartao = hospede.aplicaDesconto(precoTotal);
+		registrador.realizaCheckout(hospede, valorCartao);
 		cadastros.get(email).getEstadias().remove(estadia);
 		return String.format("R$%.2f", precoTotal);
 

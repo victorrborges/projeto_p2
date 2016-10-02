@@ -2,12 +2,14 @@ package hotel;
 
 import java.util.ArrayList;
 import java.util.List;
+import cartao.CartaoFidelidade;
 
 public class Hospede {
 	private String nome;
 	private String email;
 	private String dataDeNascimento;
 	private List<Estadia> estadias;
+	private CartaoFidelidade cartao;
 
 	/**
 	 * Classe Hospede
@@ -24,6 +26,7 @@ public class Hospede {
 		this.email = email;
 		this.dataDeNascimento = dataDeNascimento;
 		this.estadias = new ArrayList<Estadia>();
+		this.cartao = new CartaoFidelidade();
 	}
 
 	public String getNome() {
@@ -86,6 +89,16 @@ public class Hospede {
 		this.estadias = estadias;
 	}
 
+	public void addPontos(double valorGasto){
+		cartao.addPontos(valorGasto);
+	}
+	
+	public double aplicaDesconto(double valorCobranca){
+		return cartao.aplicaDesconto(valorCobranca);
+	}
 
+	public String convertePontos(int pontos) throws Exception {
+		return cartao.convertePontos(pontos);
+	}
 
 }
