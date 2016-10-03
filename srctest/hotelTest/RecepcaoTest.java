@@ -31,4 +31,24 @@ public class RecepcaoTest {
 		Assert.assertEquals("1", recepcao.consultaTransacoes("Quantidade"));
 		Assert.assertEquals("R$1000,00", recepcao.consultaTransacoes("Total"));
 	}
+	@Test
+	public void TestExceptions() throws SistemaInvalidoException{
+		try{
+			recepcao.cadastraHospede("asdf23423", "algo@hotmail.com", "28/12/1963");
+		}catch (SistemaInvalidoException e) {
+			Assert.assertEquals("Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.", e.getMessage() );
+		}try{
+			recepcao.cadastraHospede("alguma coisa", "algo.com", "28/12/1963");
+		}catch (SistemaInvalidoException e) {
+			Assert.assertEquals("Erro no cadastro de Hospede. Email do(a) hospede esta invalido.", e.getMessage());
+		}try{
+			recepcao.cadastraHospede("alguma coisa", "algo@hotmail.com", "28/12asdf963");
+		}catch(SistemaInvalidoException e){
+			Assert.assertEquals("Erro no cadastro de Hospede. Formato de data invalido.", e.getMessage());
+		}try{
+			recepcao.cadastraHospede("alguma coisa", "algo@hotmail.com", "28/12/2010");
+		}catch (SistemaInvalidoException e) {
+			Assert.assertEquals("Erro no cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.", e.getMessage());
+		}
+	}
 }
