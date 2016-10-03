@@ -27,5 +27,8 @@ public class RecepcaoTest {
 		recepcao.realizaCheckin("jurubeba@hotmail.com", 10, "15A", "Simples");
 		Assert.assertEquals("Jurubeba", recepcao.getInfoHospede("jurubeba@hotmail.com", "Nome"));
 		Assert.assertEquals("1", recepcao.getInfoHospedagem("jurubeba@hotmail.com", "Hospedagens Ativas"));
+		recepcao.realizaCheckout("jurubeba@hotmail.com", "15A");
+		Assert.assertEquals("1", recepcao.consultaTransacoes("Quantidade"));
+		Assert.assertEquals("R$1000,00", recepcao.consultaTransacoes("Total"));
 	}
 }
