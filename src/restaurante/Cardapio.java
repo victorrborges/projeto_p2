@@ -83,7 +83,7 @@ public class Cardapio {
 		if (atributo.equalsIgnoreCase("Nome")) {
 			Collections.sort(refeicoes, ordenaNome);
 			ordenacaoAtual = "nome";
-		} else if (atributo.equalsIgnoreCase("Preco")){
+		} else if (atributo.equalsIgnoreCase("Preco")) {
 			Collections.sort(refeicoes, ordenaPreco);
 			ordenacaoAtual = "preco";
 		}
@@ -133,19 +133,16 @@ public class Cardapio {
 	 *            Pratos que a refeicao contem.
 	 * @throws RestauranteInvalidoException
 	 */
-	public void cadastraRefeicao(String nome, String descricao,
-			String componentes) throws RestauranteInvalidoException {
+	public void cadastraRefeicao(String nome, String descricao, String componentes)
+			throws RestauranteInvalidoException {
 		if (nome == null || nome.trim().isEmpty()) {
-			throw new RefeicaoInvalidaException(
-					"Erro no cadastro de refeicao. Nome da refeicao esta vazio.");
+			throw new RefeicaoInvalidaException("Erro no cadastro de refeicao. Nome da refeicao esta vazio.");
 		}
 		if (descricao.trim().isEmpty()) {
-			throw new RefeicaoInvalidaException(
-					"Erro no cadastro de refeicao. Descricao da refeicao esta vazia.");
+			throw new RefeicaoInvalidaException("Erro no cadastro de refeicao. Descricao da refeicao esta vazia.");
 		}
 		if (componentes.trim().isEmpty()) {
-			throw new RefeicaoInvalidaException(
-					"Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
+			throw new RefeicaoInvalidaException("Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
 		}
 		RefeicaoCompleta refeicao = new RefeicaoCompleta(nome, descricao);
 		String[] arrayComponentes = componentes.split(";");
@@ -177,19 +174,15 @@ public class Cardapio {
 	 *            Descricao do prato.
 	 * @throws RestauranteInvalidoException
 	 */
-	public void cadastraPrato(String nome, double preco, String descricao)
-			throws RestauranteInvalidoException {
+	public void cadastraPrato(String nome, double preco, String descricao) throws RestauranteInvalidoException {
 		if (nome == null || nome.trim().isEmpty()) {
-			throw new PratoInvalidoException(
-					"Erro no cadastro do prato. Nome do prato esta vazio.");
+			throw new PratoInvalidoException("Erro no cadastro do prato. Nome do prato esta vazio.");
 		}
 		if (preco < 0) {
-			throw new PratoInvalidoException(
-					"Erro no cadastro do prato. Preco do prato eh invalido.");
+			throw new PratoInvalidoException("Erro no cadastro do prato. Preco do prato eh invalido.");
 		}
 		if (descricao.trim().isEmpty()) {
-			throw new PratoInvalidoException(
-					"Erro no cadastro do prato. Descricao do prato esta vazia.");
+			throw new PratoInvalidoException("Erro no cadastro do prato. Descricao do prato esta vazia.");
 		}
 		Prato prato = new Prato(nome, preco, descricao);
 		refeicoes.add(prato);
@@ -247,6 +240,10 @@ public class Cardapio {
 		} else {
 			return false;
 		}
+	}
+
+	public double consultaPreco(String nome) {
+		return buscaRefeicao(nome).calculaPreco();
 	}
 
 }

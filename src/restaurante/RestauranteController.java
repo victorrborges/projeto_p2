@@ -23,8 +23,7 @@ public class RestauranteController {
 	 *            Descricao do prato que sera cadastrado.
 	 * @throws RestauranteInvalidoException
 	 */
-	public void cadastraPrato(String nome, double preco, String descricao)
-			throws RestauranteInvalidoException {
+	public void cadastraPrato(String nome, double preco, String descricao) throws RestauranteInvalidoException {
 		cardapio.cadastraPrato(nome, preco, descricao);
 	}
 
@@ -40,8 +39,8 @@ public class RestauranteController {
 	 *            Pratos que compoem a refeicao.
 	 * @throws RestauranteInvalidoException
 	 */
-	public void cadastraRefeicao(String nome, String descricao,
-			String componentes) throws RestauranteInvalidoException {
+	public void cadastraRefeicao(String nome, String descricao, String componentes)
+			throws RestauranteInvalidoException {
 		cardapio.cadastraRefeicao(nome, descricao, componentes);
 	}
 
@@ -56,11 +55,9 @@ public class RestauranteController {
 	 *         formato: "R$00,00"
 	 * @throws RestauranteInvalidoException
 	 */
-	public String consultaRestaurante(String nome, String atributo)
-			throws RestauranteInvalidoException {
+	public String consultaRestaurante(String nome, String atributo) throws RestauranteInvalidoException {
 		if (nome.trim().isEmpty()) {
-			throw new RestauranteInvalidoException(
-					"Erro na consulta do restaurante. Nome do prato esta vazio.");
+			throw new RestauranteInvalidoException("Erro na consulta do restaurante. Nome do prato esta vazio.");
 		}
 		return cardapio.consultaCardapioRefeicao(nome, atributo);
 	}
@@ -82,6 +79,10 @@ public class RestauranteController {
 	 */
 	public String consultaMenuRestaurante() {
 		return cardapio.consultaMenu();
+	}
+
+	public double realizaPedido(String nomeRefeicao) {
+		return cardapio.consultaPreco(nomeRefeicao);
 	}
 
 	public void fechaSistema() {

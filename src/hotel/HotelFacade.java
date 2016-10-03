@@ -1,20 +1,17 @@
 package hotel;
 
-import restaurante.RestauranteController;
 import easyaccept.EasyAccept;
 import exceptions.SistemaInvalidoException;
 
 public class HotelFacade {
-	private RecepcaoController recepcao;
-	private RestauranteController restaurante;
+	private HotelController hotel;
 
 	/**
 	 * Delega os metodos a RecepcaoController e ao RestauranteController
 	 * 
 	 */
 	public HotelFacade() {
-		this.recepcao = new RecepcaoController();
-		this.restaurante = new RestauranteController();
+		this.hotel = new HotelController();
 	}
 
 	public void iniciaSistema() {
@@ -24,7 +21,7 @@ public class HotelFacade {
 	public String cadastraHospede(String nome, String email,
 			String dataDeNascimento) throws Exception {
 		try {
-			return recepcao.cadastraHospede(nome, email, dataDeNascimento);
+			return hotel.cadastraHospede(nome, email, dataDeNascimento);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
@@ -33,7 +30,7 @@ public class HotelFacade {
 
 	public void removeHospede(String id) throws Exception {
 		try {
-			recepcao.removeHospede(id);
+			hotel.removeHospede(id);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
@@ -41,7 +38,7 @@ public class HotelFacade {
 
 	public String getInfoHospede(String id, String atributo) throws Exception {
 		try {
-			return recepcao.getInfoHospede(id, atributo);
+			return hotel.getInfoHospede(id, atributo);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
@@ -50,7 +47,7 @@ public class HotelFacade {
 	public String getInfoHospedagem(String id, String atributo)
 			throws Exception {
 		try {
-			return recepcao.getInfoHospedagem(id, atributo);
+			return hotel.getInfoHospedagem(id, atributo);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
@@ -59,7 +56,7 @@ public class HotelFacade {
 	public void atualizaCadastro(String id, String atributo, String valor)
 			throws Exception {
 		try {
-			recepcao.atualizaCadastro(id, atributo, valor);
+			hotel.atualizaCadastro(id, atributo, valor);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
@@ -68,7 +65,7 @@ public class HotelFacade {
 	public void realizaCheckin(String email, int qtdeDias, String idQuarto,
 			String tipoQuarto) throws Exception {
 		try {
-			recepcao.realizaCheckin(email, qtdeDias, idQuarto, tipoQuarto);
+			hotel.realizaCheckin(email, qtdeDias, idQuarto, tipoQuarto);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
@@ -76,24 +73,24 @@ public class HotelFacade {
 
 	public String realizaCheckout(String email, String quarto) throws Exception {
 		try {
-			return recepcao.realizaCheckout(email, quarto);
+			return hotel.realizaCheckout(email, quarto);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
 	}
 
 	public int totalAtivas() {
-		return recepcao.totalAtivas();
+		return hotel.totalAtivas();
 	}
 
 	public String consultaTransacoes(String atributo) {
-		return recepcao.consultaTransacoes(atributo);
+		return hotel.consultaTransacoes(atributo);
 	}
 
 	public String consultaTransacoes(String atributo, int indice)
 			throws Exception {
 		try {
-			return recepcao.consultaTransacoes(atributo, indice);
+			return hotel.consultaTransacoes(atributo, indice);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
@@ -102,7 +99,7 @@ public class HotelFacade {
 	public void cadastraPrato(String nome, double preco, String descricao)
 			throws Exception {
 		try {
-			restaurante.cadastraPrato(nome, preco, descricao);
+			hotel.cadastraPrato(nome, preco, descricao);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
@@ -111,7 +108,7 @@ public class HotelFacade {
 	public void cadastraRefeicao(String nome, String descricao,
 			String componentes) throws Exception {
 		try {
-			restaurante.cadastraRefeicao(nome, descricao, componentes);
+			hotel.cadastraRefeicao(nome, descricao, componentes);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
@@ -120,18 +117,22 @@ public class HotelFacade {
 	public String consultaRestaurante(String nome, String atributo)
 			throws Exception {
 		try {
-			return restaurante.consultaRestaurante(nome, atributo);
+			return hotel.consultaRestaurante(nome, atributo);
 		} catch (SistemaInvalidoException ex) {
 			throw new SistemaInvalidoException(ex.getMessage());
 		}
 	}
 
 	public void ordenaMenu(String atributo) {
-		restaurante.ordenaMenu(atributo);
+		hotel.ordenaMenu(atributo);
 	}
 
 	public String consultaMenuRestaurante() {
-		return restaurante.consultaMenuRestaurante();
+		return hotel.consultaMenuRestaurante();
+	}
+	
+	public String realizaPedido(String email, String refeicao) {
+		return hotel.realizaPedido(email, refeicao);
 	}
 
 	public void fechaSistema() {
@@ -148,7 +149,7 @@ public class HotelFacade {
 				"acceptance_test/testes_uc3_exception.txt",
 				"acceptance_test/testes_uc4.txt",
 				"acceptance_test/testes_uc4_exception.txt",
-				"acceptance_test/testes_uc5.txt" };
+				"acceptance_test/testes_uc5.txt", "acceptance_test/testes_uc6.txt" };
 		EasyAccept.main(args);
 	}
 

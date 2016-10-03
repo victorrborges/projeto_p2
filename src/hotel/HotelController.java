@@ -6,22 +6,27 @@ import java.util.List;
 import exceptions.HospedeInvalidoException;
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
+import restaurante.RestauranteController;
+
 import java.util.HashMap;
 
 import validacao.ValidaHospede;
 
-public class RecepcaoController {
+public class HotelController {
 	private HashMap<String, Hospede> cadastros;
 	private ValidaHospede valida;
 	private Registrador registrador;
+	private RestauranteController restaurante;
+
 	
 	/**
 	 * Responsavel pela logica de funcionamente
 	 */
-	public RecepcaoController() {
+	public HotelController() {
 		this.cadastros = new HashMap<String, Hospede>();
 		this.registrador = new Registrador();
 		valida = new ValidaHospede();
+		this.restaurante = new RestauranteController();
 	}
 
 	/**
@@ -294,7 +299,7 @@ public class RecepcaoController {
 		Estadia estadia = buscaEstadia(email, quarto);
 		double precoTotal = estadia.getGastos();
 		Hospede hospede = cadastros.get(email);
-		registrador.realizaCheckout(hospede, precoTotal);
+		registrador.registraGasto(hospede, precoTotal,quarto);
 		cadastros.get(email).getEstadias().remove(estadia);
 		return String.format("R$%.2f", precoTotal);
 
@@ -326,7 +331,38 @@ public class RecepcaoController {
 	public String consultaTransacoes(String atributo, int indice) throws SistemaInvalidoException {
 		return registrador.consultaTransacoes(atributo,indice);
 	}
+	
+	public void cadastraPrato(String nome, double preco, String descricao)
+			throws Exception {
+		restaurante.cadastraPrato(nome, preco, descricao);
+	}
 
+	public void cadastraRefeicao(String nome, String descricao,
+			String componentes) throws Exception {
+		restaurante.cadastraRefeicao(nome, descricao, componentes);
+	}
+
+	public String consultaRestaurante(String nome, String atributo)
+			throws Exception {
+		return restaurante.consultaRestaurante(nome, atributo);
+	}
+
+	public void ordenaMenu(String atributo) {
+		restaurante.ordenaMenu(atributo);
+	}
+
+	public String consultaMenuRestaurante() {
+		return restaurante.consultaMenuRestaurante();
+	}
+	
+	public String realizaPedido(String email, String nomeRefeicao){
+		double precoTotal = restaurante.realizaPedido(nomeRefeicao);
+		Hospede hospede = cadastros.get(email);
+		registrador.registraGasto(hospede,precoTotal,nomeRefeicao);
+		
+		return String.format("R$%.2f", precoTotal);
+	}
+	
 	/**
 	 * Verifica se um quarto ja esta ocupado
 	 * 

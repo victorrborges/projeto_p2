@@ -25,6 +25,7 @@ expect "Rapadura;Espresso;Tapioca;Pudim de leite;Bresaola com rucula e parmesao;
 ##################################
 # Registro de pedido de hospedes #
 ##################################
+expect "R$50,85" consultaRestaurante nome="Delicia da serra" atributo="Preco"
 expect "R$50,85" realizaPedido hospede="nobel@got.se" itemMenu="Delicia da serra"
 expect "R$3,00" realizaPedido hospede="nobel@got.se" itemMenu="Tapioca"
 

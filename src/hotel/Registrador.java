@@ -11,12 +11,14 @@ public class Registrador {
 	
 	private List<Hospede> historicoHospedes;
 	private List<String> historicoDeGastos;
+	private List<String> historicoDeCompra;
 	private double total;
 	private String saida = "";
 	
 	public Registrador() {
 		this.historicoHospedes = new ArrayList<Hospede>();
 		this.historicoDeGastos = new ArrayList<String>();
+		this.historicoDeCompra = new ArrayList<String>();
 		this.total = 0;
 	}
 	
@@ -39,6 +41,8 @@ public class Registrador {
 
 		if (atributo.equalsIgnoreCase("Nome")) {
 			return historicoHospedes.get(indice).getNome();
+		} else if (atributo.equalsIgnoreCase("Detalhes")) {
+			return historicoDeCompra.get(indice);
 		} else {
 			return historicoDeGastos.get(indice);
 		}
@@ -62,9 +66,10 @@ public class Registrador {
 		}
 	}
 	
-	public void realizaCheckout(Hospede hospede, double precoTotal) {
+	public void registraGasto(Hospede hospede, double precoTotal, String nomeProduto) {
 		historicoHospedes.add(hospede);
 		historicoDeGastos.add(String.format("R$%.2f", precoTotal));
+		historicoDeCompra.add(nomeProduto);
 		saida += hospede.getNome()+";";
 		this.total += precoTotal;
 		}

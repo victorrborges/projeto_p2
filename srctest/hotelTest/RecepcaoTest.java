@@ -4,15 +4,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 import exceptions.SistemaInvalidoException;
-import hotel.RecepcaoController;
+import hotel.HotelController;
 
 public class RecepcaoTest {
 
-	private RecepcaoController recepcao;
+	private HotelController recepcao;
 	
 	@Before
 	public void RecepcaoTest(){
-		this.recepcao = new RecepcaoController();
+		this.recepcao = new HotelController();
 	}
 	@Test
 	public void TestCadastroeRemocao() throws SistemaInvalidoException{
