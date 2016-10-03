@@ -13,7 +13,7 @@ public class Vip implements TipoDeCartaoIF {
 
 	@Override
 	public double aplicaDesconto(double valorCobranca) {
-		return Math.ceil(valorCobranca * DESCONTO); 
+		return valorCobranca * DESCONTO; 
 		
 	}
 
