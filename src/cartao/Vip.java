@@ -1,5 +1,8 @@
 package cartao;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Vip implements TipoDeCartaoIF {
 	
 	private static final double RECOMPENSA = 0.5;
@@ -13,12 +16,16 @@ public class Vip implements TipoDeCartaoIF {
 
 	@Override
 	public double aplicaDesconto(double valorCobranca) {
+		double extra = 0.0;
 		
 		if(valorCobranca >= 100){
 			int centenas = (int) (valorCobranca/100);
-			return valorCobranca * DESCONTO - 10 * centenas;
+			extra = 10 * centenas;
 		} 
-		return valorCobranca * DESCONTO;
+		
+		double precoDescontado = Math.round((valorCobranca * DESCONTO - extra) * 100);
+		
+		return precoDescontado / 100;
 	}
 
 	@Override

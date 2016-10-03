@@ -42,8 +42,6 @@ public class CartaoFidelidade {
 	}
 	
 	public double aplicaDesconto(double valorCobranca){
-		System.out.println(tipoDeCartao.aplicaDesconto(valorCobranca));
-		System.out.println(getTipoDeCartao());
 		return tipoDeCartao.aplicaDesconto(valorCobranca);
 		
 	}

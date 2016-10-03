@@ -134,6 +134,14 @@ public class HotelFacade {
 	public String realizaPedido(String email, String refeicao) {
 		return hotel.realizaPedido(email, refeicao);
 	}
+	
+	public String convertePontos(String id, int qtdPontos) throws Exception {
+		try{
+			return hotel.convertePontos(id, qtdPontos);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 
 	public void fechaSistema() {
 
@@ -149,7 +157,9 @@ public class HotelFacade {
 				"acceptance_test/testes_uc3_exception.txt",
 				"acceptance_test/testes_uc4.txt",
 				"acceptance_test/testes_uc4_exception.txt",
-				"acceptance_test/testes_uc5.txt", "acceptance_test/testes_uc6.txt" };
+				"acceptance_test/testes_uc5.txt", 
+				"acceptance_test/testes_uc6.txt",
+				"acceptance_test/testes_uc7.txt"};
 		EasyAccept.main(args);
 	}
 

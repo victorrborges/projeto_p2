@@ -433,4 +433,8 @@ public class HotelController {
 		return null;
 	}
 
+	public String convertePontos(String id, int qtdPontos) throws Exception {
+		Hospede hospede = buscaHospede(id);
+		return hospede.getCartao().convertePontos(qtdPontos);
+	}
 }
