@@ -1,6 +1,5 @@
 package hotel;
 
-
 import java.util.List;
 
 import exceptions.HospedeInvalidoException;
@@ -18,7 +17,6 @@ public class HotelController {
 	private Registrador registrador;
 	private RestauranteController restaurante;
 
-	
 	/**
 	 * Responsavel pela logica de funcionamente
 	 */
@@ -96,6 +94,8 @@ public class HotelController {
 			return cadastros.get(id).getNome();
 		} else if (atributo.equalsIgnoreCase("Data de Nascimento")) {
 			return cadastros.get(id).getAno();
+		} else if (atributo.equalsIgnoreCase("Pontos")) {
+			return String.format("%d", cadastros.get(id).getCartao().getPontos());
 		}
 		return cadastros.get(id).getEmail();
 	}
@@ -299,8 +299,10 @@ public class HotelController {
 		Estadia estadia = buscaEstadia(email, quarto);
 		double precoTotal = estadia.getGastos();
 		Hospede hospede = cadastros.get(email);
-		registrador.registraGasto(hospede, precoTotal,quarto);
+		hospede.getCartao().addPontos(precoTotal);
+		registrador.registraGasto(hospede, precoTotal, quarto);
 		cadastros.get(email).getEstadias().remove(estadia);
+
 		return String.format("R$%.2f", precoTotal);
 
 	}
@@ -329,21 +331,18 @@ public class HotelController {
 	 * @throws SistemaInvalidoException
 	 */
 	public String consultaTransacoes(String atributo, int indice) throws SistemaInvalidoException {
-		return registrador.consultaTransacoes(atributo,indice);
+		return registrador.consultaTransacoes(atributo, indice);
 	}
-	
-	public void cadastraPrato(String nome, double preco, String descricao)
-			throws Exception {
+
+	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
 		restaurante.cadastraPrato(nome, preco, descricao);
 	}
 
-	public void cadastraRefeicao(String nome, String descricao,
-			String componentes) throws Exception {
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
 		restaurante.cadastraRefeicao(nome, descricao, componentes);
 	}
 
-	public String consultaRestaurante(String nome, String atributo)
-			throws Exception {
+	public String consultaRestaurante(String nome, String atributo) throws Exception {
 		return restaurante.consultaRestaurante(nome, atributo);
 	}
 
@@ -354,15 +353,16 @@ public class HotelController {
 	public String consultaMenuRestaurante() {
 		return restaurante.consultaMenuRestaurante();
 	}
-	
-	public String realizaPedido(String email, String nomeRefeicao){
+
+	public String realizaPedido(String email, String nomeRefeicao) {
 		double precoTotal = restaurante.realizaPedido(nomeRefeicao);
 		Hospede hospede = cadastros.get(email);
-		registrador.registraGasto(hospede,precoTotal,nomeRefeicao);
-		
+		precoTotal = hospede.getCartao().aplicaDesconto(precoTotal);
+		registrador.registraGasto(hospede, precoTotal, nomeRefeicao);
+		hospede.getCartao().addPontos(precoTotal);
 		return String.format("R$%.2f", precoTotal);
 	}
-	
+
 	/**
 	 * Verifica se um quarto ja esta ocupado
 	 * 
@@ -372,11 +372,12 @@ public class HotelController {
 	 *         contrario.
 	 */
 	private boolean verificaQuarto(String quarto) {
-		for(String hospedes : cadastros.keySet()){
-			if(cadastros.get(hospedes).verificaQuarto(quarto)){
+		for (String hospedes : cadastros.keySet()) {
+			if (cadastros.get(hospedes).verificaQuarto(quarto)) {
 				return true;
 			}
-		}return false;
+		}
+		return false;
 	}
 
 	/**
@@ -425,7 +426,7 @@ public class HotelController {
 	 *         null caso contrario.
 	 */
 	private Hospede buscaHospede(String id) {
-		if(cadastros.containsKey(id)){
+		if (cadastros.containsKey(id)) {
 			return cadastros.get(id);
 		}
 		return null;

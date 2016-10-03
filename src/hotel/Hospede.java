@@ -53,24 +53,27 @@ public class Hospede {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 
-	public void adicionaEstadia(String id, String diaria, int qtdeDias){
+	public void adicionaEstadia(String id, String diaria, int qtdeDias) {
 		Estadia estadia = new Estadia(id, diaria, qtdeDias);
 		this.estadias.add(estadia);
 	}
 
-	public boolean verificaQuarto(String quarto){
-		for(Estadia estadia : estadias){
-			if(estadia.getQuarto().getId().equals(quarto)){
+	public boolean verificaQuarto(String quarto) {
+		for (Estadia estadia : estadias) {
+			if (estadia.getQuarto().getId().equals(quarto)) {
 				return true;
 			}
-		}return false;
+		}
+		return false;
 	}
-	public Estadia buscaEstadia(String estadia){
-		for(Estadia estadi : estadias){
-			if(estadi.getQuarto().getId().equals(estadia)){
+
+	public Estadia buscaEstadia(String estadia) {
+		for (Estadia estadi : estadias) {
+			if (estadi.getQuarto().getId().equals(estadia)) {
 				return estadi;
 			}
-		}return null;
+		}
+		return null;
 	}
 
 	public String getDataDeNascimento() {
@@ -89,16 +92,8 @@ public class Hospede {
 		this.estadias = estadias;
 	}
 
-	public void addPontos(double valorGasto){
-		cartao.addPontos(valorGasto);
-	}
-	
-	public double aplicaDesconto(double valorCobranca){
-		return cartao.aplicaDesconto(valorCobranca);
-	}
-
-	public String convertePontos(int pontos) throws Exception {
-		return cartao.convertePontos(pontos);
+	public CartaoFidelidade getCartao() {
+		return cartao;
 	}
 
 }

@@ -5,7 +5,9 @@ public class CartaoFidelidade {
 	private TipoDeCartaoIF tipoDeCartao;
 	
 	public CartaoFidelidade(){
-		
+		this.pontos = 0;
+		this.tipoDeCartao = new Padrao();
+	
 	}
 
 	public int getPontos() {
@@ -27,7 +29,7 @@ public class CartaoFidelidade {
 	public void verificaTipo(){
 		if (this.getPontos() < 350){
 			this.setTipoDeCartao(new Padrao());
-		} else if (this.getPontos() == 350 && this.getPontos() <= 1000){
+		} else if (this.getPontos() >= 350 && this.getPontos() <= 1000){
 			this.setTipoDeCartao(new Premium());
 		} else if (this.getPontos() > 1000){
 			this.setTipoDeCartao(new Vip());
@@ -40,7 +42,10 @@ public class CartaoFidelidade {
 	}
 	
 	public double aplicaDesconto(double valorCobranca){
+		System.out.println(tipoDeCartao.aplicaDesconto(valorCobranca));
+		System.out.println(getTipoDeCartao());
 		return tipoDeCartao.aplicaDesconto(valorCobranca);
+		
 	}
 	
 	public String convertePontos(int pontos) throws Exception {
