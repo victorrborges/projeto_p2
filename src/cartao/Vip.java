@@ -13,8 +13,12 @@ public class Vip implements TipoDeCartaoIF {
 
 	@Override
 	public double aplicaDesconto(double valorCobranca) {
-		return valorCobranca * DESCONTO; 
 		
+		if(valorCobranca >= 100){
+			int centenas = (int) (valorCobranca/100);
+			return valorCobranca * DESCONTO - 10 * centenas;
+		} 
+		return valorCobranca * DESCONTO;
 	}
 
 	@Override
