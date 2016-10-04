@@ -364,6 +364,11 @@ public class HotelController {
 		return String.format("R$%.2f", preco);
 	}
 
+	public String convertePontos(String id, int qtdPontos) throws Exception {
+		Hospede hospede = buscaHospede(id);
+		return hospede.getCartao().convertePontos(qtdPontos);
+	}
+
 	/**
 	 * Verifica se um quarto ja esta ocupado
 	 * 
@@ -431,10 +436,5 @@ public class HotelController {
 			return cadastros.get(id);
 		}
 		return null;
-	}
-
-	public String convertePontos(String id, int qtdPontos) throws Exception {
-		Hospede hospede = buscaHospede(id);
-		return hospede.getCartao().convertePontos(qtdPontos);
 	}
 }

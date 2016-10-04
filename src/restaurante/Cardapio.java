@@ -24,41 +24,6 @@ public class Cardapio {
 	}
 
 	/**
-	 * Busca um Prato no set de Pratos.
-	 * 
-	 * @param nome
-	 *            Nome do prato.
-	 * 
-	 * @return Retorna um Prato, se o prato foi achado e null caso contrario.
-	 */
-	private Prato buscaPrato(String nome) {
-		for (Refeicao refeicao : refeicoes) {
-			if (nome.equals(refeicao.getNome())) {
-				Prato prato = (Prato) refeicao;
-				return prato;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Busca uma refeicao no menu
-	 * 
-	 * @param nome
-	 *            Nome da refeicao
-	 * 
-	 * @return Retorna uma Refeicao
-	 */
-	private Refeicao buscaRefeicao(String nome) {
-		for (Refeicao refeicao : refeicoes) {
-			if (nome.equals(refeicao.getNome())) {
-				return refeicao;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Consulta as refeicoes do menu
 	 * 
 	 * @return Retorna os nomes das refeicoes
@@ -87,39 +52,6 @@ public class Cardapio {
 			Collections.sort(refeicoes, ordenaPreco);
 			ordenacaoAtual = "preco";
 		}
-	}
-
-	/**
-	 * Verifica se os pratos da lista de Pratos estao no cardapio.
-	 * 
-	 * @param pratos
-	 *            Lista de pratos.
-	 * @return Retorna true se todos estiverem no cardapio, false caso
-	 *         contrario.
-	 */
-	private boolean validaPrato(ArrayList<Prato> pratos) {
-		for (Prato prato : pratos) {
-			if (!this.refeicoes.contains(prato)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * Cria uma lista de pratos a partir dos nomes de cada prato.
-	 * 
-	 * @param componentes
-	 *            Um array de String, em que cada componente do array representa
-	 *            o nome de um Prato.
-	 * @return Retorna uma lista de Pratos.
-	 */
-	private ArrayList<Prato> arrayPratos(String[] componentes) {
-		ArrayList<Prato> arrayDePratos = new ArrayList<Prato>();
-		for (int i = 0; i < componentes.length; i += 1) {
-			arrayDePratos.add(buscaPrato(componentes[i]));
-		}
-		return arrayDePratos;
 	}
 
 	/**
@@ -244,6 +176,74 @@ public class Cardapio {
 
 	public double consultaPreco(String nome) {
 		return buscaRefeicao(nome).calculaPreco();
+	}
+
+	/**
+	 * Busca um Prato no set de Pratos.
+	 * 
+	 * @param nome
+	 *            Nome do prato.
+	 * 
+	 * @return Retorna um Prato, se o prato foi achado e null caso contrario.
+	 */
+	private Prato buscaPrato(String nome) {
+		for (Refeicao refeicao : refeicoes) {
+			if (nome.equals(refeicao.getNome())) {
+				Prato prato = (Prato) refeicao;
+				return prato;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Busca uma refeicao no menu
+	 * 
+	 * @param nome
+	 *            Nome da refeicao
+	 * 
+	 * @return Retorna uma Refeicao
+	 */
+	private Refeicao buscaRefeicao(String nome) {
+		for (Refeicao refeicao : refeicoes) {
+			if (nome.equals(refeicao.getNome())) {
+				return refeicao;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Verifica se os pratos da lista de Pratos estao no cardapio.
+	 * 
+	 * @param pratos
+	 *            Lista de pratos.
+	 * @return Retorna true se todos estiverem no cardapio, false caso
+	 *         contrario.
+	 */
+	private boolean validaPrato(ArrayList<Prato> pratos) {
+		for (Prato prato : pratos) {
+			if (!this.refeicoes.contains(prato)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Cria uma lista de pratos a partir dos nomes de cada prato.
+	 * 
+	 * @param componentes
+	 *            Um array de String, em que cada componente do array representa
+	 *            o nome de um Prato.
+	 * @return Retorna uma lista de Pratos.
+	 */
+	private ArrayList<Prato> arrayPratos(String[] componentes) {
+		ArrayList<Prato> arrayDePratos = new ArrayList<Prato>();
+		for (int i = 0; i < componentes.length; i += 1) {
+			arrayDePratos.add(buscaPrato(componentes[i]));
+		}
+		return arrayDePratos;
 	}
 
 }
