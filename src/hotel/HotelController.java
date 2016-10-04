@@ -300,7 +300,7 @@ public class HotelController {
 		double precoTotal = estadia.getGastos();
 		Hospede hospede = cadastros.get(email);
 		double preco = hospede.getCartao().aplicaDesconto(precoTotal);
-		registrador.registraGasto(hospede, precoTotal, quarto);
+		registrador.registraGasto(hospede, preco, quarto);
 		cadastros.get(email).getEstadias().remove(estadia);
 		hospede.getCartao().addPontos(precoTotal);
 
@@ -359,7 +359,7 @@ public class HotelController {
 		double precoTotal = restaurante.realizaPedido(nomeRefeicao);
 		Hospede hospede = cadastros.get(email);
 		double preco = hospede.getCartao().aplicaDesconto(precoTotal);
-		registrador.registraGasto(hospede, precoTotal, nomeRefeicao);
+		registrador.registraGasto(hospede, preco, nomeRefeicao);
 		hospede.getCartao().addPontos(precoTotal);
 		return String.format("R$%.2f", preco);
 	}
