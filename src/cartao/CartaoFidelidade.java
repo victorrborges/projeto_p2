@@ -25,7 +25,10 @@ public class CartaoFidelidade {
 	public void setTipoDeCartao(TipoDeCartaoIF tipoDeCartao) {
 		this.tipoDeCartao = tipoDeCartao;
 	}
-	
+	/**
+	 * metodo para verificação do tipo do cartão na qual usamos strategy para mudança;
+	 * @return void
+	 */
 	public void verificaTipo(){
 		if (this.getPontos() < 350){
 			this.setTipoDeCartao(new Padrao());
@@ -35,7 +38,11 @@ public class CartaoFidelidade {
 			this.setTipoDeCartao(new Vip());
 		}
 	}
-	
+	/**
+	 * metodo para adição no cartão do hospede.
+	 * @return void
+	 * @param valorGasto
+	 */
 	public void addPontos(double valorGasto){
 		this.setPontos(this.getPontos() + tipoDeCartao.addPontos(valorGasto));
 		this.verificaTipo();
@@ -45,7 +52,12 @@ public class CartaoFidelidade {
 		return tipoDeCartao.aplicaDesconto(valorCobranca);
 		
 	}
-	
+	/**
+	 * metodo para converter os pontos para o catão, caso a quantidade de pontos for menor ou igual ao do cartão ele remove os pontos e retorna a quantia de acordo com o tipo do cartão.
+	 * @param pontos
+	 * @return
+	 * @throws Exception
+	 */
 	public String convertePontos(int pontos) throws Exception {
 		if (pontos > this.getPontos()){
 			throw new Exception ("Quantidade de pontos indisponivel");
