@@ -60,6 +60,8 @@ public class Registrador {
 		if (atributo.equalsIgnoreCase("Quantidade")) {
 			return String.format("%d", historicoHospedes.size());
 		} else if (atributo.equals("Total")) {
+			total = (int) (total * 100);
+			total /= 100;
 			return String.format("R$%.2f", total);
 		} else {
 			return saida.substring(0, saida.length()-1);
