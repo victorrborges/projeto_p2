@@ -8,11 +8,11 @@ public class Premium implements TipoDeCartaoIF {
 	
 	@Override
 	public int addPontos(double valorGasto) {
-		double pontosExtra = 0;
+		int pontosExtra = 0;
 		if (valorGasto < 100){
 			return (int) (valorGasto * RECOMPENSA);
 		} else {
-			pontosExtra = valorGasto / 100.0;
+			pontosExtra = (int) (valorGasto / 100);
 			return (int) ((pontosExtra * 10) + (valorGasto * RECOMPENSA));
 		}
 	}
