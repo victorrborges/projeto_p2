@@ -335,18 +335,55 @@ public class HotelController {
 		return registrador.consultaTransacoes(atributo, indice);
 	}
 
+	/**
+	 * Cadastra um prato no cardapio
+	 * 
+	 * @param nome
+	 *            Nome do prato
+	 * @param preco
+	 *            Preco do prato
+	 * @param descricao
+	 *            Descricao do prato
+	 * @throws Exception
+	 */
 	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
 		restaurante.cadastraPrato(nome, preco, descricao);
 	}
 
+	/**
+	 * Cadastra uma refeicao no cardapio
+	 * 
+	 * @param nome
+	 *            Nome da refeicao
+	 * @param descricao
+	 *            Descricao da refeicao
+	 * @param componentes
+	 *            Pratos que compoem a refeicao
+	 * @throws Exception
+	 */
 	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
 		restaurante.cadastraRefeicao(nome, descricao, componentes);
 	}
 
+	/**
+	 * Consulta o restaurante de acordo com o atributo recebido como parametro
+	 * 
+	 * @param nome
+	 *            Nome da refeicao ou prato simples
+	 * @param atributo
+	 *            Preco ou descricao
+	 * @return Retorna uma String, que pode ser a Descricao ou o Preco
+	 * @throws Exception
+	 */
 	public String consultaRestaurante(String nome, String atributo) throws Exception {
 		return restaurante.consultaRestaurante(nome, atributo);
 	}
 
+	/**
+	 * Ordena o menu de acordo com o atributo, nome ou preco
+	 * 
+	 * @param atributo
+	 */
 	public void ordenaMenu(String atributo) {
 		restaurante.ordenaMenu(atributo);
 	}
@@ -355,6 +392,15 @@ public class HotelController {
 		return restaurante.consultaMenuRestaurante();
 	}
 
+	/**
+	 * Realiza um pedido no restaurante
+	 * 
+	 * @param email
+	 *            Email do hospede
+	 * @param nomeRefeicao
+	 *            Nome da refeicao ou prato simples
+	 * @return preco Preco da refeicao ou prato simples formatado
+	 */
 	public String realizaPedido(String email, String nomeRefeicao) {
 		double precoTotal = restaurante.realizaPedido(nomeRefeicao);
 		Hospede hospede = cadastros.get(email);
@@ -364,6 +410,16 @@ public class HotelController {
 		return String.format("R$%.2f", preco);
 	}
 
+	/**
+	 * Converte pontos em credito
+	 * 
+	 * @param id
+	 *            Email do hospede
+	 * @param qtdPontos
+	 *            Quantidade de pontos
+	 * @return credito
+	 * @throws Exception
+	 */
 	public String convertePontos(String id, int qtdPontos) throws Exception {
 		Hospede hospede = buscaHospede(id);
 		return hospede.getCartao().convertePontos(qtdPontos);

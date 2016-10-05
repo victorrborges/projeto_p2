@@ -7,7 +7,7 @@ public class HotelFacade {
 	private HotelController hotel;
 
 	/**
-	 * Delega os metodos a RecepcaoController e ao RestauranteController
+	 * Delega os metodos ao HotelController
 	 * 
 	 */
 	public HotelFacade() {
@@ -18,8 +18,7 @@ public class HotelFacade {
 
 	}
 
-	public String cadastraHospede(String nome, String email,
-			String dataDeNascimento) throws Exception {
+	public String cadastraHospede(String nome, String email, String dataDeNascimento) throws Exception {
 		try {
 			return hotel.cadastraHospede(nome, email, dataDeNascimento);
 		} catch (SistemaInvalidoException ex) {
@@ -44,8 +43,7 @@ public class HotelFacade {
 		}
 	}
 
-	public String getInfoHospedagem(String id, String atributo)
-			throws Exception {
+	public String getInfoHospedagem(String id, String atributo) throws Exception {
 		try {
 			return hotel.getInfoHospedagem(id, atributo);
 		} catch (SistemaInvalidoException ex) {
@@ -53,8 +51,7 @@ public class HotelFacade {
 		}
 	}
 
-	public void atualizaCadastro(String id, String atributo, String valor)
-			throws Exception {
+	public void atualizaCadastro(String id, String atributo, String valor) throws Exception {
 		try {
 			hotel.atualizaCadastro(id, atributo, valor);
 		} catch (SistemaInvalidoException ex) {
@@ -62,8 +59,7 @@ public class HotelFacade {
 		}
 	}
 
-	public void realizaCheckin(String email, int qtdeDias, String idQuarto,
-			String tipoQuarto) throws Exception {
+	public void realizaCheckin(String email, int qtdeDias, String idQuarto, String tipoQuarto) throws Exception {
 		try {
 			hotel.realizaCheckin(email, qtdeDias, idQuarto, tipoQuarto);
 		} catch (SistemaInvalidoException ex) {
@@ -87,8 +83,7 @@ public class HotelFacade {
 		return hotel.consultaTransacoes(atributo);
 	}
 
-	public String consultaTransacoes(String atributo, int indice)
-			throws Exception {
+	public String consultaTransacoes(String atributo, int indice) throws Exception {
 		try {
 			return hotel.consultaTransacoes(atributo, indice);
 		} catch (SistemaInvalidoException ex) {
@@ -96,8 +91,7 @@ public class HotelFacade {
 		}
 	}
 
-	public void cadastraPrato(String nome, double preco, String descricao)
-			throws Exception {
+	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
 		try {
 			hotel.cadastraPrato(nome, preco, descricao);
 		} catch (SistemaInvalidoException ex) {
@@ -105,8 +99,7 @@ public class HotelFacade {
 		}
 	}
 
-	public void cadastraRefeicao(String nome, String descricao,
-			String componentes) throws Exception {
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
 		try {
 			hotel.cadastraRefeicao(nome, descricao, componentes);
 		} catch (SistemaInvalidoException ex) {
@@ -114,8 +107,7 @@ public class HotelFacade {
 		}
 	}
 
-	public String consultaRestaurante(String nome, String atributo)
-			throws Exception {
+	public String consultaRestaurante(String nome, String atributo) throws Exception {
 		try {
 			return hotel.consultaRestaurante(nome, atributo);
 		} catch (SistemaInvalidoException ex) {
@@ -130,13 +122,13 @@ public class HotelFacade {
 	public String consultaMenuRestaurante() {
 		return hotel.consultaMenuRestaurante();
 	}
-	
+
 	public String realizaPedido(String email, String refeicao) {
 		return hotel.realizaPedido(email, refeicao);
 	}
-	
+
 	public String convertePontos(String id, int qtdPontos) throws Exception {
-		try{
+		try {
 			return hotel.convertePontos(id, qtdPontos);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -148,18 +140,12 @@ public class HotelFacade {
 	}
 
 	public static void main(String[] args) {
-		args = new String[] { "hotel.HotelFacade",
-				"acceptance_test/testes_uc1.txt",
-				"acceptance_test/testes_uc1_exception.txt",
-				"acceptance_test/testes_uc2.txt",
-				"acceptance_test/testes_uc2_exception.txt",
-				"acceptance_test/testes_uc3.txt",
-				"acceptance_test/testes_uc3_exception.txt",
-				"acceptance_test/testes_uc4.txt",
-				"acceptance_test/testes_uc4_exception.txt",
-				"acceptance_test/testes_uc5.txt", 
-				"acceptance_test/testes_uc6.txt",
-				"acceptance_test/testes_uc7.txt"};
+		args = new String[] { "hotel.HotelFacade", "acceptance_test/testes_uc1.txt",
+				"acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc2.txt",
+				"acceptance_test/testes_uc2_exception.txt", "acceptance_test/testes_uc3.txt",
+				"acceptance_test/testes_uc3_exception.txt", "acceptance_test/testes_uc4.txt",
+				"acceptance_test/testes_uc4_exception.txt", "acceptance_test/testes_uc5.txt",
+				"acceptance_test/testes_uc6.txt", "acceptance_test/testes_uc7.txt" };
 		EasyAccept.main(args);
 	}
 
