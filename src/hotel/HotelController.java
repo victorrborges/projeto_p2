@@ -499,8 +499,10 @@ public class HotelController {
 		int cont = 1;
 		String saida = "Cadastro de Hospedes: " + cadastros.size() + " hospedes registrados\n";
 		for (Hospede hospede : cadastros.values()) {
+			String[] data = hospede.getDataDeNascimento().split("/");
+			String dataFormatada = data[2] + "-" + data[1] + "-" + data[0];
 			saida += "==>Hospede " + cont + ":\n" + "Email: " + hospede.getEmail() + "\nNome: " + hospede.getNome()
-					+ "\nData de nascimento: " + hospede.getDataDeNascimento() + "\n\n";
+					+ "\nData de nascimento: " + dataFormatada + "\n\n";
 			cont++;
 		}
 		out.write(saida);
