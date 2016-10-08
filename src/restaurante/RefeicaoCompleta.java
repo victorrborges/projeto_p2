@@ -81,16 +81,11 @@ public class RefeicaoCompleta extends Refeicao {
 
 	@Override
 	public String toString() {
-		String toString = this.getDescricao() + " Serao servidos: ";
-		int indice = 0;
+		String saida = "Nome: "+super.getNome()+" Preco: R$"+super.getPreco()+"\nDescricao: "+super.getDescricao()+"\nPratos: ";
 		for (Prato prato : pratos) {
-			indice += 1;
-			toString += "(" + indice + ") " + prato.getNome() + ", ";
+			saida += prato.getNome()+",";
 		}
-		toString = toString + ".";
-		toString = toString.replace(", .", ".");
-		return toString;
-
+		return saida.substring(0, saida.length()-1)+"\n";
 	}
 
 }

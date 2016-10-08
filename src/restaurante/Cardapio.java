@@ -245,5 +245,14 @@ public class Cardapio {
 		}
 		return arrayDePratos;
 	}
+	public String toString(){
+		String saida = "Menu do Restaurante: "+ refeicoes.size()+" itens no cardapio\n";
+		int cont = 1;
+		for (Refeicao refeicao : refeicoes) {
+			saida += "==> Item "+cont+":\n";
+			saida += refeicao.toString();
+			cont++;
+		}return saida;
+	}
 
 }

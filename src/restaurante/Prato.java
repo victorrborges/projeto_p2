@@ -48,6 +48,7 @@ public class Prato extends Refeicao {
 	}
 
 	public String toString() {
-		return super.getDescricao();
+		String saida = "Nome: "+super.getNome()+"Preco: R$"+super.getPreco()+"\nDescricao: "+super.getDescricao();
+		return saida +"\n";
 	}
 }
