@@ -493,7 +493,7 @@ public class HotelController {
 		}
 		return null;
 	}
-	public String toString(){
+	public String saidaParaArquivo(){
 		int cont = 1;
 		String saida = "Cadastro de Hospedes: "+cadastros.size()+" hospedes registrados\n";
 		for (String hospede : cadastros.keySet()){

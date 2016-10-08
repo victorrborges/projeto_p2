@@ -37,6 +37,14 @@ public class Cardapio {
 		return saida.substring(0, saida.length() - 1);
 	}
 
+	public List<Refeicao> getRefeicoes() {
+		return refeicoes;
+	}
+
+	public void setRefeicoes(List<Refeicao> refeicoes) {
+		this.refeicoes = refeicoes;
+	}
+
 	/**
 	 * Ordena o menu de acordo com o atributo.
 	 * 

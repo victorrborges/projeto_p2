@@ -95,7 +95,7 @@ public class Hospede {
 	public CartaoFidelidade getCartao() {
 		return cartao;
 	}
-	public String toString(){
+	public String saidaArquivo(){
 		String saida= "Email: "+getEmail()+"\nNome: "  + getNome()+"\nData de nascimento: "+getDataDeNascimento();
 		return saida+"\n";
 	}
