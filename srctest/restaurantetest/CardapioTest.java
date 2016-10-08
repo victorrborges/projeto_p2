@@ -31,5 +31,21 @@ public class CardapioTest {
 		cardapio.ordenaMenu("Nome");
 		assertEquals("Alga", cardapio.getRefeicoes().get(0).getNome());
 		assertEquals(50, cardapio.getRefeicoes().get(1).getPreco(),0.01);
+		cardapio.ordenaMenu("Preco");
+		assertEquals("Peixe refogado", cardapio.getRefeicoes().get(0).getNome());
+	}
+	@Test
+	public void testExceptions(){
+		try{
+			cardapio.cadastraRefeicao("refeição test", "Descrição para test", "Alga");
+			fail();
+		}catch (RestauranteInvalidoException e) {
+			assertEquals("Erro no cadastro de refeicao completa. Uma refeicao completa deve possuir no minimo 3 e no maximo 4 pratos.", e.getMessage());
+		}try{
+			cardapio.cadastraRefeicao("Resfeição tes", "Test normal", "pratoNaoexistente;outro;maisoutro");
+			fail();
+		}catch (RestauranteInvalidoException e) {
+			assertEquals("Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.", e.getMessage());
+		}
 	}
 }
