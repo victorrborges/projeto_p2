@@ -5,10 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
-import restaurante.Refeicao;
 
 public class Registrador {
 
@@ -79,9 +77,22 @@ public class Registrador {
 	}
 
 	public void gravaArquivoRegistros() throws IOException {
+		String FIM_DE_LINHA = System.lineSeparator();
 		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/cad_transacoes.txt"));
 		int cont = 1;
-		String saida = "Historico de Transacoes:\n";
+		int indice = 0;
+		String saida = "Historico de Transacoes:" + FIM_DE_LINHA;
+		for (Hospede hospede : historicoHospedes){
+			saida += "==> Nome: " + hospede.getNome() + " Gasto: " + historicoDeGastos.get(indice) + " Detalhes: " + historicoDeCompra.get(indice) + FIM_DE_LINHA;
+			cont = cont + 1;
+			indice = indice + 1;
+		}
+		double lucro = this.total/cont;
+		String lucroF = String.format("%.2f", lucro);
+		
+		saida += "===== Resumo de transacoes =====" + FIM_DE_LINHA + "Lucro total:R$" 
+		+ this.total + FIM_DE_LINHA + "Total de transacoes:" + cont + FIM_DE_LINHA 
+				+ "Lucro medio por transacao: R$" + lucroF + FIM_DE_LINHA; 
 		out.write(saida);
 		out.close();
 	}

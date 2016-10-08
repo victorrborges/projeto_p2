@@ -6,13 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import comparator.ComparaNome;
 import comparator.ComparaPreco;
 import exceptions.PratoInvalidoException;
 import exceptions.RefeicaoInvalidaException;
 import exceptions.RestauranteInvalidoException;
-import hotel.Hospede;
 
 public class Cardapio {
 	private List<Refeicao> refeicoes;
@@ -270,12 +268,13 @@ public class Cardapio {
 	}
 
 	public void gravaArquivoPratosRefeicoes() throws IOException {
+		String FIM_DE_LINHA = System.lineSeparator();
 		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/cad_restaurante.txt"));
 		int cont = 1;
-		String saida = "Menu do Restaurante: " + refeicoes.size() + " itens no cardapio\n";
+		String saida = "Menu do Restaurante: " + refeicoes.size() + " itens no cardapio" + FIM_DE_LINHA;
 		for (Refeicao refeicao : refeicoes) {
-			saida += "==> Item" + cont + ":\n" + "Nome: " + refeicao.getNome() + " Preco: R$" + refeicao.getPreco()
-					+ "\nDescricao: " + refeicao.getDescricao() + "\n\n";
+			saida += "==> Item " + cont + ":" + FIM_DE_LINHA + "Nome: " + refeicao.getNome() + " Preco: R$" + refeicao.getPreco()
+					+ FIM_DE_LINHA + "Descricao: " + refeicao.getDescricao() + FIM_DE_LINHA + FIM_DE_LINHA;
 			cont++;
 		}
 		out.write(saida);
