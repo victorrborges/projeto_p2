@@ -1,5 +1,7 @@
 package restaurante;
 
+import java.io.IOException;
+
 import exceptions.RestauranteInvalidoException;
 
 public class RestauranteController {
@@ -87,6 +89,9 @@ public class RestauranteController {
 
 	public void fechaSistema() {
 
+	}	
+	public void gravaArquivoPratosRefeicoes() throws IOException{ 
+		cardapio.gravaArquivoPratosRefeicoes();
 	}
 
 }

@@ -1,5 +1,8 @@
 package restaurante;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,6 +12,7 @@ import comparator.ComparaPreco;
 import exceptions.PratoInvalidoException;
 import exceptions.RefeicaoInvalidaException;
 import exceptions.RestauranteInvalidoException;
+import hotel.Hospede;
 
 public class Cardapio {
 	private List<Refeicao> refeicoes;
@@ -253,14 +257,29 @@ public class Cardapio {
 		}
 		return arrayDePratos;
 	}
-	public String toString(){
-		String saida = "Menu do Restaurante: "+ refeicoes.size()+" itens no cardapio\n";
+
+	public String toString() {
+		String saida = "Menu do Restaurante: " + refeicoes.size() + " itens no cardapio\n";
 		int cont = 1;
 		for (Refeicao refeicao : refeicoes) {
-			saida += "==> Item "+cont+":\n";
+			saida += "==> Item " + cont + ":\n";
 			saida += refeicao.toString();
 			cont++;
-		}return saida;
+		}
+		return saida;
+	}
+
+	public void gravaArquivoPratosRefeicoes() throws IOException {
+		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/cad_restaurante.txt"));
+		int cont = 1;
+		String saida = "Menu do Restaurante: " + refeicoes.size() + " itens no cardapio\n";
+		for (Refeicao refeicao : refeicoes) {
+			saida += "==> Item" + cont + ":\n" + "Nome: " + refeicao.getNome() + " Preco: R$" + refeicao.getPreco()
+					+ "\nDescricao: " + refeicao.getDescricao() + "\n\n";
+			cont++;
+		}
+		out.write(saida);
+		out.close();
 	}
 
 }

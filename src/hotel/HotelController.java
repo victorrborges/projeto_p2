@@ -1,7 +1,7 @@
 package hotel;
 
 import java.util.List;
-
+import java.io.*;
 import exceptions.HospedeInvalidoException;
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
@@ -493,12 +493,42 @@ public class HotelController {
 		}
 		return null;
 	}
-	public String saidaParaArquivo(){
+
+	public void gravaArquivoHospede() throws IOException {
+		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/cad_hospedes.txt"));
 		int cont = 1;
-		String saida = "Cadastro de Hospedes: "+cadastros.size()+" hospedes registrados\n";
-		for (String hospede : cadastros.keySet()){
-			saida += "Hospede "+cont+":\n"+cadastros.get(hospede).toString();
+		String saida = "Cadastro de Hospedes: " + cadastros.size() + " hospedes registrados\n";
+		for (Hospede hospede : cadastros.values()) {
+			saida += "==>Hospede " + cont + ":\n" + "Email: " + hospede.getEmail() + "\nNome: " + hospede.getNome()
+					+ "\nData de nascimento: " + hospede.getDataDeNascimento() + "\n\n";
 			cont++;
-		}return saida;
+		}
+		out.write(saida);
+		out.close();
+	}
+
+	public void geraArquivoResumo() throws IOException {
+		gravaArquivoHospede();
+		registrador.gravaArquivoRegistros();
+		restaurante.gravaArquivoPratosRefeicoes();
+		BufferedReader cadHospede = new BufferedReader(new FileReader("arquivos_sistema/relatorios/cad_hospedes.txt"));
+		BufferedReader cadRestaurante = new BufferedReader(
+				new FileReader("arquivos_sistema/relatorios/cad_restaurante.txt"));
+		BufferedReader cadRegistro = new BufferedReader(
+				new FileReader("arquivos_sistema/relatorios/cad_transacoes.txt"));
+		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/hotel_principal.txt"));
+		BufferedReader[] in = { cadHospede, cadRestaurante, cadRegistro };
+		String line = "";
+		for (int i = 0; i < in.length; i++) {
+			out.write("======================================================\n");
+			while ((line = in[i].readLine()) != null) {
+				out.write(line + "\n");
+			}
+
+		}
+		cadHospede.close();
+		cadRestaurante.close();
+		cadRegistro.close();
+		out.close();
 	}
 }

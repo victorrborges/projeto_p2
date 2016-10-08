@@ -1,28 +1,30 @@
 package hotel;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
-
+import restaurante.Refeicao;
 
 public class Registrador {
-	
+
 	private List<Hospede> historicoHospedes;
 	private List<String> historicoDeGastos;
 	private List<String> historicoDeCompra;
 	private double total;
 	private String saida = "";
-	
+
 	public Registrador() {
 		this.historicoHospedes = new ArrayList<Hospede>();
 		this.historicoDeGastos = new ArrayList<String>();
 		this.historicoDeCompra = new ArrayList<String>();
 		this.total = 0;
 	}
-	
-	
+
 	/**
 	 * Consulta as transacoes realizacoes de acordo com o indice
 	 * 
@@ -47,7 +49,7 @@ public class Registrador {
 			return historicoDeGastos.get(indice);
 		}
 	}
-	
+
 	/**
 	 * Consulta as transacoes realizadas
 	 * 
@@ -64,16 +66,23 @@ public class Registrador {
 			total /= 100;
 			return String.format("R$%.2f", total);
 		} else {
-			return saida.substring(0, saida.length()-1);
+			return saida.substring(0, saida.length() - 1);
 		}
 	}
-	
+
 	public void registraGasto(Hospede hospede, double precoTotal, String nomeProduto) {
 		historicoHospedes.add(hospede);
 		historicoDeGastos.add(String.format("R$%.2f", precoTotal));
 		historicoDeCompra.add(nomeProduto);
-		saida += hospede.getNome()+";";
+		saida += hospede.getNome() + ";";
 		this.total += precoTotal;
-		}
-	
+	}
+
+	public void gravaArquivoRegistros() throws IOException {
+		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/cad_transacoes.txt"));
+		int cont = 1;
+		String saida = "Historico de Transacoes:\n";
+		out.write(saida);
+		out.close();
+	}
 }

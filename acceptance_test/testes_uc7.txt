@@ -11,6 +11,7 @@ iniciaSistema
 #                                          #
 ############################################
 
+geraArquivoResumo
 expect "1570" getInfoHospede id="sven@sverige.se" atributo="Pontos"
 expect "905" getInfoHospede id="ines@brasil.com.br" atributo="Pontos"
 expect "20" getInfoHospede id="agnetha@abba.se" atributo="Pontos"

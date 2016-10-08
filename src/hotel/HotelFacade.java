@@ -1,5 +1,7 @@
 package hotel;
 
+import java.io.IOException;
+
 import easyaccept.EasyAccept;
 import exceptions.SistemaInvalidoException;
 
@@ -139,6 +141,9 @@ public class HotelFacade {
 
 	}
 
+	public void geraArquivoResumo() throws IOException{
+		hotel.geraArquivoResumo();
+	}
 	public static void main(String[] args) {
 		args = new String[] { "hotel.HotelFacade", "acceptance_test/testes_uc1.txt",
 				"acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc2.txt",
