@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cartao.*;
+import exceptions.SistemaInvalidoException;
 
 public class CartaoTest {
 	private CartaoFidelidade cartao;
@@ -27,14 +28,22 @@ public class CartaoTest {
 	@Test
 	public void testStrategy() throws Exception{
 		assertTrue(cartao.getTipoDeCartao() instanceof Padrao);
+		cartao.addPontos(350);
+		assertEquals("R$3,50", cartao.convertePontos(35));
 		cartao.addPontos(4000);
-		assertEquals("R$11,10", cartao.convertePontos(35));
-		cartao.verificaTipo();
 		assertTrue(cartao.getTipoDeCartao() instanceof Premium);
 		assertEquals("R$11,10", cartao.convertePontos(35));
 		cartao.addPontos(8500);
-		cartao.verificaTipo();
 		assertTrue(cartao.getTipoDeCartao() instanceof Vip);
 		assertEquals("R$26,00", cartao.convertePontos(35));
+	}
+	@Test
+	public void testException(){
+		try{
+			cartao.convertePontos(1);
+
+		}catch (Exception e) {
+			assertEquals("Quantidade de pontos indisponivel", e.getMessage());
+		}
 	}
 }
