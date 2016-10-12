@@ -18,9 +18,10 @@ public class HotelFacade {
 
 	/**
 	 * Delega os metodos ao HotelController
+	 * @throws FileNotFoundException 
 	 * 
 	 */
-	public HotelFacade() {
+	public HotelFacade() throws FileNotFoundException {
 		this.hotel = new HotelController();
 		this.banco = new BancoDeDados();
 	}

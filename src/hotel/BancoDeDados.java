@@ -11,14 +11,16 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 public class BancoDeDados {
+	public BancoDeDados() {
+	
+	}
 	public HotelController iniciaSistema() throws IOException, ClassNotFoundException{
-		FileInputStream fis;
-		try{
-			fis = new FileInputStream("arquivos_sistema/hug.dat");
-		}catch (Exception e) {
-			new FileOutputStream("arquivos_sistema/hug.dat");
+		File file = new File("arquivos_sistema/hug.dat");
+		if(!file.exists()){
+			FileOutputStream fos = new FileOutputStream("arquivos_sistema/hug.dat");
+			fos.close();
 		}
-		fis = new FileInputStream("arquivos_sistema/hug.dat");
+		FileInputStream fis = new FileInputStream("arquivos_sistema/hug.dat");
 		GZIPInputStream giz = new GZIPInputStream(fis);
 		ObjectInputStream ois = new ObjectInputStream(giz);
 		HotelController saida = (HotelController) ois.readObject();

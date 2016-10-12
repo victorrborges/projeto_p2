@@ -2,6 +2,7 @@ package hotelTest;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.Before;
@@ -12,7 +13,7 @@ import hotel.HotelFacade;
 public class FachadaTest {
 	private HotelFacade hotel;
 	@Before
-	public void test(){
+	public void test() throws FileNotFoundException{
 		this.hotel = new HotelFacade();
 	}
 	@Test
