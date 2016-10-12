@@ -1,6 +1,8 @@
 package hotel;
 
-public class Quarto {
+import java.io.Serializable;
+
+public class Quarto implements Serializable{
 	private String id;
 	private TipoQuarto diaria;
 

@@ -1,6 +1,8 @@
 package restaurante;
 
-public abstract class Refeicao {
+import java.io.Serializable;
+
+public abstract class Refeicao implements Serializable{
 
 	private String nome;
 	protected double preco;

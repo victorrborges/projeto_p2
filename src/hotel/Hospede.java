@@ -1,10 +1,15 @@
 package hotel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import cartao.CartaoFidelidade;
 
-public class Hospede {
+public class Hospede implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String email;
 	private String dataDeNascimento;

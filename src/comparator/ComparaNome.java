@@ -1,10 +1,11 @@
 package comparator;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import restaurante.Refeicao;
 
-public class ComparaNome implements Comparator<Refeicao> {
+public class ComparaNome implements Comparator<Refeicao>,Serializable{
 	
 	@Override
 	public int compare(Refeicao arg0, Refeicao arg1) {

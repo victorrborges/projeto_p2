@@ -11,7 +11,11 @@ import java.util.HashMap;
 
 import validacao.ValidaHospede;
 
-public class HotelController {
+public class HotelController implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private HashMap<String, Hospede> cadastros;
 	private ValidaHospede valida;
 	private Registrador registrador;

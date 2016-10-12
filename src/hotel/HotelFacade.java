@@ -1,12 +1,20 @@
 package hotel;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import easyaccept.EasyAccept;
 import exceptions.SistemaInvalidoException;
 
 public class HotelFacade {
 	private HotelController hotel;
+	private BancoDeDados banco;
 
 	/**
 	 * Delega os metodos ao HotelController
@@ -14,11 +22,17 @@ public class HotelFacade {
 	 */
 	public HotelFacade() {
 		this.hotel = new HotelController();
+		this.banco = new BancoDeDados();
 	}
 
-	public void iniciaSistema() {
-
+	public void iniciaSistema() throws IOException, ClassNotFoundException {
+		this.hotel =banco.iniciaSistema();
+		
 	}
+	public void fechaSistema() throws IOException {
+		this.banco.fechasistema(hotel);
+	}
+
 
 	public String cadastraHospede(String nome, String email, String dataDeNascimento) throws Exception {
 		try {
@@ -137,14 +151,12 @@ public class HotelFacade {
 		}
 	}
 
-	public void fechaSistema() {
-
-	}
-
+	
 	public void geraArquivoResumo() throws IOException{
 		hotel.geraArquivoResumo();
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		
 		args = new String[] { "hotel.HotelFacade", "acceptance_test/testes_uc1.txt",
 				"acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc2.txt",
 				"acceptance_test/testes_uc2_exception.txt", "acceptance_test/testes_uc3.txt",
@@ -152,6 +164,7 @@ public class HotelFacade {
 				"acceptance_test/testes_uc4_exception.txt", "acceptance_test/testes_uc5.txt",
 				"acceptance_test/testes_uc6.txt", "acceptance_test/testes_uc7.txt" };
 		EasyAccept.main(args);
+		
 	}
 
 }

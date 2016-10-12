@@ -1,6 +1,8 @@
 package cartao;
 
-public class Vip implements TipoDeCartaoIF {
+import java.io.Serializable;
+
+public class Vip implements TipoDeCartaoIF{
 	
 	private static final double RECOMPENSA = 0.5;
 	private static final double DESCONTO = 0.85;

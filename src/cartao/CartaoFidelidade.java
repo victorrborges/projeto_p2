@@ -1,6 +1,12 @@
 package cartao;
 
-public class CartaoFidelidade {
+import java.io.Serializable;
+
+public class CartaoFidelidade implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4432060393068709237L;
 	private int pontos;
 	private TipoDeCartaoIF tipoDeCartao;
 

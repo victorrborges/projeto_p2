@@ -1,9 +1,11 @@
 package validacao;
 
+import java.io.Serializable;
+
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
-public class ValidaHospede {
+public class ValidaHospede implements Serializable{
 
 	public ValidaHospede() {
 	}

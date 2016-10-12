@@ -1,6 +1,8 @@
 package hotel;
 
-public enum TipoQuarto {
+import java.io.Serializable;
+
+public enum TipoQuarto implements Serializable{
 	SIMPLES(100.0), LUXO(250.0), PRESIDENCIAL(450.0);
 	private double preco;
 

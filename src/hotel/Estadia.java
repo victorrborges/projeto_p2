@@ -1,6 +1,8 @@
 package hotel;
 
-public class Estadia {
+import java.io.Serializable;
+
+public class Estadia implements Serializable{
 	private Quarto quarto;
 	private int qtdeDias;
 	private double gastos;

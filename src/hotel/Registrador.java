@@ -3,13 +3,18 @@ package hotel;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
 
-public class Registrador {
+public class Registrador  implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6257126875476158041L;
 	private List<Hospede> historicoHospedes;
 	private List<String> historicoDeGastos;
 	private List<String> historicoDeCompra;

@@ -1,10 +1,11 @@
 package restaurante;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import exceptions.RestauranteInvalidoException;
 
-public class RestauranteController {
+public class RestauranteController implements Serializable{
 	private Cardapio cardapio;
 
 	public RestauranteController() {

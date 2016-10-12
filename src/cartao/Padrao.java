@@ -1,5 +1,7 @@
 package cartao;
 
+import java.io.Serializable;
+
 public class Padrao implements TipoDeCartaoIF {
 
 	private static final double RECOMPENSA = 0.1;

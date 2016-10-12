@@ -3,6 +3,7 @@ package restaurante;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +13,7 @@ import exceptions.PratoInvalidoException;
 import exceptions.RefeicaoInvalidaException;
 import exceptions.RestauranteInvalidoException;
 
-public class Cardapio {
+public class Cardapio implements Serializable {
 	private List<Refeicao> refeicoes;
 	private ComparaNome ordenaNome;
 	private ComparaPreco ordenaPreco;
