@@ -21,6 +21,7 @@ public class HotelController implements Serializable {
 	private Registrador registrador;
 	private RestauranteController restaurante;
 	private BancoDeDados banco;
+
 	/**
 	 * Responsavel pela logica de funcionamente
 	 */
@@ -31,10 +32,12 @@ public class HotelController implements Serializable {
 		this.restaurante = new RestauranteController();
 		this.banco = new BancoDeDados();
 	}
+
 	public HotelController iniciaSistema() throws IOException, ClassNotFoundException {
-		 return banco.iniciaSistema();
-		
+		return banco.iniciaSistema();
+
 	}
+
 	public void fechaSistema() throws IOException {
 		this.banco.fechasistema(this);
 	}
@@ -514,15 +517,16 @@ public class HotelController implements Serializable {
 		for (Hospede hospede : cadastros.values()) {
 			String[] data = hospede.getDataDeNascimento().split("/");
 			String dataFormatada = data[2] + "-" + data[1] + "-" + data[0];
-			saida += "==>Hospede " + cont + ":" + FIM_DE_LINHA + "Email: " + hospede.getEmail() + FIM_DE_LINHA + "Nome: " + hospede.getNome()
-					+ FIM_DE_LINHA + "Data de nascimento: " + dataFormatada + FIM_DE_LINHA + FIM_DE_LINHA;
+			saida += "==>Hospede " + cont + ":" + FIM_DE_LINHA + "Email: " + hospede.getEmail() + FIM_DE_LINHA
+					+ "Nome: " + hospede.getNome() + FIM_DE_LINHA + "Data de nascimento: " + dataFormatada
+					+ FIM_DE_LINHA + FIM_DE_LINHA;
 			cont++;
 		}
 		out.write(saida);
 		out.close();
 	}
 
-	public void geraArquivoResumo() throws IOException {
+	public void gravaArquivoResumo() throws IOException {
 		String FIM_DE_LINHA = System.lineSeparator();
 		gravaArquivoHospede();
 		registrador.gravaArquivoRegistros();

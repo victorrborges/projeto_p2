@@ -14,11 +14,11 @@ import exceptions.SistemaInvalidoException;
 
 public class HotelFacade {
 	private HotelController hotel;
-	
 
 	/**
 	 * Delega os metodos ao HotelController
-	 * @throws FileNotFoundException 
+	 * 
+	 * @throws FileNotFoundException
 	 * 
 	 */
 	public HotelFacade() throws FileNotFoundException {
@@ -27,12 +27,12 @@ public class HotelFacade {
 
 	public void iniciaSistema() throws IOException, ClassNotFoundException {
 		hotel = hotel.iniciaSistema();
-		
+
 	}
+
 	public void fechaSistema() throws IOException {
 		hotel.fechaSistema();
 	}
-
 
 	public String cadastraHospede(String nome, String email, String dataDeNascimento) throws Exception {
 		try {
@@ -151,12 +151,12 @@ public class HotelFacade {
 		}
 	}
 
-	
-	public void geraArquivoResumo() throws IOException{
-		hotel.geraArquivoResumo();
+	public void gravaArquivoResumo() throws IOException {
+		hotel.gravaArquivoResumo();
 	}
+
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		
+
 		args = new String[] { "hotel.HotelFacade", "acceptance_test/testes_uc1.txt",
 				"acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc2.txt",
 				"acceptance_test/testes_uc2_exception.txt", "acceptance_test/testes_uc3.txt",
@@ -164,7 +164,7 @@ public class HotelFacade {
 				"acceptance_test/testes_uc4_exception.txt", "acceptance_test/testes_uc5.txt",
 				"acceptance_test/testes_uc6.txt", "acceptance_test/testes_uc7.txt" };
 		EasyAccept.main(args);
-		
+
 	}
 
 }
