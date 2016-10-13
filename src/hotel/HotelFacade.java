@@ -14,7 +14,7 @@ import exceptions.SistemaInvalidoException;
 
 public class HotelFacade {
 	private HotelController hotel;
-	private BancoDeDados banco;
+	
 
 	/**
 	 * Delega os metodos ao HotelController
@@ -23,15 +23,14 @@ public class HotelFacade {
 	 */
 	public HotelFacade() throws FileNotFoundException {
 		this.hotel = new HotelController();
-		this.banco = new BancoDeDados();
 	}
 
 	public void iniciaSistema() throws IOException, ClassNotFoundException {
-		this.hotel =banco.iniciaSistema();
+		hotel = hotel.iniciaSistema();
 		
 	}
 	public void fechaSistema() throws IOException {
-		this.banco.fechasistema(hotel);
+		hotel.fechaSistema();
 	}
 
 

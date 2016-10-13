@@ -20,7 +20,7 @@ public class HotelController implements Serializable {
 	private ValidaHospede valida;
 	private Registrador registrador;
 	private RestauranteController restaurante;
-
+	private BancoDeDados banco;
 	/**
 	 * Responsavel pela logica de funcionamente
 	 */
@@ -29,6 +29,14 @@ public class HotelController implements Serializable {
 		this.registrador = new Registrador();
 		valida = new ValidaHospede();
 		this.restaurante = new RestauranteController();
+		this.banco = new BancoDeDados();
+	}
+	public HotelController iniciaSistema() throws IOException, ClassNotFoundException {
+		 return banco.iniciaSistema();
+		
+	}
+	public void fechaSistema() throws IOException {
+		this.banco.fechasistema(this);
 	}
 
 	/**

@@ -8,10 +8,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-public class BancoDeDados {
+public class BancoDeDados implements Serializable {
 	public BancoDeDados() {
 	
 	}
@@ -30,6 +31,7 @@ public class BancoDeDados {
 
 	}
 	public void fechasistema(HotelController hotel) throws IOException{
+		
 		
 		FileOutputStream fos = new FileOutputStream("arquivos_sistema/hug.dat");
 		GZIPOutputStream goz = new GZIPOutputStream(fos);
