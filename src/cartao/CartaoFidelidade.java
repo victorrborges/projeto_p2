@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import exceptions.CartaoInvalidoException;
 
-public class CartaoFidelidade implements Serializable{
+public class CartaoFidelidade implements Serializable {
 	/**
 	 * 
 	 */
@@ -18,18 +18,37 @@ public class CartaoFidelidade implements Serializable{
 
 	}
 
+	/**
+	 * 
+	 * @return Retorna quantidade de pontos.
+	 */
 	public int getPontos() {
 		return pontos;
 	}
 
+	/**
+	 * Muda a quantidade de pontos.
+	 * 
+	 * @param pontos
+	 *            Nova quantidade de pontos.
+	 */
 	public void setPontos(int pontos) {
 		this.pontos = pontos;
 	}
 
+	/**
+	 * @return Retorna o tipo do cartao.
+	 */
 	public TipoDeCartaoIF getTipoDeCartao() {
 		return tipoDeCartao;
 	}
 
+	/**
+	 * Muda o tipo do cartao.
+	 * 
+	 * @param tipoDeCartao
+	 *            Novo tipo.
+	 */
 	public void setTipoDeCartao(TipoDeCartaoIF tipoDeCartao) {
 		this.tipoDeCartao = tipoDeCartao;
 	}
@@ -61,6 +80,13 @@ public class CartaoFidelidade implements Serializable{
 		this.verificaTipo();
 	}
 
+	/**
+	 * Aplica desconto no valor da compra.
+	 * 
+	 * @param valorCobranca
+	 *            Valor da compra.
+	 * @return Retorna o preco descontado.
+	 */
 	public double aplicaDesconto(double valorCobranca) {
 		return tipoDeCartao.aplicaDesconto(valorCobranca);
 

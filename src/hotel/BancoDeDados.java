@@ -14,9 +14,10 @@ import java.util.zip.GZIPOutputStream;
 
 public class BancoDeDados implements Serializable {
 	public BancoDeDados() {
-	
+
 	}
-	public HotelController iniciaSistema() throws IOException, ClassNotFoundException{
+
+	public HotelController iniciaSistema() throws IOException, ClassNotFoundException {
 		try {
 			FileInputStream fis = new FileInputStream("arquivos_sistema/hug.dat");
 			GZIPInputStream giz = new GZIPInputStream(fis);
@@ -27,12 +28,11 @@ public class BancoDeDados implements Serializable {
 		} catch (FileNotFoundException e) {
 			return new HotelController();
 		}
-	
 
 	}
-	public void fechasistema(HotelController hotel) throws IOException{
-		
-		
+
+	public void fechasistema(HotelController hotel) throws IOException {
+
 		FileOutputStream fos = new FileOutputStream("arquivos_sistema/hug.dat");
 		GZIPOutputStream goz = new GZIPOutputStream(fos);
 		ObjectOutputStream oos = new ObjectOutputStream(goz);

@@ -20,6 +20,7 @@ public class Registrador implements Serializable {
 	private double total;
 	private String saida = "";
 
+	
 	public Registrador() {
 		this.historicoDeCompra = new ArrayList<Gasto>();
 		this.total = 0;
@@ -69,7 +70,14 @@ public class Registrador implements Serializable {
 			return saida.substring(0, saida.length() - 1);
 		}
 	}
-
+	
+	/**
+	 * Adiciona a compra na lista historicoDeCompra
+	 * 
+	 * @param hospede Objeto do tipo Hospede.
+	 * @param precoTotal Preco total da compra.
+	 * @param nomeProduto Nome do produto, que no caso pode ser um quarto ou uma refeicao.
+	 */
 	public void registraGasto(Hospede hospede, double precoTotal, String nomeProduto) {
 		Gasto compra = new Gasto(hospede.getNome(),nomeProduto, String.format("R$%.2f", precoTotal));
 		historicoDeCompra.add(compra);
