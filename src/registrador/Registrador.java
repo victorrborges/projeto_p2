@@ -1,4 +1,4 @@
-package hotel;
+package registrador;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import exceptions.RecepcaoInvalidaException;
+import exceptions.HotelInvalidoException;
 import exceptions.SistemaInvalidoException;
+import hotel.Hospede;
 
 public class Registrador implements Serializable {
 
@@ -37,7 +38,7 @@ public class Registrador implements Serializable {
 	 */
 	public String consultaTransacoes(String atributo, int indice) throws SistemaInvalidoException {
 		if (indice < 0 || indice >= historicoDeCompra.size()) {
-			throw new RecepcaoInvalidaException("Erro na consulta de transacoes. Indice invalido.");
+			throw new HotelInvalidoException("Erro na consulta de transacoes. Indice invalido.");
 		}
 
 		if (atributo.equalsIgnoreCase("Nome")) {

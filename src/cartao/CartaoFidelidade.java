@@ -2,6 +2,8 @@ package cartao;
 
 import java.io.Serializable;
 
+import exceptions.CartaoInvalidoException;
+
 public class CartaoFidelidade implements Serializable{
 	/**
 	 * 
@@ -75,7 +77,7 @@ public class CartaoFidelidade implements Serializable{
 	 */
 	public String convertePontos(int pontos) throws Exception {
 		if (pontos > this.getPontos()) {
-			throw new Exception("Quantidade de pontos indisponivel");
+			throw new CartaoInvalidoException("Quantidade de pontos indisponivel");
 		}
 		double credito = tipoDeCartao.credito(pontos);
 		this.setPontos(this.getPontos() - pontos);

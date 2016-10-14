@@ -3,8 +3,9 @@ package hotel;
 import java.util.List;
 import java.io.*;
 import exceptions.HospedeInvalidoException;
-import exceptions.RecepcaoInvalidaException;
+import exceptions.HotelInvalidoException;
 import exceptions.SistemaInvalidoException;
+import registrador.Registrador;
 import restaurante.RestauranteController;
 
 import java.util.HashMap;
@@ -94,14 +95,14 @@ public class HotelController implements Serializable {
 	 */
 	public void removeHospede(String id) throws SistemaInvalidoException {
 		if (!valida.validaEmail(id)) {
-			throw new RecepcaoInvalidaException("Erro na remocao do Hospede. Formato de email invalido.");
+			throw new HotelInvalidoException("Erro na remocao do Hospede. Formato de email invalido.");
 		}
 		cadastros.remove(id);
 	}
 
 	public String getInfoHospede(String id, String atributo) throws SistemaInvalidoException {
 		if (!cadastros.containsKey(id)) {
-			throw new RecepcaoInvalidaException(
+			throw new HotelInvalidoException(
 					"Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
 		}
 
@@ -130,23 +131,23 @@ public class HotelController implements Serializable {
 	public String getInfoHospedagem(String id, String atributo) throws SistemaInvalidoException {
 
 		if (id == null || id.trim().isEmpty()) {
-			throw new RecepcaoInvalidaException(
+			throw new HotelInvalidoException(
 					"Erro ao checar hospedagem ativa. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaEmail(id)) {
-			throw new RecepcaoInvalidaException("Erro ao checar hospedagem ativa. Email do(a) hospede esta invalido.");
+			throw new HotelInvalidoException("Erro ao checar hospedagem ativa. Email do(a) hospede esta invalido.");
 		}
 		Hospede hospede = buscaHospede(id);
 
 		if (hospede == null) {
-			throw new RecepcaoInvalidaException(
+			throw new HotelInvalidoException(
 					"Erro na consulta de hospede. Hospede de email " + id + " nao foi cadastrado(a).");
 		}
 
 		List<Estadia> estadias = cadastros.get(id).getEstadias();
 
 		if (estadias.size() == 0) {
-			throw new RecepcaoInvalidaException(
+			throw new HotelInvalidoException(
 					"Erro na consulta de hospedagem. Hospede " + hospede.getNome() + " nao esta hospedado(a).");
 		}
 		if (atributo.equalsIgnoreCase("Hospedagens Ativas")) {
@@ -207,21 +208,21 @@ public class HotelController implements Serializable {
 	public void atualizaCadastro(String id, String atributo, String valor) throws SistemaInvalidoException {
 		if (atributo.equalsIgnoreCase("nome")) {
 			if (valor == null || valor.trim().isEmpty()) {
-				throw new RecepcaoInvalidaException(
+				throw new HotelInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.");
 			}
 			if (!valida.validaNome(valor)) {
-				throw new RecepcaoInvalidaException(
+				throw new HotelInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede esta invalido.");
 			}
 			cadastros.get(id).setNome(valor);
 		} else if (atributo.equalsIgnoreCase("email")) {
 			if (valor == null || valor.trim().isEmpty()) {
-				throw new RecepcaoInvalidaException(
+				throw new HotelInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede nao pode ser vazio.");
 			}
 			if (!valida.validaEmail(valor)) {
-				throw new RecepcaoInvalidaException(
+				throw new HotelInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.");
 			}
 			Hospede hospede = cadastros.get(id);
@@ -231,15 +232,15 @@ public class HotelController implements Serializable {
 
 		} else if (atributo.equalsIgnoreCase("data de nascimento")) {
 			if (valor == null || valor.trim().isEmpty()) {
-				throw new RecepcaoInvalidaException(
+				throw new HotelInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.");
 			}
 			if (!valida.validaData(valor)) {
-				throw new RecepcaoInvalidaException(
+				throw new HotelInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. Formato de data invalido.");
 			}
 			if (!valida.validaIdade(valor)) {
-				throw new RecepcaoInvalidaException(
+				throw new HotelInvalidoException(
 						"Erro na atualizacao do cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.");
 			}
 
@@ -264,27 +265,27 @@ public class HotelController implements Serializable {
 			throws SistemaInvalidoException {
 
 		if (email == null || email.trim().isEmpty()) {
-			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
+			throw new HotelInvalidoException("Erro ao realizar checkin. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaEmail(email)) {
-			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Email do(a) hospede esta invalido.");
+			throw new HotelInvalidoException("Erro ao realizar checkin. Email do(a) hospede esta invalido.");
 		}
 		if (!valida.validaIdQuarto(idQuarto)) {
-			throw new RecepcaoInvalidaException(
+			throw new HotelInvalidoException(
 					"Erro ao realizar checkin. ID do quarto invalido, use apenas numeros ou letras.");
 		}
 		if (qtdeDias <= 0) {
-			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Quantidade de dias esta invalida.");
+			throw new HotelInvalidoException("Erro ao realizar checkin. Quantidade de dias esta invalida.");
 		}
 		if (getTipoQuarto(tipoQuarto) == null) {
-			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Tipo de quarto invalido.");
+			throw new HotelInvalidoException("Erro ao realizar checkin. Tipo de quarto invalido.");
 		}
 		if (verificaQuarto(idQuarto)) {
-			throw new RecepcaoInvalidaException("Erro ao realizar checkin. Quarto " + idQuarto + " ja esta ocupado.");
+			throw new HotelInvalidoException("Erro ao realizar checkin. Quarto " + idQuarto + " ja esta ocupado.");
 		}
 		Hospede buscado = cadastros.get(email);
 		if (buscado == null) {
-			throw new RecepcaoInvalidaException(
+			throw new HotelInvalidoException(
 					"Erro ao realizar checkin. Hospede de email " + email + " nao foi cadastrado(a).");
 		}
 		buscado.adicionaEstadia(idQuarto, tipoQuarto, qtdeDias);
@@ -302,13 +303,13 @@ public class HotelController implements Serializable {
 	 */
 	public String realizaCheckout(String email, String quarto) throws SistemaInvalidoException {
 		if (email == null || email.trim().isEmpty()) {
-			throw new RecepcaoInvalidaException("Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
+			throw new HotelInvalidoException("Erro ao realizar checkout. Email do(a) hospede nao pode ser vazio.");
 		}
 		if (!valida.validaEmail(email)) {
-			throw new RecepcaoInvalidaException("Erro ao realizar checkout. Email do(a) hospede esta invalido.");
+			throw new HotelInvalidoException("Erro ao realizar checkout. Email do(a) hospede esta invalido.");
 		}
 		if (!valida.validaIdQuarto(quarto)) {
-			throw new RecepcaoInvalidaException(
+			throw new HotelInvalidoException(
 					"Erro ao realizar checkout. ID do quarto invalido, use apenas numeros ou letras.");
 		}
 		Estadia estadia = buscaEstadia(email, quarto);

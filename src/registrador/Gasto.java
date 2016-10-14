@@ -1,4 +1,4 @@
-package hotel;
+package registrador;
 
 import java.io.Serializable;
 
