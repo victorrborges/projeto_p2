@@ -274,9 +274,14 @@ public class Cardapio implements Serializable {
 		int cont = 1;
 		String saida = "Menu do Restaurante: " + refeicoes.size() + " itens no cardapio" + FIM_DE_LINHA;
 		for (Refeicao refeicao : refeicoes) {
-			saida += "==> Item " + cont + ":" + FIM_DE_LINHA + "Nome: " + refeicao.getNome() + " Preco: R$" + refeicao.getPreco()
-					+ FIM_DE_LINHA + "Descricao: " + refeicao.getDescricao() + FIM_DE_LINHA + FIM_DE_LINHA;
+			saida += "==> Item " + cont + ":" + FIM_DE_LINHA + "Nome: " + refeicao.getNome() + " Preco: R$"
+					+ refeicao.getPreco() + FIM_DE_LINHA + "Descricao: " + refeicao.getDescricao() + FIM_DE_LINHA;
 			cont++;
+			if (refeicao.getClass().getSimpleName().equals("RefeicaoCompleta")) {
+				RefeicaoCompleta re = (RefeicaoCompleta) refeicao;
+				saida += "Pratos: " + re.pratosRefeicao();
+			}
+			saida += FIM_DE_LINHA;
 		}
 		out.write(saida);
 		out.close();

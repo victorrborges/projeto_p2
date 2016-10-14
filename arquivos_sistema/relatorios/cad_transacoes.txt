@@ -16,7 +16,49 @@ Historico de Transacoes:
 ==> Nome: Ines Brasil Gasto: R$2250,00 Detalhes: 5B
 ==> Nome: Ines Brasil Gasto: R$45,77 Detalhes: Delicia da serra
 ==> Nome: Ines Brasil Gasto: R$1215,00 Detalhes: 5B
+==> Nome: Ines Brasil Gasto: R$45,77 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$43,23 Detalhes: Delicia da serra
+==> Nome: Ines Brasil Gasto: R$50,85 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$45,77 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$2250,00 Detalhes: 1A
+==> Nome: Ines Brasil Gasto: R$500,00 Detalhes: 1B
+==> Nome: Agnetha Faltskog Gasto: R$200,00 Detalhes: 15A
+==> Nome: Alfred Nobel Gasto: R$450,00 Detalhes: 1A
+==> Nome: Alfred Nobel Gasto: R$50,85 Detalhes: Delicia da serra
+==> Nome: Alfred Nobel Gasto: R$3,00 Detalhes: Tapioca
+==> Nome: Ines Brasil Gasto: R$3,00 Detalhes: Tapioca
+==> Nome: Sven Gudmar Svenson Gasto: R$1350,00 Detalhes: 2A
+==> Nome: Ines Brasil Gasto: R$750,00 Detalhes: 2B
+==> Nome: Sven Gudmar Svenson Gasto: R$45,77 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$1620,00 Detalhes: 5A
+==> Nome: Sven Gudmar Svenson Gasto: R$43,23 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$675,00 Detalhes: 5A
+==> Nome: Ines Brasil Gasto: R$50,85 Detalhes: Delicia da serra
+==> Nome: Ines Brasil Gasto: R$2250,00 Detalhes: 5B
+==> Nome: Ines Brasil Gasto: R$45,77 Detalhes: Delicia da serra
+==> Nome: Ines Brasil Gasto: R$1215,00 Detalhes: 5B
+==> Nome: Ines Brasil Gasto: R$45,77 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$43,23 Detalhes: Delicia da serra
+==> Nome: Ines Brasil Gasto: R$50,85 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$45,77 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$2250,00 Detalhes: 1A
+==> Nome: Ines Brasil Gasto: R$500,00 Detalhes: 1B
+==> Nome: Agnetha Faltskog Gasto: R$200,00 Detalhes: 15A
+==> Nome: Alfred Nobel Gasto: R$450,00 Detalhes: 1A
+==> Nome: Alfred Nobel Gasto: R$50,85 Detalhes: Delicia da serra
+==> Nome: Alfred Nobel Gasto: R$3,00 Detalhes: Tapioca
+==> Nome: Ines Brasil Gasto: R$3,00 Detalhes: Tapioca
+==> Nome: Sven Gudmar Svenson Gasto: R$1350,00 Detalhes: 2A
+==> Nome: Ines Brasil Gasto: R$750,00 Detalhes: 2B
+==> Nome: Sven Gudmar Svenson Gasto: R$45,77 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$1620,00 Detalhes: 5A
+==> Nome: Sven Gudmar Svenson Gasto: R$43,23 Detalhes: Delicia da serra
+==> Nome: Sven Gudmar Svenson Gasto: R$675,00 Detalhes: 5A
+==> Nome: Ines Brasil Gasto: R$50,85 Detalhes: Delicia da serra
+==> Nome: Ines Brasil Gasto: R$2250,00 Detalhes: 5B
+==> Nome: Ines Brasil Gasto: R$45,77 Detalhes: Delicia da serra
+==> Nome: Ines Brasil Gasto: R$1215,00 Detalhes: 5B
 ===== Resumo de transacoes =====
-Lucro total:R$11502.46
-Total de transacoes:18
-Lucro medio por transacao: R$639,03
+Lucro total:R$34878.6
+Total de transacoes:60
+Lucro medio por transacao: R$581,31

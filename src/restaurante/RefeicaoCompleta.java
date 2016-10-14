@@ -57,10 +57,7 @@ public class RefeicaoCompleta extends Refeicao {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((super.getDescricao() == null) ? 0 : super.getDescricao()
-						.hashCode());
+		result = prime * result + ((super.getDescricao() == null) ? 0 : super.getDescricao().hashCode());
 		result = prime * result + ((pratos == null) ? 0 : pratos.hashCode());
 		return result;
 	}
@@ -71,8 +68,7 @@ public class RefeicaoCompleta extends Refeicao {
 			return false;
 		}
 		RefeicaoCompleta refeicao = (RefeicaoCompleta) obj;
-		if (refeicao.getDescricao().equals(getDescricao())
-				&& refeicao.getPratos().equals(getPratos())) {
+		if (refeicao.getDescricao().equals(getDescricao()) && refeicao.getPratos().equals(getPratos())) {
 			return true;
 		} else {
 			return false;
@@ -92,12 +88,13 @@ public class RefeicaoCompleta extends Refeicao {
 		return toString;
 
 	}
-	public String saidaParaArquivo(){
-		String saida = "Nome: "+super.getNome()+" Preco: R$"+super.getPreco()+"\nDescricao: "+super.getDescricao()+"\nPratos: ";
+
+	public String pratosRefeicao() {
+		String saida = "";
 		for (Prato prato : pratos) {
-			saida += prato.getNome()+",";
+			saida += prato.getNome() + ", ";
 		}
-		return saida.substring(0, saida.length()-1)+"\n";
+		return saida.substring(0, saida.length() - 2) + "\n";
 	}
 
 }
