@@ -1,8 +1,10 @@
-/hotel/
-/cartaotest/
-/hotelTest/
-/restaurantetest/
-/restaurante/
-/registrador/
-/exceptions/
 /cartao/
+/cartaotest/
+/comparator/
+/exceptions/
+/hotel/
+/hotelTest/
+/registrador/
+/restaurante/
+/restaurantetest/
+/validacao/

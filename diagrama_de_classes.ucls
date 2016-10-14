@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.11" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+<class-diagram version="1.1.11" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
   <class id="1" language="java" name="hotel.Estadia" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/hotel/Estadia.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="901" y="1907"/>    
+    <position height="-1" width="-1" x="345" y="1928"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,71 +13,71 @@
   </class>  
   <class id="2" language="java" name="hotel.Quarto" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/hotel/Quarto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="879" y="2197"/>    
+    <position height="-1" width="-1" x="346" y="2248"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="3" language="java" name="hotel.TipoQuarto" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="3" language="java" name="hotel.BancoDeDados" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/hotel/BancoDeDados.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="635" y="1321"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="4" language="java" name="hotel.TipoQuarto" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/hotel/TipoQuarto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="887" y="2442"/>    
+    <position height="-1" width="-1" x="344" y="2557"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="4" language="java" name="hotel.Hospede" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="5" language="java" name="hotel.Hospede" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/hotel/Hospede.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="913" y="1518"/>    
+    <position height="-1" width="-1" x="852" y="1928"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="hotel.HotelController" project="115210709_Dayvson_Lucas_Victor_Wesley" 
-    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/hotel/HotelController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="892" y="758"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="hotel.Registrador" project="115210709_Dayvson_Lucas_Victor_Wesley" 
-    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/hotel/Registrador.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="636" y="1165"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="hotel.HotelFacade" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="6" language="java" name="hotel.HotelFacade" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/hotel/HotelFacade.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="892" y="234"/>    
+    <position height="-1" width="-1" x="765" y="218"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="restaurante.RestauranteController" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="7" language="java" name="registrador.Gasto" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/registrador/Gasto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="154" y="1120"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="registrador.Registrador" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/registrador/Registrador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="154" y="823"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="restaurante.RestauranteController" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/restaurante/RestauranteController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-95" y="1416"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="restaurante.Cardapio" project="115210709_Dayvson_Lucas_Victor_Wesley" 
-    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/restaurante/Cardapio.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-97" y="1858"/>    
+    <position height="-1" width="-1" x="1346" y="823"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -85,8 +86,8 @@
   </class>  
   <class id="10" language="java" name="restaurante.Prato" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/restaurante/Prato.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="77" y="2729"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="190" width="206" x="1406" y="1469"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -95,7 +96,7 @@
   <class id="11" language="java" name="restaurante.RefeicaoCompleta" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/restaurante/RefeicaoCompleta.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-196" y="2602"/>    
+    <position height="-1" width="-1" x="1946" y="1563"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -104,7 +105,7 @@
   </class>  
   <class id="12" language="java" name="restaurante.Refeicao" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/restaurante/Refeicao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-117" y="2210"/>    
+    <position height="-1" width="-1" x="1718" y="1261"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -113,312 +114,356 @@
   </class>  
   <class id="13" language="java" name="validacao.ValidaHospede" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/validacao/ValidaHospede.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-162" y="938"/>    
+    <position height="-1" width="-1" x="446" y="1049"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="comparator.ComparaNome" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="14" language="java" name="exceptions.SistemaInvalidoException" 
+    project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/SistemaInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="40" y="95"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="exceptions.PratoInvalidoException" 
+    project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/PratoInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-240" y="547"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="exceptions.HotelInvalidoException" 
+    project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/HotelInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-348" y="259"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="exceptions.RefeicaoInvalidaException" 
+    project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/RefeicaoInvalidaException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="43" y="547"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="exceptions.RestauranteInvalidoException" 
+    project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/RestauranteInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-84" y="318"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="exceptions.CartaoInvalidoException" 
+    project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/CartaoInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="176" y="313"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="exceptions.HospedeInvalidoException" 
+    project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/HospedeInvalidoException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="436" y="269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="comparator.ComparaNome" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/comparator/ComparaNome.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="276" y="2480"/>    
+    <position height="-1" width="-1" x="2121" y="949"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="comparator.ComparaPreco" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="22" language="java" name="comparator.ComparaPreco" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/comparator/ComparaPreco.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="522" y="2480"/>    
+    <position height="-1" width="-1" x="2119" y="692"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="cartao.Padrao" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="23" language="java" name="cartao.Padrao" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/cartao/Padrao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1408" y="813"/>    
+    <position height="-1" width="-1" x="876" y="2594"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="cartao.Premium" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="24" language="java" name="cartao.Premium" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/cartao/Premium.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1656" y="790"/>    
+    <position height="-1" width="-1" x="1245" y="2654"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="cartao.Vip" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="25" language="java" name="cartao.Vip" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/cartao/Vip.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1894" y="822"/>    
+    <position height="-1" width="-1" x="1622" y="2596"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="19" language="java" name="cartao.TipoDeCartaoIF" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <interface id="26" language="java" name="cartao.TipoDeCartaoIF" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/cartao/TipoDeCartaoIF.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1773" y="1076"/>    
+    <position height="-1" width="-1" x="1244" y="2319"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="20" language="java" name="cartao.CartaoFidelidade" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+  <class id="27" language="java" name="cartao.CartaoFidelidade" project="115210709_Dayvson_Lucas_Victor_Wesley" 
     file="/115210709_Dayvson_Lucas_Victor_Wesley/src/cartao/CartaoFidelidade.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1825" y="1516"/>    
+    <position height="-1" width="-1" x="1243" y="1979"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="exceptions.SistemaInvalidoException" 
-    project="115210709_Dayvson_Lucas_Victor_Wesley" 
-    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/SistemaInvalidoException.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="121" y="253"/>    
+  <class id="28" language="java" name="hotel.HotelController" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/hotel/HotelController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="765" y="827"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="exceptions.PratoInvalidoException" 
-    project="115210709_Dayvson_Lucas_Victor_Wesley" 
-    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/PratoInvalidoException.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-166" y="581"/>    
+  <class id="29" language="java" name="restaurante.Cardapio" project="115210709_Dayvson_Lucas_Victor_Wesley" 
+    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/restaurante/Cardapio.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1715" y="823"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="exceptions.RefeicaoInvalidaException" 
-    project="115210709_Dayvson_Lucas_Victor_Wesley" 
-    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/RefeicaoInvalidaException.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="83" y="581"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="24" language="java" name="exceptions.RestauranteInvalidoException" 
-    project="115210709_Dayvson_Lucas_Victor_Wesley" 
-    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/RestauranteInvalidoException.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-146" y="417"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="25" language="java" name="exceptions.HospedeInvalidoException" 
-    project="115210709_Dayvson_Lucas_Victor_Wesley" 
-    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/HospedeInvalidoException.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="122" y="417"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="26" language="java" name="exceptions.RecepcaoInvalidaException" 
-    project="115210709_Dayvson_Lucas_Victor_Wesley" 
-    file="/115210709_Dayvson_Lucas_Victor_Wesley/src/exceptions/RecepcaoInvalidaException.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="385" y="417"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <association id="27">    
-    <bendpoint x="801" y="1058"/>    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="28" name="cadastros"/>      
-      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <association id="30">    
-    <end type="SOURCE" refId="5" navigable="false">      
+    <end type="SOURCE" refId="28" navigable="false">      
       <attribute id="31" name="restaurante"/>      
       <multiplicity id="32" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="33">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="34" name="tipoDeCartao"/>      
-      <multiplicity id="35" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="19" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="36">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="37" name="registrador"/>      
-      <multiplicity id="38" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="39">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="40" name="refeicoes"/>      
-      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="42">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="21"/>  
-  </generalization>  
-  <association id="43">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="44" name="hotel"/>      
-      <multiplicity id="45" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="46">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="21"/>  
-  </generalization>  
-  <association id="47">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="48" name="cartao"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="50">    
-    <bendpoint x="-120" y="2384"/>    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <realization id="51">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="19"/>  
-  </realization>  
-  <association id="52">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="53" name="quarto"/>      
-      <multiplicity id="54" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="55">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="56" name="estadias"/>      
-      <multiplicity id="57" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="58">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="19"/>  
-  </realization>  
-  <association id="59">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="60" name="valida"/>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="62">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="63" name="cardapio"/>      
-      <multiplicity id="64" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="65">    
+  <association id="33">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="34" name="ordenaPreco"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="37" name="valida"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="39">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="40">    
+    <bendpoint x="1798" y="1564"/>    
+    <bendpoint x="1728" y="1564"/>    
     <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="66" name="pratos"/>      
-      <multiplicity id="67" minimum="0" maximum="2147483647"/>    
+      <attribute id="41" name="pratos"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="68">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <generalization id="69">    
-    <end type="SOURCE" refId="26"/>    
-    <end type="TARGET" refId="21"/>  
-  </generalization>  
-  <association id="70">    
+  <association id="43">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="71" name="diaria"/>      
-      <multiplicity id="72" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="73">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="74" name="ordenaNome"/>      
-      <multiplicity id="75" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="76">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="77" name="ordenaPreco"/>      
-      <multiplicity id="78" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="79">    
-    <end type="SOURCE" refId="23"/>    
-    <end type="TARGET" refId="24"/>  
-  </generalization>  
-  <realization id="80">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="19"/>  
-  </realization>  
-  <association id="81">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="82" name="historicoHospedes"/>      
-      <multiplicity id="83" minimum="0" maximum="2147483647"/>    
+      <attribute id="44" name="diaria"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="84">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="24"/>  
+  <association id="46">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="47" name="cardapio"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="14"/>  
   </generalization>  
+  <realization id="50">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <association id="51">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="52" name="historicoDeCompra"/>      
+      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="54">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="55">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="56" name="cadastros"/>      
+      <multiplicity id="57" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="59" name="quarto"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="61">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <association id="62">    
+    <bendpoint x="973" y="1979"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="63" name="cartao"/>      
+      <multiplicity id="64" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="65">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <association id="66">    
+    <bendpoint x="1714" y="1074"/>    
+    <bendpoint x="1714" y="1102"/>    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="67" name="refeicoes"/>      
+      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="70" name="hotel"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="72">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="73" name="tipoDeCartao"/>      
+      <multiplicity id="74" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="75">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="76">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="77">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="78">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="79">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="80" name="banco"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="83" name="registrador"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="85">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="86">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="87" name="ordenaNome"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="89">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="90" name="estadias"/>      
+      <multiplicity id="91" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

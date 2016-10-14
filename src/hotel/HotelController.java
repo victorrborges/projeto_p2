@@ -441,6 +441,49 @@ public class HotelController implements Serializable {
 		return hospede.getCartao().convertePontos(qtdPontos);
 	}
 
+	public void gravaArquivoHospede() throws IOException {
+		String FIM_DE_LINHA = System.lineSeparator();
+		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/cad_hospedes.txt"));
+		int cont = 1;
+		String saida = "Cadastro de Hospedes: " + cadastros.size() + " hospedes registrados" + FIM_DE_LINHA;
+		for (Hospede hospede : cadastros.values()) {
+			String[] data = hospede.getDataDeNascimento().split("/");
+			String dataFormatada = data[2] + "-" + data[1] + "-" + data[0];
+			saida += "==>Hospede " + cont + ":" + FIM_DE_LINHA + "Email: " + hospede.getEmail() + FIM_DE_LINHA
+					+ "Nome: " + hospede.getNome() + FIM_DE_LINHA + "Data de nascimento: " + dataFormatada
+					+ FIM_DE_LINHA + FIM_DE_LINHA;
+			cont++;
+		}
+		out.write(saida);
+		out.close();
+	}
+
+	public void gravaArquivoResumo() throws IOException {
+		String FIM_DE_LINHA = System.lineSeparator();
+		gravaArquivoHospede();
+		registrador.gravaArquivoRegistros();
+		restaurante.gravaArquivoPratosRefeicoes();
+		BufferedReader cadHospede = new BufferedReader(new FileReader("arquivos_sistema/relatorios/cad_hospedes.txt"));
+		BufferedReader cadRestaurante = new BufferedReader(
+				new FileReader("arquivos_sistema/relatorios/cad_restaurante.txt"));
+		BufferedReader cadRegistro = new BufferedReader(
+				new FileReader("arquivos_sistema/relatorios/cad_transacoes.txt"));
+		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/hotel_principal.txt"));
+		BufferedReader[] in = { cadHospede, cadRestaurante, cadRegistro };
+		String line = "";
+		for (int i = 0; i < in.length; i++) {
+			out.write("======================================================" + FIM_DE_LINHA);
+			while ((line = in[i].readLine()) != null) {
+				out.write(line + FIM_DE_LINHA);
+			}
+
+		}
+		cadHospede.close();
+		cadRestaurante.close();
+		cadRegistro.close();
+		out.close();
+	}
+
 	/**
 	 * Verifica se um quarto ja esta ocupado
 	 * 
@@ -508,48 +551,5 @@ public class HotelController implements Serializable {
 			return cadastros.get(id);
 		}
 		return null;
-	}
-
-	public void gravaArquivoHospede() throws IOException {
-		String FIM_DE_LINHA = System.lineSeparator();
-		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/cad_hospedes.txt"));
-		int cont = 1;
-		String saida = "Cadastro de Hospedes: " + cadastros.size() + " hospedes registrados" + FIM_DE_LINHA;
-		for (Hospede hospede : cadastros.values()) {
-			String[] data = hospede.getDataDeNascimento().split("/");
-			String dataFormatada = data[2] + "-" + data[1] + "-" + data[0];
-			saida += "==>Hospede " + cont + ":" + FIM_DE_LINHA + "Email: " + hospede.getEmail() + FIM_DE_LINHA
-					+ "Nome: " + hospede.getNome() + FIM_DE_LINHA + "Data de nascimento: " + dataFormatada
-					+ FIM_DE_LINHA + FIM_DE_LINHA;
-			cont++;
-		}
-		out.write(saida);
-		out.close();
-	}
-
-	public void gravaArquivoResumo() throws IOException {
-		String FIM_DE_LINHA = System.lineSeparator();
-		gravaArquivoHospede();
-		registrador.gravaArquivoRegistros();
-		restaurante.gravaArquivoPratosRefeicoes();
-		BufferedReader cadHospede = new BufferedReader(new FileReader("arquivos_sistema/relatorios/cad_hospedes.txt"));
-		BufferedReader cadRestaurante = new BufferedReader(
-				new FileReader("arquivos_sistema/relatorios/cad_restaurante.txt"));
-		BufferedReader cadRegistro = new BufferedReader(
-				new FileReader("arquivos_sistema/relatorios/cad_transacoes.txt"));
-		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/hotel_principal.txt"));
-		BufferedReader[] in = { cadHospede, cadRestaurante, cadRegistro };
-		String line = "";
-		for (int i = 0; i < in.length; i++) {
-			out.write("======================================================" + FIM_DE_LINHA);
-			while ((line = in[i].readLine()) != null) {
-				out.write(line + FIM_DE_LINHA);
-			}
-
-		}
-		cadHospede.close();
-		cadRestaurante.close();
-		cadRegistro.close();
-		out.close();
 	}
 }

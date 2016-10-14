@@ -189,6 +189,36 @@ public class Cardapio implements Serializable {
 		return buscaRefeicao(nome).calculaPreco();
 	}
 
+	public String toString() {
+		String saida = "Menu do Restaurante: " + refeicoes.size() + " itens no cardapio\n";
+		int cont = 1;
+		for (Refeicao refeicao : refeicoes) {
+			saida += "==> Item " + cont + ":\n";
+			saida += refeicao.toString();
+			cont++;
+		}
+		return saida;
+	}
+
+	public void gravaArquivoPratosRefeicoes() throws IOException {
+		String FIM_DE_LINHA = System.lineSeparator();
+		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/cad_restaurante.txt"));
+		int cont = 1;
+		String saida = "Menu do Restaurante: " + refeicoes.size() + " itens no cardapio" + FIM_DE_LINHA;
+		for (Refeicao refeicao : refeicoes) {
+			saida += "==> Item " + cont + ":" + FIM_DE_LINHA + "Nome: " + refeicao.getNome() + " Preco: R$"
+					+ refeicao.getPreco() + FIM_DE_LINHA + "Descricao: " + refeicao.getDescricao() + FIM_DE_LINHA;
+			cont++;
+			if (refeicao.getClass().getSimpleName().equals("RefeicaoCompleta")) {
+				RefeicaoCompleta re = (RefeicaoCompleta) refeicao;
+				saida += "Pratos: " + re.pratosRefeicao();
+			}
+			saida += FIM_DE_LINHA;
+		}
+		out.write(saida);
+		out.close();
+	}
+
 	/**
 	 * Busca um Prato no set de Pratos.
 	 * 
@@ -255,36 +285,6 @@ public class Cardapio implements Serializable {
 			arrayDePratos.add(buscaPrato(componentes[i]));
 		}
 		return arrayDePratos;
-	}
-
-	public String toString() {
-		String saida = "Menu do Restaurante: " + refeicoes.size() + " itens no cardapio\n";
-		int cont = 1;
-		for (Refeicao refeicao : refeicoes) {
-			saida += "==> Item " + cont + ":\n";
-			saida += refeicao.toString();
-			cont++;
-		}
-		return saida;
-	}
-
-	public void gravaArquivoPratosRefeicoes() throws IOException {
-		String FIM_DE_LINHA = System.lineSeparator();
-		BufferedWriter out = new BufferedWriter(new FileWriter("arquivos_sistema/relatorios/cad_restaurante.txt"));
-		int cont = 1;
-		String saida = "Menu do Restaurante: " + refeicoes.size() + " itens no cardapio" + FIM_DE_LINHA;
-		for (Refeicao refeicao : refeicoes) {
-			saida += "==> Item " + cont + ":" + FIM_DE_LINHA + "Nome: " + refeicao.getNome() + " Preco: R$"
-					+ refeicao.getPreco() + FIM_DE_LINHA + "Descricao: " + refeicao.getDescricao() + FIM_DE_LINHA;
-			cont++;
-			if (refeicao.getClass().getSimpleName().equals("RefeicaoCompleta")) {
-				RefeicaoCompleta re = (RefeicaoCompleta) refeicao;
-				saida += "Pratos: " + re.pratosRefeicao();
-			}
-			saida += FIM_DE_LINHA;
-		}
-		out.write(saida);
-		out.close();
 	}
 
 }
