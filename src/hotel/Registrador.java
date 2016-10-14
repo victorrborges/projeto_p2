@@ -9,22 +9,20 @@ import java.util.List;
 import exceptions.RecepcaoInvalidaException;
 import exceptions.SistemaInvalidoException;
 
-public class Registrador  implements Serializable{
+public class Registrador implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6257126875476158041L;
 	private List<Hospede> historicoHospedes;
-	private List<String> historicoDeGastos;
-	private List<String> historicoDeCompra;
+	private List<Gasto> historicoDeCompra;
 	private double total;
 	private String saida = "";
 
 	public Registrador() {
 		this.historicoHospedes = new ArrayList<Hospede>();
-		this.historicoDeGastos = new ArrayList<String>();
-		this.historicoDeCompra = new ArrayList<String>();
+		this.historicoDeCompra = new ArrayList<Gasto>();
 		this.total = 0;
 	}
 
@@ -47,9 +45,9 @@ public class Registrador  implements Serializable{
 		if (atributo.equalsIgnoreCase("Nome")) {
 			return historicoHospedes.get(indice).getNome();
 		} else if (atributo.equalsIgnoreCase("Detalhes")) {
-			return historicoDeCompra.get(indice);
+			return historicoDeCompra.get(indice).getNome();
 		} else {
-			return historicoDeGastos.get(indice);
+			return historicoDeCompra.get(indice).getPreco();
 		}
 	}
 
@@ -75,8 +73,8 @@ public class Registrador  implements Serializable{
 
 	public void registraGasto(Hospede hospede, double precoTotal, String nomeProduto) {
 		historicoHospedes.add(hospede);
-		historicoDeGastos.add(String.format("R$%.2f", precoTotal));
-		historicoDeCompra.add(nomeProduto);
+		Gasto compra = new Gasto(nomeProduto, String.format("R$%.2f", precoTotal));
+		historicoDeCompra.add(compra);
 		saida += hospede.getNome() + ";";
 		this.total += precoTotal;
 	}
@@ -87,17 +85,18 @@ public class Registrador  implements Serializable{
 		int cont = 1;
 		int indice = 0;
 		String saida = "Historico de Transacoes:" + FIM_DE_LINHA;
-		for (Hospede hospede : historicoHospedes){
-			saida += "==> Nome: " + hospede.getNome() + " Gasto: " + historicoDeGastos.get(indice) + " Detalhes: " + historicoDeCompra.get(indice) + FIM_DE_LINHA;
+		for (Hospede hospede : historicoHospedes) {
+			saida += "==> Nome: " + hospede.getNome() + " Gasto: " + historicoDeCompra.get(indice).getPreco()
+					+ " Detalhes: " + historicoDeCompra.get(indice).getNome() + FIM_DE_LINHA;
 			cont = cont + 1;
 			indice = indice + 1;
 		}
-		double lucro = this.total/cont;
+		double lucro = this.total / cont;
 		String lucroF = String.format("%.2f", lucro);
-		
-		saida += "===== Resumo de transacoes =====" + FIM_DE_LINHA + "Lucro total:R$" 
-		+ this.total + FIM_DE_LINHA + "Total de transacoes:" + cont + FIM_DE_LINHA 
-				+ "Lucro medio por transacao: R$" + lucroF + FIM_DE_LINHA; 
+
+		saida += "===== Resumo de transacoes =====" + FIM_DE_LINHA + "Lucro total:R$" + this.total + FIM_DE_LINHA
+				+ "Total de transacoes:" + cont + FIM_DE_LINHA + "Lucro medio por transacao: R$" + lucroF
+				+ FIM_DE_LINHA;
 		out.write(saida);
 		out.close();
 	}
