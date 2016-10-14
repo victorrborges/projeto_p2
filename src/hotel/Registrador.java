@@ -15,13 +15,11 @@ public class Registrador implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6257126875476158041L;
-	private List<Hospede> historicoHospedes;
 	private List<Gasto> historicoDeCompra;
 	private double total;
 	private String saida = "";
 
 	public Registrador() {
-		this.historicoHospedes = new ArrayList<Hospede>();
 		this.historicoDeCompra = new ArrayList<Gasto>();
 		this.total = 0;
 	}
@@ -38,14 +36,14 @@ public class Registrador implements Serializable {
 	 * @throws SistemaInvalidoException
 	 */
 	public String consultaTransacoes(String atributo, int indice) throws SistemaInvalidoException {
-		if (indice < 0 || indice >= historicoHospedes.size()) {
+		if (indice < 0 || indice >= historicoDeCompra.size()) {
 			throw new RecepcaoInvalidaException("Erro na consulta de transacoes. Indice invalido.");
 		}
 
 		if (atributo.equalsIgnoreCase("Nome")) {
-			return historicoHospedes.get(indice).getNome();
+			return historicoDeCompra.get(indice).getNomeHospede();
 		} else if (atributo.equalsIgnoreCase("Detalhes")) {
-			return historicoDeCompra.get(indice).getNome();
+			return historicoDeCompra.get(indice).getNomeProduto();
 		} else {
 			return historicoDeCompra.get(indice).getPreco();
 		}
@@ -61,7 +59,7 @@ public class Registrador implements Serializable {
 	 */
 	public String consultaTransacoes(String atributo) {
 		if (atributo.equalsIgnoreCase("Quantidade")) {
-			return String.format("%d", historicoHospedes.size());
+			return String.format("%d", historicoDeCompra.size());
 		} else if (atributo.equals("Total")) {
 			total = (int) (total * 100);
 			total /= 100;
@@ -72,8 +70,7 @@ public class Registrador implements Serializable {
 	}
 
 	public void registraGasto(Hospede hospede, double precoTotal, String nomeProduto) {
-		historicoHospedes.add(hospede);
-		Gasto compra = new Gasto(nomeProduto, String.format("R$%.2f", precoTotal));
+		Gasto compra = new Gasto(hospede.getNome(),nomeProduto, String.format("R$%.2f", precoTotal));
 		historicoDeCompra.add(compra);
 		saida += hospede.getNome() + ";";
 		this.total += precoTotal;
@@ -85,9 +82,9 @@ public class Registrador implements Serializable {
 		int cont = 1;
 		int indice = 0;
 		String saida = "Historico de Transacoes:" + FIM_DE_LINHA;
-		for (Hospede hospede : historicoHospedes) {
-			saida += "==> Nome: " + hospede.getNome() + " Gasto: " + historicoDeCompra.get(indice).getPreco()
-					+ " Detalhes: " + historicoDeCompra.get(indice).getNome() + FIM_DE_LINHA;
+		for (Gasto compra : historicoDeCompra) {
+			saida += "==> Nome: " + compra.getNomeHospede() + " Gasto: " + historicoDeCompra.get(indice).getPreco()
+					+ " Detalhes: " + historicoDeCompra.get(indice).getNomeProduto() + FIM_DE_LINHA;
 			cont = cont + 1;
 			indice = indice + 1;
 		}

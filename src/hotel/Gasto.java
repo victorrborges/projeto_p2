@@ -8,20 +8,30 @@ public class Gasto implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String nome;
+	private String nomeHospede;
+	private String nomeProduto;
 	private String preco;
 
-	public Gasto(String nome, String preco) {
-		this.nome = nome;
+	public Gasto(String nomeHospede, String nomeProduto, String preco) {
+		this.nomeHospede = nomeHospede;
+		this.nomeProduto = nomeProduto;
 		this.preco = preco;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeHospede() {
+		return nomeHospede;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeHospede(String nome) {
+		this.nomeHospede = nome;
+	}
+	
+	public String getNomeProduto() {
+		return this.nomeProduto;
+	}
+	
+	public void setNomeProduto(String nome) {
+		this.nomeProduto = nome;
 	}
 
 	public String getPreco() {
